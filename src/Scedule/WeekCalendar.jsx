@@ -4,11 +4,14 @@ import styled from 'styled-components'
 const WeekCalendarWrapper = styled.div`
   margin-top: 2.188rem;
   width:67.9rem;
-  height: 78%;
+  height: 46rem;
   border-radius: 15px;
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
   background-color: #fff;
   display: flex;
+  @media screen and (max-width:1440px) {
+   height:50rem;
+  }
 `;
 
 const CalendarContent = styled.div`
@@ -19,7 +22,7 @@ const CalendarContent = styled.div`
 
 const CalendarHead = styled.div`
   height: 3.125rem;
-  background-color: #dfe5f4;
+  background-color: #eef3ff;
   display: flex;
   align-items: center;
   justify-content: center;

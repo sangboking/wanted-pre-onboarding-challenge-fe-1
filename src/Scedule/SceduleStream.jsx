@@ -10,6 +10,9 @@ import RightBtnIcon from '../SvgIcons/RightBtnIcon';
 import PostModal from './PostModal';
 import CloseIcon from '../SvgIcons/CloseIcon';
 import PostingIcon from '../SvgIcons/PostingIcon';
+import FaceBookS from '../SvgIcons/FaceBookS';
+import TwitS from '../SvgIcons/TwitS';
+
 
 
 const Wrapper = styled.div`
@@ -150,44 +153,52 @@ const Posth1 = styled.h1`
 const StreamWrapper = styled.div`
   width:100%;
   margin-top:2rem;
-  overflow:hidden;
 `;
 
 const StreamContentWrapper = styled.div`
   display:flex;
-  margin:0 auto;
   margin-bottom:4rem;
   width:100%;
+  
 `;
 
 const StreamBox = styled.div`
   width:43rem;
-  height:35.5rem;
+  height:43.375rem;
   background-color: #fff;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
   border-radius: 15px;
-  border: solid 1px #e4e4e4;
+  border: solid 1px #eaeaea;
   margin-right:.688rem;
 `;
 
 const StreamBoxTitle = styled.div`
+  width:100%;
+  height:3.125rem;
+  background-color: #eef3ff;
   display:flex ;
   justify-content:space-between ;
-  padding:.75rem 1.688rem .75rem 1.688rem;
   border-bottom:solid 1px #e4e4e4;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
 `;
 
 const StreamBoxTitleIcon = styled.div`
   display:flex ;
+  align-items: center;
+  margin-left: 1.438rem;
 `;
 
-const IconImg = styled.img`
-
+const StreamSnsIcon = styled.div`
+  margin-right: .75rem;
 `;
+
 
 const StreamBoxDate = styled.h1`
   display:flex ;
   align-items:center ;
   justify-content:center ;
+  margin-right:1.625rem;
 `;
 
 const StreamButton = styled.button`
@@ -210,10 +221,10 @@ const StreamButton = styled.button`
 
 const StreamNote = styled.div`
   width:24.5rem;
-  height:35.5rem;
-  background-color: #fff;
+  height:43.55rem;
   border-radius: 15px;
-  border: solid 1px #e4e4e4;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: #fff;
   display:flex ;
   flex-direction:column ;
   justify-content:space-between ;
@@ -221,12 +232,12 @@ const StreamNote = styled.div`
 
 const NoteWrapper = styled.div`
   display: flex;
-  
 `;
 
 const NoteTopLeft = styled.div`
   width:50%;
-  height:2.98rem;
+  height: 3.25rem;
+  background-color: #eef3ff;
   border-top-left-radius: 10px;
   border-right: 1px solid #e4e4e4;
   border-bottom: 1px solid #e4e4e4;
@@ -244,8 +255,9 @@ const NoteTopLeft = styled.div`
 `;
 
 const NoteTopRight = styled.div`
-   width:50%;
-  height:2.98rem;
+  width:50%;
+  height: 3.25rem;
+  background-color: #eef3ff;
   border-top-right-radius: 10px;
   border-bottom: 1px solid #e4e4e4;
   display:flex ;
@@ -261,15 +273,15 @@ const NoteTopRight = styled.div`
   color: #191919;
 `;
 
-const NoteBottomText = styled.textarea`
+const NoteBottomWrapper = styled.div`
   resize: none;
-  height:6.094rem;
+  height:5.844rem;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   padding:.813rem;
   border: .1px solid #e4e4e4;
   outline-color: #e4e4e4;
-  &::placeholder{
+  /* &::placeholder{
     font-size: 0.875rem;
     font-weight: normal;
     font-stretch: normal;
@@ -278,7 +290,11 @@ const NoteBottomText = styled.textarea`
     letter-spacing: normal;
     text-align: left;
     color: #191919;
-  }
+  } */
+`;
+
+const NoteBottomText = styled.textarea`
+
 `;
 
 const CloseIconWrapper = styled.div`
@@ -313,7 +329,7 @@ export default function SceduleStream() {
 
   const today = getMoment;
 
-  const todayTime = today.format('M월 D일 h:mm');
+  const todayTime = today.format('YYYY년 M월 D일 h:mm');
   
   const prevMonth = () => {
     setMoment(getMoment.clone().subtract(1, 'month'))
@@ -355,9 +371,9 @@ export default function SceduleStream() {
               <StreamBox>
                 <StreamBoxTitle>
                   <StreamBoxTitleIcon>
-                    <IconImg src='/assets/Facebook_small.png' style={{marginRight:'1rem'}}></IconImg>
-                    <IconImg src='/assets/Instargram_small.png' style={{marginRight:'1rem'}}></IconImg>
-                    <IconImg src='/assets/Twiter_small.png'></IconImg>
+                    <StreamSnsIcon><FaceBookS/></StreamSnsIcon>
+                    <StreamSnsIcon><TwitS/></StreamSnsIcon>
+                    <StreamSnsIcon><TwitS/></StreamSnsIcon>
                   </StreamBoxTitleIcon>
                   <StreamBoxDate>{todayTime}<StreamButton>수정</StreamButton></StreamBoxDate>
                 </StreamBoxTitle>   
@@ -369,9 +385,9 @@ export default function SceduleStream() {
                   <NoteTopRight>History</NoteTopRight>
                 </NoteWrapper>
                 
-                <NoteBottomText placeholder='노트를 입력하고 엔터를 누르세요.'>
+                <NoteBottomWrapper placeholder='노트를 입력하고 엔터를 누르세요.'>
 
-                </NoteBottomText>
+                </NoteBottomWrapper>
               </StreamNote>
             </StreamContentWrapper>
 
@@ -379,9 +395,9 @@ export default function SceduleStream() {
               <StreamBox>
                 <StreamBoxTitle>
                   <StreamBoxTitleIcon>
-                    <IconImg src='/assets/Facebook_small.png' style={{marginRight:'1rem'}}></IconImg>
-                    <IconImg src='/assets/Instargram_small.png' style={{marginRight:'1rem'}}></IconImg>
-                    <IconImg src='/assets/Twiter_small.png'></IconImg>
+                    <StreamSnsIcon><FaceBookS/></StreamSnsIcon>
+                    <StreamSnsIcon><TwitS/></StreamSnsIcon>
+                    <StreamSnsIcon><TwitS/></StreamSnsIcon>
                   </StreamBoxTitleIcon>
                   <StreamBoxDate>{todayTime}<StreamButton>수정</StreamButton></StreamBoxDate>
                 </StreamBoxTitle>
@@ -396,9 +412,9 @@ export default function SceduleStream() {
                   <NoteTopRight>History</NoteTopRight>
                 </NoteWrapper>
                 
-                <NoteBottomText placeholder='노트를 입력하고 엔터를 누르세요.'>
+                <NoteBottomWrapper placeholder='노트를 입력하고 엔터를 누르세요.'>
 
-                </NoteBottomText>
+                </NoteBottomWrapper>
               </StreamNote>
 
             </StreamContentWrapper>

@@ -17,7 +17,6 @@ import InboxComnet from './Inbox/InboxComnet';
 import InsightInstar from './Insight/InsightInstar';
 import InsightTwit from './Insight/InsightTwit';
 import Connect from './Connect/Connect';
-import Ex from './Components/Ex';
 import MyInfo from './Setting/MyInfo';
 
 
@@ -58,7 +57,6 @@ const router = () => {
             {/* Setting */}
             <Route path='/info' element={<MyInfo/>}></Route>
 
-            <Route path='/ex' element={<Ex/>}/>
            </>
           </Routes>
         </BrowserRouter>

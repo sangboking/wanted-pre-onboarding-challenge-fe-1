@@ -7,8 +7,6 @@ import TwitS from '../SvgIcons/TwitS';
 import Reconnect from '../SvgIcons/Reconnect';
 import Disconnect from '../SvgIcons/DisconnectIcon';
 import DotIcon from '../SvgIcons/DotIcon';
-import Ex from '../Components/Ex';
-
 
 const Wrapper = styled.div`
   width:120rem;
@@ -326,8 +324,7 @@ export default function Connect() {
           </SnsBoxNoConnect> 
           {/* Twitter 박스 영역 끝 */}
 
-          
-          <Ex/>
+        
           
 
           <Both1>이후 더 많은 SNS 채널이 연동 될 예정입니다.</Both1>

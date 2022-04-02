@@ -2,14 +2,22 @@ import React from 'react'
 import styled from 'styled-components'
 import moment from 'moment';
 
+const CalendarWrapper = styled.div`
+  width:100%;
+  height:46rem;
+  border-radius: 15px;
+  margin-top: 2.188rem;
+  @media screen and (max-width:1440px) {
+   height:50rem;
+  }
+`;
 
 const CalendarTable = styled.table`
-  margin-top: 2rem;
   border-collapse:collapse;
   table-layout: fixed;
   border:1px solid #e4e4e4;
   width: 100%;
-  height:78%;
+  height:100%;
   font-size: 0.875rem;
   font-weight: normal;
   font-stretch: normal;
@@ -19,6 +27,10 @@ const CalendarTable = styled.table`
   text-align: center;
   color: #333;;
   background-color: #fff;
+  border-collapse: collapse;
+  border-radius: 10px;
+  border-style: hidden;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
 `;
 
 
@@ -31,12 +43,11 @@ const CalendarTr = styled.tr`
 `;
 
 const CalendarTh = styled.th`
+  background-color:  #eef3ff;
   border-left: 1px solid #e4e4e4;
-  height: 1.8rem;
+  height:3.125rem;
   color: #777;
-  margin: 0 auto;
-  width:6rem;
-  padding-top:.5rem;
+  vertical-align: middle;
 `;
 
 const CalendarTh2 = styled.th`
@@ -47,11 +58,13 @@ const CalendarTh2 = styled.th`
   margin: 0 auto;
   width:6rem;
   padding-top:.5rem;
+  padding-left:.5rem;
 `;
 
 const CalendarTbody = styled.tbody`
-
+  text-align: left;
 `;
+
 
 
 export default function MonthCalendar({firstWeek,lastWeek,today}) {
@@ -75,7 +88,7 @@ export default function MonthCalendar({firstWeek,lastWeek,today}) {
                 );
               }else if(days.format('MM') !== today.format('MM')){
                 return(
-                  <CalendarTh2 key={index} style={{backgroundColor:'#f2f2f2'}} >
+                  <CalendarTh2 key={index} style={{opacity:'30%'}} >
                     <span>{days.format('D')}</span>
                   </CalendarTh2>
                 );
@@ -97,6 +110,7 @@ export default function MonthCalendar({firstWeek,lastWeek,today}) {
   
   return (
     
+     <CalendarWrapper>
       <CalendarTable>
         <CalendarThead>
           <CalendarTr>
@@ -116,6 +130,7 @@ export default function MonthCalendar({firstWeek,lastWeek,today}) {
 
         
       </CalendarTable>
+     </CalendarWrapper>
    
   )
 }

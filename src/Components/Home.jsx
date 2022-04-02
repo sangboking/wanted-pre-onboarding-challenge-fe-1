@@ -7,7 +7,7 @@ import InstarS from '../SvgIcons/InstarS';
 import TwitS from '../SvgIcons/TwitS';
 import RightArrowIcon from '../SvgIcons/RightArrowIcon';
 import DotIcon from '../SvgIcons/DotIcon';
-import Ex from './Ex';
+import FbLogin from './FbLogin';
 
 const Wrapper = styled.div`
   width:100%;
@@ -459,7 +459,7 @@ const Home = () => {
         : null
         }
 
-        <Ex/>
+        <FbLogin/>
 
       </Wrapper>
     );
