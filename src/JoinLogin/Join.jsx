@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
-
+import { useForm } from 'react-hook-form';
 
 
 const Wrapper = styled.div`
@@ -357,6 +357,10 @@ const JoinButton2 = styled.button`
 const TextWrapper = styled.div`
 `;
 
+const FormStyled = styled.form`
+
+`;
+
 
 
 const Join = () => {
@@ -379,88 +383,114 @@ const Join = () => {
   니다.`;
 
   const [joinState,setJoinState] = useState(false);
-  
+  const {register, handleSubmit, formState:{errors}, setError} = useForm();
+  console.log(errors)
+  const onValid = (data) => {
+    if(data.pwd !== data.pwdConfirm){
+      setError(
+        "pwd",
+        {message:"비밀번호가 일치하지 않습니다."},
+        {shouldFocus:true}
+      )
+    }
+  }
+ 
+
 
     return (
       <Wrapper joinState={joinState}>
         <LayOut>
-          <Title>회원가입</Title>
-          <Intro>환영합니다! 링커에 가입해보세요.</Intro>
-         
-          <InputTitle>아이디(email)</InputTitle> 
-          <IdPwWrapper>
-            <Input/>
-            <Button>인증번호 발송</Button>
-          </IdPwWrapper>
+          <FormStyled onSubmit={handleSubmit(onValid)}>
+            <Title>회원가입</Title>
+            <Intro>환영합니다! 링커에 가입해보세요.</Intro>
           
-          <InputTitle>이메일 인증번호</InputTitle>
-          <IdPwWrapper>
-            <Input></Input>
-            <Button>확인</Button>
-          </IdPwWrapper>
+            <InputTitle>아이디(email)</InputTitle> 
+            <IdPwWrapper>
+              <Input {...register("email", {required:true})}/>
+              <Button>인증번호 발송</Button>
+            </IdPwWrapper>
+            
+            <InputTitle>이메일 인증번호</InputTitle>
+            <IdPwWrapper>
+              <Input {...register("emailCode", {required:true})}></Input>
+              <Button>확인</Button>
+            </IdPwWrapper>
 
-          <InputTitleWrapper>
-            <InputTitle>비밀번호</InputTitle>
-            <PwSpan>* 영문,숫자 조합 8~12자 입력</PwSpan>
-          </InputTitleWrapper>
-          <PwInput type="password"></PwInput>
+            <InputTitleWrapper>
+              <InputTitle>비밀번호</InputTitle>
+              <PwSpan>* 영문,숫자 조합 8~12자 입력</PwSpan>
+            </InputTitleWrapper>
+            <PwInput type="password" {...register("pwd", 
+            {
+              required:true ,
+              maxLength:{value:12,message:'최대 비밀먼호는 12자 입니다.'} ,
+              minLength:{value:8,message:'최소 비밀번호는 8자 입니다.'}
+            })}>
+            </PwInput>
+            <span>{errors?.pwd?.message}</span>
+            
+            
+            <InputTitle>비밀번호 확인</InputTitle>
+            <PwInput type="password" {...register("pwdConfirm",
+             {required:true,
+              maxLength:12,
+              minLength:8
+             })}> 
+            </PwInput>
           
-          
-          <InputTitle>비밀번호 확인</InputTitle>
-          <PwInput type="password"></PwInput>
-         
-          <InputTitle>이름</InputTitle>
-          <PwInput ></PwInput>
+            <InputTitle>이름</InputTitle>
+            <PwInput {...register("name", {required:true})}></PwInput>
 
-          <InputTitle>생년월일</InputTitle>
-          <BirthWrapper>
-            <YearBox placeholder='년(YYYY)'></YearBox>
-            <MonthBox>
-              <MonthOption value='월'>월</MonthOption>
-              {
-                month.map((a,i)=>{
-                  return(
-                    <MonthOption value={a} key={i}>{a}</MonthOption>
-                  )
-                })
-              }
-            </MonthBox>
-            <DayBox placeholder='일'>
-              
-            </DayBox>
-          </BirthWrapper>
-          {
-            joinState ? 
-            <JoinCompletBox>
-              <JoinBox>회원가입이 완료되었습니다!</JoinBox>
-              <Link to='/login'>
-                <JoinButton2>로그인</JoinButton2>
-              </Link>
-            </JoinCompletBox> 
-            : null
-          }
-          <Line/>
-          <Title2>이용약관</Title2>
-          <TextBox readOnly>
-            <TextWrapper>
+            <InputTitle>생년월일</InputTitle>
+            <BirthWrapper>
+              <YearBox placeholder='년(YYYY)' {...register("year", {required:true})}></YearBox>
+              <MonthBox>
+                <MonthOption value='월'>월</MonthOption>
+                {
+                  month.map((a,i)=>{
+                    return(
+                      <MonthOption value={a} key={i}>{a}</MonthOption>
+                    )
+                  })
+                }
+              </MonthBox>
+              <DayBox placeholder='일' {...register("day", {required:true})}>
+                
+              </DayBox>
+            </BirthWrapper>
+            {
+              joinState ? 
+              <JoinCompletBox>
+                <JoinBox>회원가입이 완료되었습니다!</JoinBox>
+                <Link to='/login'>
+                  <JoinButton2>로그인</JoinButton2>
+                </Link>
+              </JoinCompletBox> 
+              : null
+            }
+            <Line/>
+            <Title2>이용약관</Title2>
+            <TextBox readOnly>
+              <TextWrapper>
+                <h3>여러분을 환영합니다</h3>
+                <p>{rule}</p>
+              </TextWrapper>
+            </TextBox>
+            <ConfrimWrapper>
+              <Title3>동의합니다</Title3>
+              <CheckBox type="checkbox"/>
+            </ConfrimWrapper>
+            <Title2>개인정보보호정책</Title2>
+            <TextBox>
               <h3>여러분을 환영합니다</h3>
               <p>{rule}</p>
-            </TextWrapper>
-          </TextBox>
-          <ConfrimWrapper>
-            <Title3>동의합니다</Title3>
-            <CheckBox type="checkbox"/>
-          </ConfrimWrapper>
-          <Title2>개인정보보호정책</Title2>
-          <TextBox>
-            <h3>여러분을 환영합니다</h3>
-            <p>{rule}</p>
-          </TextBox>
-          <ConfrimWrapper>
-            <Title3>동의합니다</Title3>
-            <CheckBox type="checkbox"/>
-          </ConfrimWrapper>
-          <JoinButton onClick={()=>{setJoinState(!joinState)}}>가입하기</JoinButton>
+            </TextBox>
+            <ConfrimWrapper>
+              <Title3>동의합니다</Title3>
+              <CheckBox type="checkbox"/>
+            </ConfrimWrapper>
+            <JoinButton onClick={()=>{setJoinState(!joinState)}}>가입하기</JoinButton>
+          </FormStyled>
         </LayOut>
       </Wrapper>   
     );
