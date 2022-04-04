@@ -249,7 +249,7 @@ const Title2 = styled.h2`
 `;
 
 const TextBox = styled.div`
-  width:97%;
+  width:30.5rem;
   overflow-y: auto;
   display:block;
   height: 5rem;
