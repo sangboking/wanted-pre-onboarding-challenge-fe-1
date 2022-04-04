@@ -76,7 +76,7 @@ const Button = styled.button`
   background-color:#262b53;
   border:1px solid #262b53;
   font-size: 0.938rem;
-  font-weight: normal;
+  font-weight: 400;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;

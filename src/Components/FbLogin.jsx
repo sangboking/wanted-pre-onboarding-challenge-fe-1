@@ -1,7 +1,6 @@
 import React, { useEffect, useState} from 'react';
 import axios from 'axios';
 
-
 export default function FbLogin() {
 
   const [accessToken,setAccessToken] = useState();
@@ -9,6 +8,8 @@ export default function FbLogin() {
   const [userId,setUserId] = useState();
   const [pageId,setPageId] = useState();
   const [postText,setPostText] = useState('');
+  
+  const appId = process.env.REACT_APP_FB_APP_ID;
  
   useEffect(() => {
     setFBAsyncInit();
@@ -18,8 +19,8 @@ export default function FbLogin() {
   const setFBAsyncInit = () => {
     window.fbAsyncInit = () => {
       window.FB.init({
-        version: 'v13.0', 
-        appId: '119517330340389', 
+        version: 'v13.0',
+        appId:appId,
         xfbml: true,
         
       });

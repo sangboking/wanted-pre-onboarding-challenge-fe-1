@@ -2,68 +2,76 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import axios from 'axios';
 
 
 const Wrapper = styled.div`
-  max-width: 100%;
-  height: 100%;
-  margin:0 auto;
-  margin-bottom:10rem;
-  background-color: ${props=>props.joinState?'#707070':'#fff'};
+  width: 100%;
+  height: 120%;
+  background-color: #f5f6f8;
+  padding-top:6rem;
 `;
 
 const LayOut = styled.div`
-  width: 30rem;
+  width: 30.031rem;
   margin:0 auto;
-  height: 67.5rem;
-  padding: 6.063rem 0 0;
-  position:relative;
+  position: relative;
+  background-color: #f5f6f8;
+  display: flex;
+  flex-direction: column;
 `;
 
-const Title = styled.span`
-  font-size:1.75rem;
-  font-weight:700;
-  width: 6.75rem;
-  height: 2rem;
-  margin: 0 9.75rem 0.625rem 0;
+const Title = styled.h1`
+  font-size: 1.75rem;
   font-weight: 500;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
-  letter-spacing: normal;
+  letter-spacing: -0.56px;
   text-align: left;
   color: #191919;
+  margin-left: .766rem;
 `;
 
 const Intro = styled.h2`
-  width: 16.5rem;
-  height: 1.313rem;
-  margin: 0.625rem 0 0;
-  margin-bottom:2.5rem;
   font-size: 1.125rem;
   font-weight: 500;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
-  letter-spacing: normal;
+  letter-spacing: -0.36px;
   text-align: left;
-  color: rgba(103, 103, 103, 0.9);
+  color: #676767;
+  margin-top:.625rem;
+  margin-left: .766rem;
 `;
 
-const IdPwWrapper = styled.div`
+const InputTitle = styled.h1`
+  font-size: 1rem;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.32px;
+  text-align: left;
+  color: #191919;
+  margin-top:1.5rem;
+  margin-left: .766rem;
+`;
+
+const IdEmailWrapper = styled.div`
   display: flex;
-  width:30.5rem;
-  margin-bottom:1rem;
+  align-items: center;
+  width:105%;
 `;
 
 const Input = styled.input`
-  background-color: #f2f2f2;
-  border:1px solid #f2f2f2;
-  border-radius:15px;
-  width:65%;
-  height: 3rem;
-  margin-right:.5rem;
-  margin-bottom:1rem;
+  width: 23rem;
+  height: 3.125rem;
+  border-radius: 15px;
+  border:1px solid #fff;
+  margin-right:.625rem;
+  margin-top:.5rem;
   color: #676767;
   padding-left:1.375rem;
   ::placeholder,
@@ -78,19 +86,46 @@ const Input = styled.input`
   }
   &:focus{
     outline: none;
+    background-color: #fff;
   }
 `;
 
-const InputTitle = styled.h1`
+const TopButton = styled.button`
+  width: 9rem;
+  height: 3.5rem;
+  background-color: #112553;
+  border-radius: 15px;
+  border:1px solid #112553;
+  font-size:.8rem;
+  color:rgba(255, 255, 255, 0.9);
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.28px;
+  text-align: center;
+  margin-top: .5rem;
+  cursor: pointer;
+`;
+
+const InputTitleWrapper = styled.div`
+  display:flex ;
+  align-items: center;
+  margin-top: 1.5rem;
+`;
+
+const InputTitle2 = styled.h1`
   font-size: 1rem;
   font-weight: 500;
   font-stretch: normal;
   font-style: normal;
+  line-height: normal;
   letter-spacing: -0.32px;
+  text-align: left;
   color: #191919;
-  margin-bottom:.5rem ;
+  margin-left: .766rem;
 `;
-
 const PwSpan = styled.span`
   font-size: 0.75rem;
   font-weight: normal;
@@ -103,29 +138,12 @@ const PwSpan = styled.span`
   margin-left:.75rem;
 `;
 
-const InputTitleWrapper = styled.div`
-  display:flex ;
-  
-`;
-
-const Button = styled.button`
-  font-size:.8rem;
-  color:rgba(255, 255, 255, 0.9);
-  width:28%;
-  height:3rem;
-  font-weight: 500;
-  border-radius: 15px;
-  background-color: #112553;
-  border:1px solid #112553;
-  cursor: pointer;
-`;
-
 const PwInput = styled.input`
+  width: 30rem;
+  height: 3.125rem;
   border-radius: 15px;
-  width:97%;
-  height:3rem;
   margin-top:.5rem ;
-  margin-bottom:1.5rem;
+  margin-bottom:.5rem;
   padding-left:1.375rem;
   font-size: 0.875rem;
   font-weight: 500;
@@ -135,32 +153,33 @@ const PwInput = styled.input`
   letter-spacing: normal;
   text-align: left;
   color: #676767;
-  background-color: #f2f2f2;
-  border:1px solid #f2f2f2;
+  background-color: #fff;
+  border:1px solid #fff;
   &:focus{
     outline: none;
   }
 `;
 
 const Line = styled.div`
+  width:32rem;
+  height: 0.031rem;
   margin-top:2rem;
   margin-bottom:1.6rem;
-  height: 0.031rem;
-  background-color: #ece7ef;
+  background-color: #aaa;
 `;
 
 const BirthWrapper = styled.div`
   margin-top:.5rem;
   display: flex;
-  width:105%;
+  width:110%;
 `;
 
 const YearBox = styled.input`
   font-weight: 500;
   font-size:0.8rem;
-  background-color: #f2f2f2;
+  background-color: #fff;
+  border:1px solid #fff;
   color: #676767;
-  border:1px solid #f2f2f2;
   border-radius: 15px;
   padding-left:1.375rem;
   width:35%;
@@ -174,8 +193,9 @@ const YearBox = styled.input`
 const MonthBox = styled.select`
   font-weight: 500;
   font-size:0.8rem;
+  background-color: #fff;
+  border:1px solid #fff;
   color: #676767;
-  border:1px solid #f2f2f2;
   border-radius: 15px;
   padding-left:1.375rem;
   margin-right:0.938rem;
@@ -183,7 +203,6 @@ const MonthBox = styled.select`
   height: 3.125rem;
   background:url(/assets/arrow_down.png) no-repeat right 50%;
   background-size:30px;
-  background-color: #f2f2f2;
   &:focus{
     outline: none;
   }
@@ -194,8 +213,8 @@ const MonthBox = styled.select`
 `;
 
 const MonthOption = styled.option`
-  background-color: #f2f2f2;
-  border:1px solid #f2f2f2;
+  background-color: #fff;
+  border:1px solid #fff;
   border-radius:3rem;
 `;
 
@@ -203,8 +222,8 @@ const DayBox = styled.input`
   font-weight: 500;
   font-size:0.8rem;
   color: #676767;
-  background-color: #f2f2f2;
-  border:1px solid #f2f2f2;
+  background-color: #fff;
+  border:1px solid #fff;
   border-radius: 15px;
   padding-left:1.375rem;
   margin-right:0.938rem;
@@ -226,6 +245,7 @@ const Title2 = styled.h2`
   text-align: left;
   color: #191919;
   margin-bottom:0.375rem;
+  margin-left: .766rem;
 `;
 
 const TextBox = styled.div`
@@ -241,8 +261,8 @@ const TextBox = styled.div`
   letter-spacing: normal;
   text-align: left;
   color: #191919;
-  background-color: #f2f2f2;
-  border:1px solid #f2f2f2;
+  background-color: #fff;
+  border:1px solid #fff;
   padding:0.625rem 0.6rem 0.582rem 0.813rem;
   border-radius: 15px;
   //우측 스크롤바 css
@@ -262,11 +282,10 @@ const TextBox = styled.div`
 `;
 
 const ConfrimWrapper = styled.div`
-  width:31rem;
   display:flex;
-  margin-top:1rem;
+  align-items: center;
+  margin-top:1.5rem;
   text-align:right;
-  position:relative;
   margin-bottom:1.5rem;
 `;
 
@@ -281,14 +300,15 @@ const Title3 = styled.h2`
   letter-spacing: normal;
   text-align: right;
   color: #191919;
+  margin-right:.1rem;
 `;
 
 const CheckBox = styled.input`
   background-color: #fff;
   border: 1px solid red;
-  border-radius: 2px;
+  border-radius: 15px;
   position:absolute;
-  right:.5rem;
+  right:0;
   &:focus{
     outline: none;
   }
@@ -298,34 +318,49 @@ const CheckBox = styled.input`
 `;
 
 const JoinButton = styled.button`
+  width:31rem;
+  height:3.125rem;
   background-color: #112553;
   border: 1px solid #112553;
   color: rgba(255, 255, 255, 0.9);
-  width:102%;
-  height:2.8rem;
   border-radius: .8rem;
   margin-top:2rem;
+  margin-bottom:4rem;
   font-weight: 500;
   cursor:pointer;
 `;
 
+const JoinCompleteBack = styled.div`
+  width:100%;
+  height:130%;
+  position:absolute;
+  left:0;top:0;
+  background:rgba(0,0,0,0.6);
+  display:block;
+  z-index: 10;
+  margin: 0 auto;
+`;
+
 const JoinCompletBox = styled.div`
   z-index:100;
-  position:absolute;
-  top:30rem;
-  left:-3rem;
-  margin:0 auto;
+  top:-20rem;left:0;
+  right:0;bottom:0;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 36.313rem;
   height: 12.438rem;
   color:black;
   border-radius: 15px;
-  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
+  background:rgba(0,0,0,0.6);
   background-color: #fff;
   text-align:center;
+  position: absolute;
 `;
 
 const JoinBox = styled.h1`
-  margin-top:4.5rem;
   font-size: 1.063rem;
   font-weight: 500;
   font-stretch: normal;
@@ -361,6 +396,18 @@ const FormStyled = styled.form`
 
 `;
 
+const AlertSpan = styled.h1`
+  font-size: .8rem;
+  color:red;
+  margin-left: 1rem;
+`;
+
+const AlertSpan2 = styled.h1`
+  font-size:.8rem;
+  color:green;
+  margin-left: 1rem;
+`;
+
 
 
 const Join = () => {
@@ -381,116 +428,206 @@ const Join = () => {
   와 이를 이용하는 링커 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 
   아울러 여러분의 링커 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습
   니다.`;
-
+  const {register, handleSubmit, formState:{errors}, setError, watch, getValues} = useForm();
   const [joinState,setJoinState] = useState(false);
-  const {register, handleSubmit, formState:{errors}, setError} = useForm();
-  console.log(errors)
+  const [email, setEmail] = useState();
+  const [emailCode, setEmailCode] = useState();
+  const [emailSendModal, setEmailSendModal] = useState(false);
+  const [emailCodeModal, setEmailCodeModal] = useState(false);
+  const [checkModal, setCheckModal] = useState(false);
+  const [check, setCheck] = useState(false);
+
   const onValid = (data) => {
+    console.log(data)
     if(data.pwd !== data.pwdConfirm){
       setError(
         "pwd",
-        {message:"비밀번호가 일치하지 않습니다."},
+        {message:"* 비밀번호가 일치하지 않습니다."},
+        {shouldFocus:true}
+      )
+      setError(
+        "pwdConfirm",
+        {message:"* 비밀번호가 일치하지 않습니다."},
         {shouldFocus:true}
       )
     }
+    else if(data.checkbox1 === false){
+      setError(
+        "checkbox1",
+        {message:"* 링커 이용약관과 개인정보 보호정책에 모두 동의하여 주세요."}
+      )
+    }
+    else if(data.checkbox2 === false){
+      setError(
+        "checkbox2",
+        {message:"* 링커 이용약관과 개인정보 보호정책에 모두 동의하여 주세요."}
+      )
+    }
+    else{
+      return setJoinState(!joinState)
+    }
+    
+  } //invalid 검사
+  
+  const emailOnclick = async () => {
+    console.log(email)
+    await axios.post(`http://localhost:8080/api/auth/signup/${email}`)
+    .then(setEmailSendModal(!emailSendModal))
+    .catch(console.log('email 값이 전송되지 않았습니다.'))
+  } //email 인증번호 발송 api
+
+  const emailConfirmOnclick = async () => {
+    console.log(emailCode);
+    await axios.get(`http://localhost:8080/api/auth/signup/${email}/${emailCode}`)
+    .then((response) => {
+      if(response === emailCode){
+        setEmailCodeModal(!emailCodeModal);
+      }
+    })
+  }
+
+  const checkBoxOnclick = () => {
+    setCheck(!check);
+  }
+
+
+  const getEmailValue = (e) => {
+   setEmail(e.target.value);
+  }
+
+  const confirmEmailValue = (e) => {
+    setEmailCode(e.target.value)
   }
  
-
-
     return (
       <Wrapper joinState={joinState}>
+        {
+          joinState ? 
+          <JoinCompleteBack>
+            <JoinCompletBox>
+              <JoinBox>회원가입이 완료되었습니다!</JoinBox>
+              <Link to='/login'>
+                <JoinButton2>로그인</JoinButton2>
+              </Link>
+            </JoinCompletBox> 
+          </JoinCompleteBack>
+          : null
+        }
         <LayOut>
-          <FormStyled onSubmit={handleSubmit(onValid)}>
-            <Title>회원가입</Title>
-            <Intro>환영합니다! 링커에 가입해보세요.</Intro>
+          <Title>회원가입</Title>
+          <Intro>환영합니다! 링커에 가입해보세요.</Intro>
+        
+          <InputTitle style={{marginTop:'2.5rem'}}>아이디(email)</InputTitle> 
+          <IdEmailWrapper>
+            <Input onChange={getEmailValue} value={email ||""}/>
+            <TopButton>인증번호 발송</TopButton>
+          </IdEmailWrapper>
+          {
+            emailSendModal === true 
+            ? <AlertSpan2>* 이메일이 발송되었습니다.</AlertSpan2>
+            : null
+          }
           
-            <InputTitle>아이디(email)</InputTitle> 
-            <IdPwWrapper>
-              <Input {...register("email", {required:true})}/>
-              <Button>인증번호 발송</Button>
-            </IdPwWrapper>
-            
-            <InputTitle>이메일 인증번호</InputTitle>
-            <IdPwWrapper>
-              <Input {...register("emailCode", {required:true})}></Input>
-              <Button>확인</Button>
-            </IdPwWrapper>
+          <InputTitle>이메일 인증번호</InputTitle>
+          <IdEmailWrapper>
+            <Input onChange={confirmEmailValue} value={emailCode || ""}></Input>
+            <TopButton onClick={emailConfirmOnclick}>확인</TopButton>
+          </IdEmailWrapper>
+          {
 
-            <InputTitleWrapper>
-              <InputTitle>비밀번호</InputTitle>
-              <PwSpan>* 영문,숫자 조합 8~12자 입력</PwSpan>
-            </InputTitleWrapper>
-            <PwInput type="password" {...register("pwd", 
-            {
-              required:true ,
-              maxLength:{value:12,message:'최대 비밀먼호는 12자 입니다.'} ,
-              minLength:{value:8,message:'최소 비밀번호는 8자 입니다.'}
-            })}>
-            </PwInput>
-            <span>{errors?.pwd?.message}</span>
-            
-            
-            <InputTitle>비밀번호 확인</InputTitle>
-            <PwInput type="password" {...register("pwdConfirm",
-             {required:true,
-              maxLength:12,
-              minLength:8
-             })}> 
-            </PwInput>
+          }
+        <FormStyled onSubmit={handleSubmit(onValid)}>
+          <InputTitleWrapper>
+            <InputTitle2>비밀번호</InputTitle2>
+            <PwSpan>* 영문,숫자 조합 8~12자를 입력해 주세요!</PwSpan>
+          </InputTitleWrapper>
+          <PwInput type="password" {...register("pwd", 
+          {
+            required:true ,
+            maxLength:{value:12,message:'*최대 비밀먼호는 12자 입니다.'} ,
+            minLength:{value:8,message:'*최소 비밀번호는 8자 입니다.'}
+          })}>
+          </PwInput>
+          <AlertSpan>{errors?.pwd?.message}</AlertSpan>
           
-            <InputTitle>이름</InputTitle>
-            <PwInput {...register("name", {required:true})}></PwInput>
-
-            <InputTitle>생년월일</InputTitle>
-            <BirthWrapper>
-              <YearBox placeholder='년(YYYY)' {...register("year", {required:true})}></YearBox>
-              <MonthBox>
-                <MonthOption value='월'>월</MonthOption>
-                {
-                  month.map((a,i)=>{
-                    return(
-                      <MonthOption value={a} key={i}>{a}</MonthOption>
-                    )
-                  })
-                }
-              </MonthBox>
-              <DayBox placeholder='일' {...register("day", {required:true})}>
-                
-              </DayBox>
-            </BirthWrapper>
+          <InputTitle>비밀번호 확인</InputTitle>
+          <PwInput type="password" {...register("pwdConfirm",
             {
-              joinState ? 
-              <JoinCompletBox>
-                <JoinBox>회원가입이 완료되었습니다!</JoinBox>
-                <Link to='/login'>
-                  <JoinButton2>로그인</JoinButton2>
-                </Link>
-              </JoinCompletBox> 
-              : null
-            }
-            <Line/>
-            <Title2>이용약관</Title2>
-            <TextBox readOnly>
-              <TextWrapper>
-                <h3>여러분을 환영합니다</h3>
-                <p>{rule}</p>
-              </TextWrapper>
-            </TextBox>
-            <ConfrimWrapper>
-              <Title3>동의합니다</Title3>
-              <CheckBox type="checkbox"/>
-            </ConfrimWrapper>
-            <Title2>개인정보보호정책</Title2>
-            <TextBox>
+            required:true,
+            maxLength:{value:12,message:'*최대 비밀먼호는 12자 입니다.'},
+            minLength:{value:8,message:'*최소 비밀번호는 8자 입니다.'}
+            })}> 
+          </PwInput>
+          <AlertSpan>{errors?.pwdConfirm?.message}</AlertSpan>
+        
+          <InputTitle>이름</InputTitle>
+          <PwInput {...register("name", 
+            {required:true})}>
+          </PwInput>
+
+          <InputTitle>생년월일</InputTitle>
+          <BirthWrapper>
+            <YearBox placeholder='년(YYYY)' {...register("year", 
+              {
+                required:true,
+                maxLength:4
+              })}>
+            </YearBox>
+
+            <MonthBox>
+              <MonthOption>월</MonthOption>
+              {
+                month.map((a,i)=>{
+                  return(
+                    <MonthOption value={a} key={i} {...register("month")}>{a}</MonthOption>
+                  )
+                })
+              }
+            </MonthBox>
+            <DayBox placeholder='일' {...register("day", 
+              {
+                required:true,
+                maxLength:2
+              })}>   
+            </DayBox>
+          </BirthWrapper>
+          <Line/>
+          <Title2>이용약관</Title2>
+          <TextBox readOnly>
+            <TextWrapper>
               <h3>여러분을 환영합니다</h3>
               <p>{rule}</p>
-            </TextBox>
-            <ConfrimWrapper>
-              <Title3>동의합니다</Title3>
-              <CheckBox type="checkbox"/>
-            </ConfrimWrapper>
-            <JoinButton onClick={()=>{setJoinState(!joinState)}}>가입하기</JoinButton>
-          </FormStyled>
+            </TextWrapper>
+          </TextBox>
+          <ConfrimWrapper>
+            <Title3>동의합니다</Title3>
+            <CheckBox type="checkbox" onClick={checkBoxOnclick}{...register("checkbox1",
+              {
+                require:true,
+                
+              })}
+            />
+          </ConfrimWrapper>
+        
+          <Title2>개인정보보호정책</Title2>
+          <TextBox>
+            <h3>여러분을 환영합니다</h3>
+            <p>{rule}</p>
+          </TextBox>
+          <ConfrimWrapper>
+            <Title3>동의합니다</Title3>
+            <CheckBox type="checkbox" {...register("checkbox2",
+              {
+                require:true
+              })}
+            />
+          </ConfrimWrapper>
+          <AlertSpan>{errors?.checkbox1?.message}</AlertSpan>
+          <AlertSpan>{errors?.checkbox2?.message}</AlertSpan>
+          
+        
+          <JoinButton>가입하기</JoinButton>
+        </FormStyled>
         </LayOut>
       </Wrapper>   
     );
@@ -498,4 +635,9 @@ const Join = () => {
 
 export default Join;
 
+// {
+//   checkModal === true 
+//   ?<AlertSpan>* 링커 이용약관과 개인정보 보호정책에 모두 동의하여 주세요.</AlertSpan>
+//   :null
+// }
 
