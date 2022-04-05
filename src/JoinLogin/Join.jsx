@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -7,7 +7,7 @@ import axios from 'axios';
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 120%;
+  height: 125%;
   background-color: #f5f6f8;
   padding-top:6rem;
 `;
@@ -200,8 +200,8 @@ const MonthBox = styled.select`
   padding-left:1.375rem;
   margin-right:0.938rem;
   width:36%;
-  height: 3.125rem;
-  background:url(/assets/arrow_down.png) no-repeat right 50%;
+  height: 3.3rem;
+  background: #fff url(/assets/arrow_down.png) no-repeat right 50%;
   background-size:30px;
   &:focus{
     outline: none;
@@ -318,7 +318,7 @@ const CheckBox = styled.input`
 `;
 
 const JoinButton = styled.button`
-  width:31rem;
+  width:32rem;
   height:3.125rem;
   background-color: #112553;
   border: 1px solid #112553;
@@ -396,6 +396,10 @@ const FormStyled = styled.form`
 
 `;
 
+const FormStyled2 = styled.form`
+
+`;
+
 const AlertSpan = styled.h1`
   font-size: .8rem;
   color:red;
@@ -412,7 +416,7 @@ const AlertSpan2 = styled.h1`
 
 const Join = () => {
 
-  const month = [1,2,3,4,5,6,7,8,9,10,11,12];
+  const month = ['01','02','03','04','05','06','07','08','09','10','11','12'];
   
   const rule = `
   링커 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 
@@ -428,25 +432,27 @@ const Join = () => {
   와 이를 이용하는 링커 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 
   아울러 여러분의 링커 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습
   니다.`;
-  const {register, handleSubmit, formState:{errors}, setError, watch, getValues} = useForm();
+  const {register, handleSubmit, formState:{errors}, setError, getValues, watch} = useForm();
   const [joinState,setJoinState] = useState(false);
-  const [email, setEmail] = useState();
-  const [emailCode, setEmailCode] = useState();
   const [emailSendModal, setEmailSendModal] = useState(false);
   const [emailCodeModal, setEmailCodeModal] = useState(false);
-  const [checkModal, setCheckModal] = useState(false);
-  const [check, setCheck] = useState(false);
+  const [codeConfirmModal, setCodeConfirmModal] = useState(false);
+  const [userInfo, setUserInfo] = useState()
+  const [emailVerified, setEmailVerified] = useState();
+  const url = 'http://localhost:8080';
+  const regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i
 
+   
   const onValid = (data) => {
-    console.log(data)
-    if(data.pwd !== data.pwdConfirm){
+    
+    if(data.password !== data.confirmPassword){
       setError(
-        "pwd",
+        "password",
         {message:"* 비밀번호가 일치하지 않습니다."},
         {shouldFocus:true}
       )
       setError(
-        "pwdConfirm",
+        "confirmPassword",
         {message:"* 비밀번호가 일치하지 않습니다."},
         {shouldFocus:true}
       )
@@ -464,41 +470,67 @@ const Join = () => {
       )
     }
     else{
-      return setJoinState(!joinState)
+        
     }
-    
+    setUserInfo(data)
+    console.log(userInfo);
   } //invalid 검사
-  
+
+
   const emailOnclick = async () => {
-    console.log(email)
-    await axios.post(`http://localhost:8080/api/auth/signup/${email}`)
-    .then(setEmailSendModal(!emailSendModal))
-    .catch(console.log('email 값이 전송되지 않았습니다.'))
+    const email = getValues('email');
+    if(email.match(regExp) != null ){
+      await axios.get(`${url}/api/auth/signup/${email}`)
+      .then((response) => {
+        console.log(response);
+        setEmailSendModal(!emailSendModal);
+      })
+      .catch((error) => console.log(error))
+    }else{
+      console.log('정규식에 일치하지 않습니다.')
+    }
   } //email 인증번호 발송 api
 
   const emailConfirmOnclick = async () => {
+    const email = getValues('email');
+    const emailCode = getValues('emailCode');
     console.log(emailCode);
-    await axios.get(`http://localhost:8080/api/auth/signup/${email}/${emailCode}`)
+    await axios.get(`${url}/api/auth/signup/${email}/${emailCode}`)
     .then((response) => {
-      if(response === emailCode){
+      if(response.data.result === true){
+        console.log(response);
         setEmailCodeModal(!emailCodeModal);
+        setCodeConfirmModal(false);
+        setEmailVerified(response.data.result);
       }
+      else{
+        setCodeConfirmModal(true);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
     })
   }
 
-  const checkBoxOnclick = () => {
-    setCheck(!check);
+  const joinOnclick = async () => {
+    if(emailVerified === true){
+      const data = {
+        userEmail : userInfo.email,
+        password : userInfo.password,
+        userName : userInfo.username,
+        emailVerified :emailVerified,
+        birthDay : `${userInfo.year}-${userInfo.month}-${userInfo.day}`
+      }
+      console.log(JSON.stringify(data));
+      await axios.post(`${url}/api/users`,JSON.stringify(data),{headers:{"Content-Type":`application/json`}})
+      .then((response) => {
+        console.log(response)
+        setJoinState(true);
+      })
+      .catch((error) => console.log(error))
+    }
   }
-
-
-  const getEmailValue = (e) => {
-   setEmail(e.target.value);
-  }
-
-  const confirmEmailValue = (e) => {
-    setEmailCode(e.target.value)
-  }
- 
+  
     return (
       <Wrapper joinState={joinState}>
         {
@@ -517,51 +549,69 @@ const Join = () => {
           <Title>회원가입</Title>
           <Intro>환영합니다! 링커에 가입해보세요.</Intro>
         
+        <FormStyled onSubmit={handleSubmit(onValid)}>
           <InputTitle style={{marginTop:'2.5rem'}}>아이디(email)</InputTitle> 
           <IdEmailWrapper>
-            <Input onChange={getEmailValue} value={email ||""}/>
-            <TopButton>인증번호 발송</TopButton>
+            <Input {...register("email",
+            {
+              required:true,
+              pattern:{value:/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/,message:"* 유효하지 않은 이메일 입니다."}
+            })} />
+            <TopButton onClick={emailOnclick}>인증번호 발송</TopButton>
           </IdEmailWrapper>
+          <AlertSpan style={{marginTop:'.5rem'}}>{errors?.email?.message}</AlertSpan>
           {
             emailSendModal === true 
-            ? <AlertSpan2>* 이메일이 발송되었습니다.</AlertSpan2>
+            ? <AlertSpan2 style={{marginTop:'.5rem'}}>* 이메일이 발송되었습니다.</AlertSpan2>
             : null
           }
           
           <InputTitle>이메일 인증번호</InputTitle>
           <IdEmailWrapper>
-            <Input onChange={confirmEmailValue} value={emailCode || ""}></Input>
+            <Input {...register("emailCode",
+            {
+              required:true
+            })}/>
             <TopButton onClick={emailConfirmOnclick}>확인</TopButton>
           </IdEmailWrapper>
           {
-
+            emailCodeModal === true
+            ? <AlertSpan2 style={{marginTop:'.5rem'}}>* 이메일 인증이 완료되었습니다.</AlertSpan2>
+            : null
           }
-        <FormStyled onSubmit={handleSubmit(onValid)}>
+          {
+            codeConfirmModal === true
+            ? <AlertSpan style={{marginTop:'.5rem'}}>* 이메일 인증이 실패하였습니다.</AlertSpan>
+            : null
+          }          
+        
           <InputTitleWrapper>
             <InputTitle2>비밀번호</InputTitle2>
             <PwSpan>* 영문,숫자 조합 8~12자를 입력해 주세요!</PwSpan>
           </InputTitleWrapper>
-          <PwInput type="password" {...register("pwd", 
+          <PwInput type="password" {...register("password", 
           {
             required:true ,
+            pattern:{value:/^[A-Za-z0-9]{6,12}$/,message:'* 영문, 숫자 조합 8~12자를 입력해주세요'},
             maxLength:{value:12,message:'*최대 비밀먼호는 12자 입니다.'} ,
             minLength:{value:8,message:'*최소 비밀번호는 8자 입니다.'}
           })}>
           </PwInput>
-          <AlertSpan>{errors?.pwd?.message}</AlertSpan>
+          <AlertSpan>{errors?.password?.message}</AlertSpan>
           
           <InputTitle>비밀번호 확인</InputTitle>
-          <PwInput type="password" {...register("pwdConfirm",
+          <PwInput type="password" {...register("confirmPassword",
             {
             required:true,
+            pattern:{value:/^[A-Za-z0-9]{6,12}$/,message:'* 영문, 숫자 조합 8~12자를 입력해주세요'},
             maxLength:{value:12,message:'*최대 비밀먼호는 12자 입니다.'},
             minLength:{value:8,message:'*최소 비밀번호는 8자 입니다.'}
             })}> 
           </PwInput>
-          <AlertSpan>{errors?.pwdConfirm?.message}</AlertSpan>
+          <AlertSpan>{errors?.confirmPassword?.message}</AlertSpan>
         
           <InputTitle>이름</InputTitle>
-          <PwInput {...register("name", 
+          <PwInput {...register("username", 
             {required:true})}>
           </PwInput>
 
@@ -570,16 +620,17 @@ const Join = () => {
             <YearBox placeholder='년(YYYY)' {...register("year", 
               {
                 required:true,
+                minLength:4,
                 maxLength:4
               })}>
             </YearBox>
 
             <MonthBox>
-              <MonthOption>월</MonthOption>
+              <MonthOption {...register("month")}>월</MonthOption>
               {
                 month.map((a,i)=>{
                   return(
-                    <MonthOption value={a} key={i} {...register("month")}>{a}</MonthOption>
+                    <MonthOption value={a} key={i}>{a}</MonthOption>
                   )
                 })
               }
@@ -601,10 +652,9 @@ const Join = () => {
           </TextBox>
           <ConfrimWrapper>
             <Title3>동의합니다</Title3>
-            <CheckBox type="checkbox" onClick={checkBoxOnclick}{...register("checkbox1",
+            <CheckBox type="checkbox"{...register("checkbox1",
               {
                 require:true,
-                
               })}
             />
           </ConfrimWrapper>
@@ -626,7 +676,7 @@ const Join = () => {
           <AlertSpan>{errors?.checkbox2?.message}</AlertSpan>
           
         
-          <JoinButton>가입하기</JoinButton>
+          <JoinButton onClick={joinOnclick}>가입하기</JoinButton>
         </FormStyled>
         </LayOut>
       </Wrapper>   
@@ -641,3 +691,10 @@ export default Join;
 //   :null
 // }
 
+
+
+
+
+//1.이메일 작성후 인증번호 발송 => 이메일 backend로 전송
+//2.전송된 이메일 code값 backend에서 받아오기 => 이때 받아온 code가 사용자가 입력한 인증번호와 같을시 하단에 인증이 완료되었습니다 메세지 주기
+//3.그후 밑 사용자 정보 모두 입력후 전체 정보가 기입되고 가입하기 누르면 backend로 사용자 정보 보내고 로그인하기 모달창 띄우기 => 회원가입 완료

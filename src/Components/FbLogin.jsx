@@ -10,6 +10,8 @@ export default function FbLogin() {
   const [postText,setPostText] = useState('');
   
   const appId = process.env.REACT_APP_FB_APP_ID;
+  const fbUrl = process.env.REACT_APP_FB_SDK_URL;
+
  
   useEffect(() => {
     setFBAsyncInit();
@@ -38,7 +40,7 @@ export default function FbLogin() {
       }
       js = d.createElement(s);
       js.id = id;
-      js.src = `https://connect.facebook.net/en_US/sdk.js`;
+      js.src = fbUrl;
       fjs.parentNode.insertBefore(js, fjs);
     })(document, 'script', 'facebook-jssdk');
   }
