@@ -375,6 +375,7 @@ const Home = () => {
   const brandOnclick = ()=>{
     setBrandModal(!brandModal);
   }
+  
 
     return (
       <Wrapper>

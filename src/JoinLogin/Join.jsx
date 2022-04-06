@@ -425,7 +425,7 @@ export default function Join()  {
   const [emailCodeModal, setEmailCodeModal] = useState(false);
   const [codeConfirmModal, setCodeConfirmModal] = useState(false);
   const [emailVerified, setEmailVerified] = useState();
-  const url = 'http://localhost:8080';
+  const url = 'https://5ff904095f3f.ngrok.io';
   const regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 
    
