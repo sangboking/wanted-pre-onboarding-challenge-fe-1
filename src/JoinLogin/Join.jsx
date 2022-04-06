@@ -126,6 +126,7 @@ const InputTitle2 = styled.h1`
   color: #191919;
   margin-left: .766rem;
 `;
+
 const PwSpan = styled.span`
   font-size: 0.75rem;
   font-weight: normal;
@@ -320,7 +321,7 @@ const JoinButton = styled.button`
 
 const JoinCompleteBack = styled.div`
   width:100%;
-  height:130%;
+  height:145vh;
   position:absolute;
   left:0;top:0;
   background:rgba(0,0,0,0.6);
@@ -331,7 +332,7 @@ const JoinCompleteBack = styled.div`
 
 const JoinCompletBox = styled.div`
   z-index:100;
-  top:-20rem;left:0;
+  top:-30rem;left:0;
   right:0;bottom:0;
   margin: auto;
   display: flex;
@@ -418,12 +419,13 @@ export default function Join()  {
   아울러 여러분의 링커 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습
   니다.`;
   const {register, handleSubmit, formState:{errors}, setError, getValues} = useForm();
-  const [joinState,setJoinState] = useState(false);
+  const [joinModal,setJoinModal] = useState(false);
+  const [overlapModal, setOverlapModal] = useState(false);
   const [emailSendModal, setEmailSendModal] = useState(false);
   const [emailCodeModal, setEmailCodeModal] = useState(false);
   const [codeConfirmModal, setCodeConfirmModal] = useState(false);
   const [emailVerified, setEmailVerified] = useState();
-  const url = 'http://localhost:8080';
+  const url = 'https://5ff904095f3f.ngrok.io';
   const regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 
    
@@ -467,7 +469,10 @@ export default function Join()  {
         console.log(response);
         setEmailSendModal(true);
       })
-      .catch((error) => console.log(error))
+      .catch((error) => {
+        console.log(error);
+        setOverlapModal(true);
+      })
     }
     else{
       console.log('정규식에 일치하지 않습니다.')
@@ -506,19 +511,21 @@ export default function Join()  {
 
     if(emailVerified === true){
       console.log(JSON.stringify(data));
-      await axios.post(`${url}/api/users`,JSON.stringify(data),{headers:{"Content-Type":`application/json`}})
+      await axios.post(`${url}/api/accounts`,JSON.stringify(data),{headers:{"Content-Type":`application/json`}})
       .then((response) => {
         console.log(response)
-        setJoinState(true);
+        setJoinModal(true);
       })
-      .catch((error) => console.log(error))
+      .catch((error) => {
+        console.log(error)
+      })
     }
   }
   
     return (
-      <Wrapper joinState={joinState}>
+      <Wrapper>
         {
-          joinState ? 
+          joinModal ? 
           <JoinCompleteBack>
             <JoinCompletBox>
               <JoinBox>회원가입이 완료되었습니다!</JoinBox>
@@ -529,6 +536,17 @@ export default function Join()  {
           </JoinCompleteBack>
           : null
         }
+        {
+          overlapModal ? 
+          <JoinCompleteBack>
+            <JoinCompletBox>
+              <JoinBox>이미 가입된 계정입니다.</JoinBox>
+              <JoinButton2 onClick={()=>{setOverlapModal(false)}}>확인</JoinButton2>
+            </JoinCompletBox> 
+          </JoinCompleteBack>
+          : null
+        }
+
         <LayOut>
           <Title>회원가입</Title>
           <Intro>환영합니다! 링커에 가입해보세요.</Intro>
@@ -609,13 +627,13 @@ export default function Join()  {
               })}>
             </YearBox>
 
-            <MonthBox placeholder='월(MM)' {...register("month",
+            <MonthBox placeholder='월(mm)' {...register("month",
               {
                 required:true,
                 maxLength:2,
               })}>
             </MonthBox>
-            <DayBox placeholder='일(DD)' {...register("day", 
+            <DayBox placeholder='일(dd)' {...register("day", 
               {
                 required:true,
                 maxLength:2
@@ -663,12 +681,6 @@ export default function Join()  {
     );
 };
 
-
-// {
-//   checkModal === true 
-//   ?<AlertSpan>* 링커 이용약관과 개인정보 보호정책에 모두 동의하여 주세요.</AlertSpan>
-//   :null
-// }
 
 
 

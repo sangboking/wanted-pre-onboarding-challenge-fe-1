@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import LinkrLogoSvg from '../SvgIcons/LinkrLogoSvg';
 import FaceBookS from '../SvgIcons/FaceBookS';
 import InstarS from '../SvgIcons/InstarS';
 import TwitS from '../SvgIcons/TwitS';
 import RightArrowIcon from '../SvgIcons/RightArrowIcon';
 import DotIcon from '../SvgIcons/DotIcon';
-import FbLogin from './FbLogin';
+import LinkrLogoNavy from '../SvgIcons/LinkrLogoNavy';
 
 const Wrapper = styled.div`
   width:100%;
@@ -368,11 +367,6 @@ const CreateButton = styled.button`
   cursor:pointer ;
 `;
 
-const Linkbutton = styled.button`
-  width:5;
-  height:5rem ;
-`;
-
 const Home = () => {
   const boxArray = [0,1,2];
 
@@ -381,11 +375,12 @@ const Home = () => {
   const brandOnclick = ()=>{
     setBrandModal(!brandModal);
   }
+  
 
     return (
       <Wrapper>
         <Header>
-          <LinkrLogoSvg width={150} height={150}/>
+          <LinkrLogoNavy width={100} height={100}/>
           <HeaderRight>
             <NamedIdWrapper>
               <Name>김링커</Name>
@@ -408,18 +403,6 @@ const Home = () => {
             }
           </BrandBoxWrapper>
         </BrandWrapper>
-
-         <Link to='/scedule/week'> 
-          <Linkbutton>스케줄 페이지 임시버튼</Linkbutton>
-        </Link>
-
-        <Link to='/join'> 
-          <Linkbutton>회원가입 페이지 임시버튼</Linkbutton>
-        </Link>
-
-        <Link to='/login'> 
-          <Linkbutton>로그인 페이지 임시버튼</Linkbutton>
-        </Link> 
 
         {
           brandModal ?
@@ -459,7 +442,6 @@ const Home = () => {
         : null
         }
 
-        <FbLogin/>
 
       </Wrapper>
     );

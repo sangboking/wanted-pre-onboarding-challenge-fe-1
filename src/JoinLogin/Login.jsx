@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Checkbox} from '@mui/material';
-import {Link} from 'react-router-dom';
+import {Link,Navigate,useNavigate} from 'react-router-dom';
 import LinkrLogoNavy from '../SvgIcons/LinkrLogoNavy';
 import { useForm } from 'react-hook-form';
+import axios from 'axios';
 
 const Wrapper = styled.div`
   width:100%;
@@ -157,12 +158,28 @@ const FormStyle = styled.form`
 `;
 
 
-
-const Login = () => {
-  const {register, handleSubmit,} = useForm();
+const Login = ({history}) => {
+  const url = 'https://5ff904095f3f.ngrok.io';
+  const navigate = useNavigate();
+  const {register, handleSubmit, getValues} = useForm();
   const onValid = (data) => {
-    console.log(data);
+    
   }  
+
+  const loginOnclick = async () => {
+    const data = {
+      email : getValues('email'),
+      password : getValues('password')
+    }
+    console.log(JSON.stringify(data));
+    await axios.post(`${url}/api/auth`,JSON.stringify(data),{headers:{"Content-Type":`application/json`}})
+    .then((response) => {
+      console.log(response)
+      if(response.data.success === true){
+        navigate('/');
+      }
+    })
+  }
   
     return (
         <Wrapper>
@@ -175,7 +192,7 @@ const Login = () => {
             <Intro>반갑습니다! 계정에 로그인 해볼까요?</Intro>
             
             <FormStyle onSubmit={handleSubmit(onValid)}>
-              <InputBox placeholder='아이디(email)' {...register("useremail")}></InputBox>
+              <InputBox placeholder='아이디(email)' {...register("email")}></InputBox>
               
               <InputBox placeholder='비밀번호' type='password' {...register("password")}></InputBox>
               
@@ -184,7 +201,7 @@ const Login = () => {
                 <CheckLog>로그인 상태 유지</CheckLog>
               </CheckWrapper>
               
-              <Button>로그인하기</Button>
+              <Button onClick={loginOnclick}>로그인하기</Button>
             </FormStyle>
             
             <Line></Line>

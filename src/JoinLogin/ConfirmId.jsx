@@ -101,7 +101,7 @@ const GoButton = styled.button`
   height: 3.125rem;
   border-radius: 15px;
   background-color: #112553;
-  border:1px solid#112553;
+  border:1px solid #112553;
   font-size: 0.875rem;
   font-weight: 500;
   font-stretch: normal;
@@ -117,7 +117,7 @@ const GoButton2 = styled.button`
   height: 3.125rem;
   border-radius: 15px;
   background-color: #112553;
-  border:1px solid#112553;
+  border:1px solid #112553;
   font-size: 0.875rem;
   font-weight: 500;
   font-stretch: normal;
@@ -134,7 +134,7 @@ export default function ConfirmId() {
     <Back>
       <CenterBox>
         
-        <Title>김링커 님의 아이디는</Title>
+        <Title>~ 님의 아이디는</Title>
         
         <IdWrapper>
           <Intro>Link**@social.com</Intro>
