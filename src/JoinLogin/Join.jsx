@@ -182,7 +182,7 @@ const YearBox = styled.input`
   color: #676767;
   border-radius: 15px;
   padding-left:1.375rem;
-  width:35%;
+  width:33%;
   height: 2.9rem;
   &:focus{
     outline: none;
@@ -190,7 +190,7 @@ const YearBox = styled.input`
   margin-right:1rem;
 `;
 
-const MonthBox = styled.select`
+const MonthBox = styled.input`
   font-weight: 500;
   font-size:0.8rem;
   background-color: #fff;
@@ -199,23 +199,11 @@ const MonthBox = styled.select`
   border-radius: 15px;
   padding-left:1.375rem;
   margin-right:0.938rem;
-  width:36%;
+  width:33%;
   height: 3.3rem;
-  background: #fff url(/assets/arrow_down.png) no-repeat right 50%;
-  background-size:30px;
   &:focus{
     outline: none;
   }
-  appearance: none; //select box 화살표 제거 
-  -moz-appearance: none; 
-  -webkit-appearance: none; 
-  cursor: pointer;
-`;
-
-const MonthOption = styled.option`
-  background-color: #fff;
-  border:1px solid #fff;
-  border-radius:3rem;
 `;
 
 const DayBox = styled.input`
@@ -227,7 +215,7 @@ const DayBox = styled.input`
   border-radius: 15px;
   padding-left:1.375rem;
   margin-right:0.938rem;
-  width:30%;
+  width:33%;
   height: 3rem;
   &:focus{
     outline:none;
@@ -414,10 +402,7 @@ const AlertSpan2 = styled.h1`
 
 
 
-const Join = () => {
-
-  const month = ['01','02','03','04','05','06','07','08','09','10','11','12'];
-  
+export default function Join()  {
   const rule = `
   링커 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 
   링커 서비스의 이용과 관련하여 링커 서비스를 제공하는 링커 주식회사(이하 ‘링커’)
@@ -432,15 +417,14 @@ const Join = () => {
   와 이를 이용하는 링커 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 
   아울러 여러분의 링커 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습
   니다.`;
-  const {register, handleSubmit, formState:{errors}, setError, getValues, watch} = useForm();
+  const {register, handleSubmit, formState:{errors}, setError, getValues} = useForm();
   const [joinState,setJoinState] = useState(false);
   const [emailSendModal, setEmailSendModal] = useState(false);
   const [emailCodeModal, setEmailCodeModal] = useState(false);
   const [codeConfirmModal, setCodeConfirmModal] = useState(false);
-  const [userInfo, setUserInfo] = useState()
   const [emailVerified, setEmailVerified] = useState();
   const url = 'http://localhost:8080';
-  const regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i
+  const regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 
    
   const onValid = (data) => {
@@ -470,26 +454,25 @@ const Join = () => {
       )
     }
     else{
-        
-    }
-    setUserInfo(data)
-    console.log(userInfo);
+      console.log(data);
   } //invalid 검사
+}
 
 
-  const emailOnclick = async () => {
+  const emailSendOnclick = async () => {
     const email = getValues('email');
-    if(email.match(regExp) != null ){
+    if(regExp.test(email) === true ){
       await axios.get(`${url}/api/auth/signup/${email}`)
       .then((response) => {
         console.log(response);
-        setEmailSendModal(!emailSendModal);
+        setEmailSendModal(true);
       })
       .catch((error) => console.log(error))
-    }else{
+    }
+    else{
       console.log('정규식에 일치하지 않습니다.')
     }
-  } //email 인증번호 발송 api
+  } 
 
   const emailConfirmOnclick = async () => {
     const email = getValues('email');
@@ -513,14 +496,15 @@ const Join = () => {
   }
 
   const joinOnclick = async () => {
+     const data = {
+      userEmail : getValues('email'),
+      password : getValues('password'),
+      userName : getValues('username'),
+      emailVerified :emailVerified,
+      birthDay : `${getValues('year')}-${getValues('month')}-${getValues('day')}`
+    }
+
     if(emailVerified === true){
-      const data = {
-        userEmail : userInfo.email,
-        password : userInfo.password,
-        userName : userInfo.username,
-        emailVerified :emailVerified,
-        birthDay : `${userInfo.year}-${userInfo.month}-${userInfo.day}`
-      }
       console.log(JSON.stringify(data));
       await axios.post(`${url}/api/users`,JSON.stringify(data),{headers:{"Content-Type":`application/json`}})
       .then((response) => {
@@ -555,9 +539,9 @@ const Join = () => {
             <Input {...register("email",
             {
               required:true,
-              pattern:{value:/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/,message:"* 유효하지 않은 이메일 입니다."}
+              pattern:{value:/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i ,message:"* 유효하지 않은 이메일 입니다."}
             })} />
-            <TopButton onClick={emailOnclick}>인증번호 발송</TopButton>
+            <TopButton onClick={emailSendOnclick}>인증번호 발송</TopButton>
           </IdEmailWrapper>
           <AlertSpan style={{marginTop:'.5rem'}}>{errors?.email?.message}</AlertSpan>
           {
@@ -625,17 +609,13 @@ const Join = () => {
               })}>
             </YearBox>
 
-            <MonthBox>
-              <MonthOption {...register("month")}>월</MonthOption>
+            <MonthBox placeholder='월(MM)' {...register("month",
               {
-                month.map((a,i)=>{
-                  return(
-                    <MonthOption value={a} key={i}>{a}</MonthOption>
-                  )
-                })
-              }
+                required:true,
+                maxLength:2,
+              })}>
             </MonthBox>
-            <DayBox placeholder='일' {...register("day", 
+            <DayBox placeholder='일(DD)' {...register("day", 
               {
                 required:true,
                 maxLength:2
@@ -683,7 +663,6 @@ const Join = () => {
     );
 };
 
-export default Join;
 
 // {
 //   checkModal === true 
