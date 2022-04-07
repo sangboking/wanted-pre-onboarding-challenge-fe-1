@@ -14,6 +14,8 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.26.1",
     "dotenv": "^16.0.0",
+    "http-proxy-middleware": "^2.0.4",
+    "mkcert": "^1.5.0",
     "moment": "^2.29.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -21,13 +23,14 @@
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
     "recoil": "^0.6.1",
+    "recoil-persist": "^4.1.0",
     "request": "^2.88.2",
     "styled-components": "^5.3.3",
     "styled-reset": "^4.3.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "set HTTPS=true && set PORT=3000 && react-scripts start",
+    "start": "set HTTPS=true&&set SSL_CRT_FILE=./.cert/cert.pem&&set SSL_KEY_FILE=./.cert/key.pem&&react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -53,5 +56,6 @@
   "devDependencies": {
     "cross-env": "HTTPS=true ^7.0.3",
     "gh-pages": "^3.2.3"
-  }
+  },
+  "proxy": "https://localhost:8080"
 }

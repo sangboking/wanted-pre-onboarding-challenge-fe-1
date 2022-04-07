@@ -10,7 +10,7 @@ export default function FbLogin() {
   const [postText,setPostText] = useState('');
   
   const appId = process.env.REACT_APP_FB_APP_ID;
-  const fbUrl = process.env.REACT_APP_FB_SDK_URL;
+  const fbSrc = process.env.REACT_APP_FB_SRC;
 
  
   useEffect(() => {
@@ -40,7 +40,7 @@ export default function FbLogin() {
       }
       js = d.createElement(s);
       js.id = id;
-      js.src = fbUrl;
+      js.src = fbSrc;
       fjs.parentNode.insertBefore(js, fjs);
     })(document, 'script', 'facebook-jssdk');
   }
@@ -57,7 +57,7 @@ export default function FbLogin() {
       }else{
         console.log('사용자가 페이스북에 로그인하지 않았으므로 웹페에지에 로그인 했는지 알수 없습니다. 혹은 로그아웃 되었습니다.')
       }
-    })
+    },{scope: 'pages_show_list'})
   }
 
   const FbLogOut = () => {
