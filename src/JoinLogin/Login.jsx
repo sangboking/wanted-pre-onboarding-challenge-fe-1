@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Checkbox} from '@mui/material';
-import {Link,Navigate,useNavigate} from 'react-router-dom';
+import {Link,useNavigate} from 'react-router-dom';
 import LinkrLogoNavy from '../SvgIcons/LinkrLogoNavy';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import { useRecoilState } from 'recoil';
+import { userInfoAtom } from '../atom';
 
 const Wrapper = styled.div`
   width:100%;
@@ -158,13 +160,26 @@ const FormStyle = styled.form`
 `;
 
 
-const Login = ({history}) => {
-  const url = 'https://5ff904095f3f.ngrok.io';
+const Login = () => {
+  const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
   const navigate = useNavigate();
   const {register, handleSubmit, getValues} = useForm();
   const onValid = (data) => {
     
-  }  
+  } 
+  
+  const getUserInfo = async () => {
+    await axios.get('api/accounts')
+    .then((response) => {
+      setUserInfo(response.data.result)
+    })
+    .then(() => {
+      navigate('/');
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }
 
   const loginOnclick = async () => {
     const data = {
@@ -172,14 +187,17 @@ const Login = ({history}) => {
       password : getValues('password')
     }
     console.log(JSON.stringify(data));
-    await axios.post(`${url}/api/auth`,JSON.stringify(data),{headers:{"Content-Type":`application/json`}})
+    await axios.post(`/api/auth`,JSON.stringify(data),{headers:{"Content-Type":`application/json`}})
     .then((response) => {
-      console.log(response)
       if(response.data.success === true){
-        navigate('/');
+        return getUserInfo();
       }
     })
+    .catch((error) => {
+      console.log(error);
+    })
   }
+
   
     return (
         <Wrapper>

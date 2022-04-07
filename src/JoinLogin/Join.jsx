@@ -425,7 +425,6 @@ export default function Join()  {
   const [emailCodeModal, setEmailCodeModal] = useState(false);
   const [codeConfirmModal, setCodeConfirmModal] = useState(false);
   const [emailVerified, setEmailVerified] = useState();
-  const url = 'https://5ff904095f3f.ngrok.io';
   const regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 
    
@@ -464,7 +463,7 @@ export default function Join()  {
   const emailSendOnclick = async () => {
     const email = getValues('email');
     if(regExp.test(email) === true ){
-      await axios.get(`${url}/api/auth/signup/${email}`)
+      await axios.get(`/api/auth/signup/${email}`)
       .then((response) => {
         console.log(response);
         setEmailSendModal(true);
@@ -483,7 +482,7 @@ export default function Join()  {
     const email = getValues('email');
     const emailCode = getValues('emailCode');
     console.log(emailCode);
-    await axios.get(`${url}/api/auth/signup/${email}/${emailCode}`)
+    await axios.get(`/api/auth/signup/${email}/${emailCode}`)
     .then((response) => {
       if(response.data.result === true){
         console.log(response);
@@ -511,7 +510,7 @@ export default function Join()  {
 
     if(emailVerified === true){
       console.log(JSON.stringify(data));
-      await axios.post(`${url}/api/accounts`,JSON.stringify(data),{headers:{"Content-Type":`application/json`}})
+      await axios.post(`/api/accounts`,JSON.stringify(data),{headers:{"Content-Type":`application/json`}})
       .then((response) => {
         console.log(response)
         setJoinModal(true);
