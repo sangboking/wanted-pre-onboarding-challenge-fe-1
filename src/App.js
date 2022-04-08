@@ -2,6 +2,10 @@ import React from 'react';
 import Router from './router';
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
+import { ReactQueryDevtools } from 'react-query/devtools';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
+const queryClient = new QueryClient();
 
 const GlobalStyle = createGlobalStyle`
   *{
@@ -27,8 +31,11 @@ const GlobalStyle = createGlobalStyle`
 const App = () => {
   return (
     <>
-      <GlobalStyle/>
-      <Router/>
+      <QueryClientProvider client={queryClient}>
+        <GlobalStyle/>
+        <Router/>
+        <ReactQueryDevtools initialIsOpen={true}/>
+      </QueryClientProvider>
     </>
   );
 };
