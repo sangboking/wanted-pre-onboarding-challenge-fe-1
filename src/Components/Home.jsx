@@ -6,10 +6,10 @@ import TwitS from '../SvgIcons/TwitS';
 import RightArrowIcon from '../SvgIcons/RightArrowIcon';
 import DotIcon from '../SvgIcons/DotIcon';
 import LinkrLogoNavy from '../SvgIcons/LinkrLogoNavy';
-import axios from 'axios';
 import { useRecoilValue } from 'recoil';
 import { userInfoAtom } from '../atom';
-import FbLogin from './FbLogin';
+import axios from 'axios';
+
 
 const Wrapper = styled.div`
   width:100%;
@@ -269,6 +269,9 @@ const BrandTime = styled.select`
   -moz-appearance: none; 
   -webkit-appearance: none; 
   cursor: pointer;
+  &:focus{
+    outline: none;
+  }
 `;
 
 
@@ -394,13 +397,15 @@ const Home = () => {
   const fbSrc = process.env.REACT_APP_FB_SRC;
   const userInfo = useRecoilValue(userInfoAtom);
   const [brandModal,setBrandModal] = useState(false);
+  const [fbConnectModal, setFbConnectModal] = useState(false);
+  const [brandName, setBrandName] = useState('');
+  const [brandTime, setBrandTime] = useState('');
   const [accessToken,setAccessToken] = useState();
   const [pageAccessToken,setPageAccessToken] = useState();
+  const [pageName, setPageName] = useState();
   const [userId,setUserId] = useState();
   const [pageId,setPageId] = useState();
-  
-
-  
+  const [postText, setPostText] = useState();
   
   const brandOnclick = () => {
     setBrandModal(!brandModal);
@@ -417,7 +422,7 @@ const Home = () => {
         version: 'v13.0',
         appId:appId,
         xfbml: true,
-        
+        cookie: true,
       });
       window.FB.AppEvents.logPageView();
     };
@@ -443,18 +448,59 @@ const Home = () => {
       if(response.status === 'connected'){
         console.log(response)
         setAccessToken(response.authResponse.accessToken);
-        setUserId(response.authResponse.userID)
+        setUserId(response.authResponse.userID);
+        setFbConnectModal(true);
       }
       else if(response.status === 'not_authorized'){
         console.log('사용자가 페이스북에 로그인했지만 웹에서는 로그인하지 않았습니다.')
       }else{
         console.log('사용자가 페이스북에 로그인하지 않았으므로 웹페에지에 로그인 했는지 알수 없습니다. 혹은 로그아웃 되었습니다.')
+        setFbConnectModal(false);
       }
+    },{scope:'user_likes, pages_show_list, pages_manage_posts,pages_messaging'})
+  }
+  
+  useEffect(() => {
+    if(accessToken){
+      axios.get(`https://graph.facebook.com/${userId}/accounts?access_token=${accessToken}`)
+      .then((response) => {
+        console.log(response);
+        setPageId(response.data.data[0].id);
+        setPageAccessToken(response.data.data[0].access_token);
+        setPageName(response.data.data[0].name);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    }
+  },[userId])
+
+  const getBrandTime = (e) => {
+    setBrandTime(e.target.value)
+  }
+
+  const brandCreateOnclick = async () => {
+    const data = {
+      brandName : brandName,
+      brandTime : `Aisa/${brandTime}`,
+      facebook : {
+        userId : userId,
+        pageId : pageId,
+        pageAccessToken : pageAccessToken,
+        pageName : pageName, 
+      }
+    }
+    console.log(JSON.stringify(data));
+    await axios.post('api/brands',JSON.stringify(data),{headers:{"Content-Type":`application/json`}})
+    .then((response) => {
+      console.log(response)
+    })
+    .catch((error) => {
+      console.log(error);
     })
   }
 
   
-
     return (
       <Wrapper>
         <Header>
@@ -483,14 +529,6 @@ const Home = () => {
             <BrandBox>
               <PlusIcon onClick={brandOnclick}><DotIcon width={25} height={25}/></PlusIcon>
             </BrandBox>
-
-            <BrandBox>
-              <PlusIcon onClick={brandOnclick}><DotIcon width={25} height={25}/></PlusIcon>
-            </BrandBox>
-
-             <BrandBox style={{marginRight:'0'}}>
-              <PlusIcon onClick={brandOnclick}><DotIcon width={25} height={25}/></PlusIcon>
-            </BrandBox>
           </BrandBoxWrapper>
         </BrandWrapper>
 
@@ -505,9 +543,10 @@ const Home = () => {
                 <LeftTitle>브랜드 기본정보</LeftTitle>
                 <LeftSpan>*필수항목</LeftSpan>
               </LeftTitleWrapper>
-              <LeftInput placeholder='브랜드 이름을 입력하세요.'></LeftInput>
-              <BrandTime>
-                <option>브랜드 타임존</option>
+              <LeftInput placeholder='브랜드 이름을 입력하세요.' value={brandName} onChange={(e) => setBrandName(e.target.value)}></LeftInput>
+              <BrandTime onChange={getBrandTime} value={brandTime}>
+                <option selected value=''>브랜드 타임존</option>
+                <option value='Seoul'>(GMT+:09:00) Seoul</option>
               </BrandTime>
             </LeftContent>
 
@@ -518,7 +557,20 @@ const Home = () => {
                 <RightTitle>SNS 계정 연동</RightTitle>
                 <RightSpan>*선택항목 | 브랜드 생성 후 마이페이지에서 연동이 가능합니다.</RightSpan>
               </RightTitleWrapper>
-              <RightButton onClick={FbLogin}><FaceBookS/><ButtonSpan>페이스북 페이지 연동</ButtonSpan><RightArrow><RightArrowIcon width={12} height={12}/></RightArrow></RightButton>
+              <RightButton onClick={FbLogin}>
+                <FaceBookS/>
+                <ButtonSpan>
+                  {
+                    fbConnectModal 
+                    ?'페이스북 연동완료'
+                    :'페이스북 페이지 연동'
+                  }
+                </ButtonSpan>
+                <RightArrow>
+                  <RightArrowIcon width={12} height={12}/>
+                </RightArrow>
+              </RightButton>
+
               <RightButton><InstarS/><ButtonSpan>인스타그램 비지니스 계정 연동</ButtonSpan><RightArrow><RightArrowIcon width={12} height={12}/></RightArrow></RightButton>
               <RightButton><TwitS/><ButtonSpan>트위터 프로필 연동</ButtonSpan><RightArrow><RightArrowIcon width={12} height={12}/></RightArrow></RightButton>
             </RightContent>
@@ -526,8 +578,9 @@ const Home = () => {
 
           <ModalButtonWrapper>
             <CancelButton onClick={brandOnclick}>취소</CancelButton>
-            <CreateButton>생성하기</CreateButton>
+            <CreateButton onClick={brandCreateOnclick}>생성하기</CreateButton>
           </ModalButtonWrapper>
+          <textarea value={postText} onChange={(e)=>{setPostText(e.target.value)}}></textarea>
         </BrandModal>
         : null
         }

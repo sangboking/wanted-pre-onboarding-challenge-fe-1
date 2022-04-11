@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Checkbox} from '@mui/material';
 import {Link,useNavigate} from 'react-router-dom';
+import { useQuery } from 'react-query';
 import LinkrLogoNavy from '../SvgIcons/LinkrLogoNavy';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
