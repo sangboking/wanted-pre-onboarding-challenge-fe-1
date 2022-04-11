@@ -591,12 +591,12 @@ export default function Join()  {
             <PwSpan>* 영문,숫자 조합 8~12자를 입력해 주세요!</PwSpan>
           </InputTitleWrapper>
           <PwInput type="password" {...register("password", 
-          {
-            required:true ,
-            pattern:{value:/^[A-Za-z0-9]{6,12}$/,message:'* 영문, 숫자 조합 8~12자를 입력해주세요'},
-            maxLength:{value:12,message:'*최대 비밀먼호는 12자 입니다.'} ,
-            minLength:{value:8,message:'*최소 비밀번호는 8자 입니다.'}
-          })}>
+            {
+              required:true ,
+              pattern:{value:/^[A-Za-z0-9]{6,12}$/,message:'* 영문, 숫자 조합 8~12자를 입력해주세요'},
+              maxLength:{value:12,message:'*최대 비밀먼호는 12자 입니다.'} ,
+              minLength:{value:8,message:'*최소 비밀번호는 8자 입니다.'}
+            })}>
           </PwInput>
           <AlertSpan>{errors?.password?.message}</AlertSpan>
           

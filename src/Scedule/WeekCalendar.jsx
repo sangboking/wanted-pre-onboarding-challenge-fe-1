@@ -78,7 +78,7 @@ export default function WeekCalendar({startDate,endDate}) {
         return(
           <CalendarContent>
             <CalendarHead>
-              <HeadDate>{day} {startDate.clone().add(i+1,'days').format('M/D')}</HeadDate>
+              <HeadDate key={i}>{day} {startDate.clone().add(i+1,'days').format('M/D')}</HeadDate>
             </CalendarHead>
           </CalendarContent>
         )

@@ -1,19 +1,13 @@
-import React from 'react'
 import styled from 'styled-components';
-import InboxSidebar2 from '../Components/InboxSideBar2';
-import FindIcon from '../SvgIcons/FindIcon';
-import InboxHead from './InboxHead';
-import { inboxMenuColorAtom,inboxColorAtom } from './InboxAtoms';
-import {useRecoilValue} from 'recoil';
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   max-width:120rem;
   height:100vh;
   display: flex;
   background-color: #f5f6f8;
 `;
 
-const ContentWrapper = styled.div`
+export const ContentWrapper = styled.div`
   width:105rem;
   height:100vh;
   display: flex;
@@ -21,7 +15,7 @@ const ContentWrapper = styled.div`
   margin-left:15rem;
 `;
 
-const Content = styled.div`
+export const Content = styled.div`
   width:89.875rem;
   height:100vh;
   @media screen and (max-width:1440px){
@@ -29,12 +23,12 @@ const Content = styled.div`
   }
 `;
 
-const InboxLayoutWrapper = styled.div`
+export const InboxLayoutWrapper = styled.div`
   display: flex;
   margin-top:.875rem;
 `;
 
-const InboxLayoutLeft = styled.div`
+export const InboxLayoutLeft = styled.div`
   width:21.313rem;
   height:48rem;
   border-top-left-radius: 15px;
@@ -45,7 +39,7 @@ const InboxLayoutLeft = styled.div`
   }
 `;
 
-const LeftHeader = styled.div`
+export const LeftHeader = styled.div`
   width:100%;
   height:3.75rem;
   border-bottom:1px solid #eaeaea;
@@ -54,7 +48,7 @@ const LeftHeader = styled.div`
   justify-content: space-between;
 `;
 
-const LeftHeaderSearch = styled.input`
+export const LeftHeaderSearch = styled.input`
   margin-left:1.375rem;
   border:none;
   &:focus{
@@ -72,12 +66,12 @@ const LeftHeaderSearch = styled.input`
   }
 `;
 
-const LeftHeaderIcon = styled.div`
+export const LeftHeaderIcon = styled.div`
   margin-right: 1.375rem;
   cursor: pointer;
 `;
 
-const InboxLayoutCenter = styled.div`
+export const InboxLayoutCenter = styled.div`
   width:39.375rem;
   height:48rem;
   border-top:1px solid #eaeaea;
@@ -87,7 +81,7 @@ const InboxLayoutCenter = styled.div`
   }
 `;
 
-const CenterHeader = styled.div`
+export const CenterHeader = styled.div`
   width:100%;
   height:3.75rem;
   border-bottom:1px solid #eaeaea;
@@ -96,7 +90,7 @@ const CenterHeader = styled.div`
   justify-content: space-between;
 `;
 
-const HeaderProfileImg = styled.div`
+export const HeaderProfileImg = styled.div`
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 10rem;
@@ -104,7 +98,7 @@ const HeaderProfileImg = styled.div`
   margin-left:1.375rem;
 `;
 
-const CenterCircle = styled.div`
+export const CenterCircle = styled.div`
   width: 7.688rem;
   height: 7.688rem;
   margin: 0 auto;
@@ -114,7 +108,7 @@ const CenterCircle = styled.div`
   background-color: #fff;
 `;
 
-const CenterComent = styled.h1`
+export const CenterComent = styled.h1`
   margin-top: 1.75rem;
   font-size: 1.063rem;
   font-weight: normal;
@@ -126,7 +120,7 @@ const CenterComent = styled.h1`
   color: #333;
 `;
 
-const InboxLayoutRight = styled.div`
+export const InboxLayoutRight = styled.div`
   width:28.438rem;
   height:48rem;
   border-top-right-radius: 15px;
@@ -137,7 +131,7 @@ const InboxLayoutRight = styled.div`
   }
 `;
 
-const RightHeader = styled.div`
+export const RightHeader = styled.div`
   width:100%;
   height:3.75rem;
   border-bottom:1px solid #eaeaea;
@@ -145,7 +139,7 @@ const RightHeader = styled.div`
   align-items: center;
 `;
 
-const RightHeaderInfo = styled.h1`
+export const RightHeaderInfo = styled.h1`
   font-size: 0.938rem;
   font-weight: 500;
   font-stretch: normal;
@@ -157,12 +151,12 @@ const RightHeaderInfo = styled.h1`
   margin-left: 1.375rem;
 `;
 
-const RightContentWrapper = styled.div`
+export const RightContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-const RightNote = styled.textarea`
+export const RightNote = styled.textarea`
   resize: none;
   width: 24.687rem;
   height: 5.813rem;
@@ -186,7 +180,7 @@ const RightNote = styled.textarea`
   }
 `;
 
-const RightButtonWrapper = styled.div`
+export const RightButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   margin-top:.563rem;
@@ -194,7 +188,7 @@ const RightButtonWrapper = styled.div`
   margin-bottom: 1.5rem;
 `;
 
-const RightCancelButton = styled.button`
+export const RightCancelButton = styled.button`
   width: 3.438rem;
   height: 2.063rem;
   border-radius: 10px;
@@ -210,7 +204,7 @@ const RightCancelButton = styled.button`
   cursor: pointer;
 `;
 
-const RightLoadButton = styled.button`
+export const RightLoadButton = styled.button`
   width: 3.438rem;
   height: 2.063rem;
   border-radius: 10px;
@@ -226,7 +220,7 @@ const RightLoadButton = styled.button`
   cursor: pointer;
 `;
 
-const RightTextWrapper = styled.div`
+export const RightTextWrapper = styled.div`
   width: 25.375rem;
   margin:0 auto;
   position: relative;
@@ -235,11 +229,11 @@ const RightTextWrapper = styled.div`
   }
 `;
 
-const RightDateTextWrapper = styled.div`
+export const RightDateTextWrapper = styled.div`
   display: flex;
 `;
 
-const RightDate = styled.h1`
+export const RightDate = styled.h1`
   font-size: 0.688rem;
   font-weight: normal;
   font-stretch: normal;
@@ -249,7 +243,7 @@ const RightDate = styled.h1`
   color: #999;
 `;
 
-const RightModify = styled.h1`
+export const RightModify = styled.h1`
   font-size: 0.688rem;
   font-weight: normal;
   font-stretch: normal;
@@ -262,7 +256,7 @@ const RightModify = styled.h1`
   cursor: pointer;
 `;
 
-const RightDelete = styled.h1`
+export const RightDelete = styled.h1`
   font-size: 0.688rem;
   font-weight: normal;
   font-stretch: normal;
@@ -276,7 +270,7 @@ const RightDelete = styled.h1`
   cursor: pointer;
 `;
 
-const RightNoteData = styled.h1`
+export const RightNoteData = styled.h1`
   font-size: 0.813rem;
   font-weight: normal;
   font-stretch: normal;
@@ -289,70 +283,3 @@ const RightNoteData = styled.h1`
   padding-bottom: 1rem;
   border-bottom: 1px solid #eaeaea;
 `;
-
-export default function InboxComnet() {
-  const inboxMenuColor = useRecoilValue(inboxMenuColorAtom);
-  const inboxColor = useRecoilValue(inboxColorAtom);
-  return (
-    <Wrapper>
-      <InboxSidebar2 inboxMenuColor={inboxMenuColor} inboxColor={inboxColor}/>
-
-      <ContentWrapper>
-        <Content>
-          <InboxHead/>
-
-          <InboxLayoutWrapper>
-
-            <InboxLayoutLeft>
-              <LeftHeader>
-                <LeftHeaderSearch placeholder='검색'></LeftHeaderSearch>
-                <LeftHeaderIcon><FindIcon/></LeftHeaderIcon>
-              </LeftHeader>
-            </InboxLayoutLeft>
-
-            <InboxLayoutCenter>
-              <CenterHeader>
-                {
-                  <HeaderProfileImg/>
-                }
-              </CenterHeader>
-              <CenterCircle/>
-              <CenterComent>연동된 모든 SNS의 댓글을 확인해보세요!</CenterComent>
-            </InboxLayoutCenter>
-
-            <InboxLayoutRight>
-              <RightHeader>
-                {
-                  <RightHeaderInfo>노트</RightHeaderInfo>
-                }
-              </RightHeader>
-
-              <RightContentWrapper>
-                {
-                  <>
-                    <RightNote placeholder='노트를 작성하세요.'></RightNote>
-                    <RightButtonWrapper>
-                      <RightCancelButton>취소</RightCancelButton>
-                      <RightLoadButton>저장</RightLoadButton>
-                    </RightButtonWrapper>
-                    
-                    <RightTextWrapper> 
-                      <RightDateTextWrapper>
-                        <RightDate>3월 21일</RightDate>
-                        <RightModify>수정</RightModify>
-                        <RightDelete>삭제</RightDelete>
-                      </RightDateTextWrapper>
-                      <RightNoteData>노트에 입력된 글.</RightNoteData>
-                    </RightTextWrapper> 
-                  </>
-                }
-              </RightContentWrapper>
-            </InboxLayoutRight>
-
-          </InboxLayoutWrapper>
-        </Content>
-
-      </ContentWrapper>
-    </Wrapper>
-  )
-}
