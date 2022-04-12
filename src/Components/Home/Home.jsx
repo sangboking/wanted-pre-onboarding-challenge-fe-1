@@ -1,18 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import * as styled from './Home.style';
+import HomeBrand from './HomeBrand';
 import FaceBookS from '../../SvgIcons/FaceBookS';
 import InstarS from '../../SvgIcons/InstarS';
 import TwitS from '../../SvgIcons/TwitS';
-import FaceBookSoff from '../../SvgIcons/FaceBookSoff';
-import InstarSoff from '../../SvgIcons/InstarSoff';
-import TwitSoff from '../../SvgIcons/TwitSoff';
 import RightArrowIcon from '../../SvgIcons/RightArrowIcon';
-import DotIcon from '../../SvgIcons/DotIcon';
 import LinkrLogoNavy from '../../SvgIcons/LinkrLogoNavy';
 import { useRecoilValue } from 'recoil';
 import { userInfoAtom } from '../../atom';
 import axios from 'axios';
-import { useQuery } from 'react-query';
 
 const Home = () => {
   const appId = process.env.REACT_APP_FB_APP_ID;
@@ -35,10 +31,10 @@ const Home = () => {
     setBrandModal(!brandModal);
   }
 
-  useEffect(() => {
-    setFBAsyncInit();
-    loadFbSdk();
-  }, []);
+  // useEffect(() => {
+  //   setFBAsyncInit();
+  //   loadFbSdk();
+  // }, []);
 
   const setFBAsyncInit = () => {
     window.fbAsyncInit = () => {
@@ -148,7 +144,7 @@ const Home = () => {
         <styled.Line/>
 
         <styled.BrandBoxWrapper>
-          
+          <HomeBrand brandModal={brandModal} brandOnclick={brandOnclick} ></HomeBrand>
         </styled.BrandBoxWrapper>
     
         {
