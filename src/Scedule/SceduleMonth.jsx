@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import Sidebar from '../Components/SideBar';
+import Sidebar from '../Components/Sidebar/SideBar';
 import { useRecoilState, useRecoilValue} from 'recoil';
 import { postModalAtom, sceduleColorAtom, sceduleMenuColorAtom } from './SceduleAtoms';
 import {Link} from 'react-router-dom';

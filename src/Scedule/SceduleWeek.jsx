@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import Sidebar from '../Components/SideBar';
+import Sidebar from '../Components/Sidebar/SideBar';
 import PostingIcon from '../SvgIcons/PostingIcon';
 import {Link} from 'react-router-dom';
 import {useRecoilState, useRecoilValue} from 'recoil';

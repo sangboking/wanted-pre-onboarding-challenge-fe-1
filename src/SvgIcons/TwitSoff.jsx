@@ -1,8 +1,8 @@
 import React from 'react'
 
-export default function TwitSoff() {
+export default function TwitSoff(props) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" {...props}>
   <g id="레이어_2" data-name="레이어 2" transform="translate(-0.108 0.231)">
     <g id="Graphic_Elements" data-name="Graphic Elements" transform="translate(0.108 -0.231)">
       <circle id="타원_471" data-name="타원 471" cx="10" cy="10" r="10" fill="#999"/>

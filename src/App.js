@@ -9,8 +9,8 @@ const queryClient = new QueryClient();
 
 const GlobalStyle = createGlobalStyle`
   *{
-    /* font-family:'SCoreDream'; */
-    font-family:'Pretendard';
+    font-family:'SCoreDream';
+    /* font-family:'Pretendard'; */
     font-size:16px;
     ${reset};
     /* font-family: 'KoPubDotumMedium';
