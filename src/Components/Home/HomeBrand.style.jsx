@@ -13,7 +13,7 @@ export const BrandBox = styled.div`
 `;
 
 export const ConnectBox = styled.div`
-  width:23.75rem;
+  width:24rem;
   height: 14.063rem;
   border-radius: 15px;
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);

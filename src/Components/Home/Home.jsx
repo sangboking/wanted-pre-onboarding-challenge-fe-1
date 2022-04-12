@@ -9,6 +9,7 @@ import LinkrLogoNavy from '../../SvgIcons/LinkrLogoNavy';
 import { useRecoilValue } from 'recoil';
 import { userInfoAtom } from '../../atom';
 import axios from 'axios';
+import { useQuery } from 'react-query';
 
 const Home = () => {
   const appId = process.env.REACT_APP_FB_APP_ID;
@@ -19,10 +20,7 @@ const Home = () => {
   const [brandName, setBrandName] = useState('');
   const [brandTime, setBrandTime] = useState('');
   const [accessToken,setAccessToken] = useState();
-  const [pageAccessToken, setPageAccessToken] = useState();
-  const [pageName, setPageName] = useState();
   const [userId, setUserId] = useState();
-  const [pageId, setPageId] = useState();
   const [brandConnect, setBrandConnect] = useState(true);
   const [addBrand, setAddBrand] = useState(false);
   const [brandId, setBrandId] = useState();
@@ -31,10 +29,10 @@ const Home = () => {
     setBrandModal(!brandModal);
   }
 
-  // useEffect(() => {
-  //   setFBAsyncInit();
-  //   loadFbSdk();
-  // }, []);
+  useEffect(() => {
+    setFBAsyncInit();
+    loadFbSdk();
+  }, []);
 
   const setFBAsyncInit = () => {
     window.fbAsyncInit = () => {
@@ -79,22 +77,20 @@ const Home = () => {
       }
     },{scope:'user_likes, pages_show_list, pages_manage_posts,pages_messaging'})
   }
-  
-  useEffect(() => {
-    if(accessToken){
-      axios.get(`https://graph.facebook.com/${userId}/accounts?access_token=${accessToken}`)
-      .then((response) => {
-        console.log(response);
-        setPageId(response.data.data[0].id);
-        setPageAccessToken(response.data.data[0].access_token);
-        setPageName(response.data.data[0].name);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-    }
-  },[userId])
 
+  const fetchGetPageInfo = async () => {
+    const response = await fetch(`https://graph.facebook.com/${userId}/accounts?access_token=${accessToken}`)
+    return response.json();
+  }
+
+  const fetchGetBrandInfo = async () => {
+    const response = await fetch()
+  }
+
+  const {data:fbPageInfo} = useQuery('fbPageInfo',fetchGetPageInfo); //pageId,PageAccessToken,pageName 정보
+
+  console.log(fbPageInfo);
+  
   const getBrandTime = (e) => {
     setBrandTime(e.target.value)
   }
@@ -118,6 +114,10 @@ const Home = () => {
     .catch((error) => {
       console.log(error);
     })
+  }
+
+  const brandSnsAdjust = async () => {
+    // await axios.post(`api/brands/${}/FACEBOOK`)
   }
 
     return (
@@ -198,10 +198,6 @@ const Home = () => {
         </styled.BrandModal>
         : null
         }
-
-        
-
-
       </styled.Wrapper>
     );
 };
@@ -209,63 +205,18 @@ const Home = () => {
 export default Home;
 
 
-// {
-//   brandConnect ?
-//   <styled.BrandBox>
-//     <styled.PlusIcon onClick={brandOnclick}><DotIcon width={25} height={25}/></styled.PlusIcon>
-//   </styled.BrandBox>
-//   :
-//   <styled.ConnectBox>
-//     <styled.ConnectHeader>
-//       <styled.ConnectCircle>{brandName.slice(0,1)}</styled.ConnectCircle>
-//       <styled.ConnectInfoWrapper>
-        
-//         <styled.NameTimeWrapper>
-//           <styled.ConnectName>{brandName}</styled.ConnectName>
-//           <styled.ConnectTime>{brandTime}</styled.ConnectTime>
-//         </styled.NameTimeWrapper>
-//         <styled.ConnectSnsWrapper>
-//           <styled.SnsIcon><FaceBookS width={16} height={16}/></styled.SnsIcon>
-//           <styled.SnsIcon><InstarSoff width={16} height={16}/></styled.SnsIcon>
-//           <styled.SnsIcon><TwitSoff width={16} height={16}/></styled.SnsIcon>
-//         </styled.ConnectSnsWrapper>
 
-//       </styled.ConnectInfoWrapper>
-//     </styled.ConnectHeader>
-//   </styled.ConnectBox>
-// }
-
-// {
-//   addBrand 
-//   ?
-//   <styled.BrandBox>
-//     <styled.PlusIcon onClick={brandOnclick}><DotIcon width={25} height={25}/></styled.PlusIcon>
-//   </styled.BrandBox>
-//   :
-//   null
-// }
-
-// {
-//   addBrand
-//   ?
-//   <styled.ConnectBox>
-//     <styled.ConnectHeader>
-//       <styled.ConnectCircle>{brandName.slice(0,1)}</styled.ConnectCircle>
-//       <styled.ConnectInfoWrapper>
-        
-//         <styled.NameTimeWrapper>
-//           <styled.ConnectName>{brandName}</styled.ConnectName>
-//           <styled.ConnectTime>{brandTime}</styled.ConnectTime>
-//         </styled.NameTimeWrapper>
-//         <styled.ConnectSnsWrapper>
-//           <styled.SnsIcon><FaceBookS width={16} height={16}/></styled.SnsIcon>
-//           <styled.SnsIcon><InstarSoff width={16} height={16}/></styled.SnsIcon>
-//           <styled.SnsIcon><TwitSoff width={16} height={16}/></styled.SnsIcon>
-//         </styled.ConnectSnsWrapper>
-
-//       </styled.ConnectInfoWrapper>
-//     </styled.ConnectHeader>
-//   </styled.ConnectBox>
-//   :
-//   null
-// }
+ // useEffect(() => {
+  //   if(accessToken){
+  //     axios.get(`https://graph.facebook.com/${userId}/accounts?access_token=${accessToken}`)
+  //     .then((response) => {
+  //       console.log(response);
+  //       setPageId(response.data.data[0].id);
+  //       setPageAccessToken(response.data.data[0].access_token);
+  //       setPageName(response.data.data[0].name);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     })
+  //   }
+  // },[userId])
