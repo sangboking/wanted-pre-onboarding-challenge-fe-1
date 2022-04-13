@@ -5,9 +5,6 @@ import {RecoilRoot} from 'recoil';
 
 
 
-
-
-
 ReactDOM.render(
   <React.StrictMode>  
     <RecoilRoot>

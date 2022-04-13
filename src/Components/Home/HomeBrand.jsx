@@ -36,13 +36,12 @@ export default function HomeBrand({...props}) {
           brandInfo.result.length === 0 && <PlusBrand/>
         }
         {
-          
           brandInfo.result.map((a,i) => {
             return(
               <>
                 <styled.ConnectBox key={i}>
                   <styled.ConnectHeader>
-                    <styled.ConnectCircle>{brandInfo?.result[i].brandName.slice(0,1)}</styled.ConnectCircle>
+                    <styled.ConnectCircle>{brandInfo?.result[i].brandName}</styled.ConnectCircle>
                     <styled.ConnectInfoWrapper>
                       
                       <styled.NameTimeWrapper>

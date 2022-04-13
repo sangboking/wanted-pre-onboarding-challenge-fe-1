@@ -22,17 +22,19 @@ const Home = () => {
   const [accessToken,setAccessToken] = useState();
   const [userId, setUserId] = useState();
   const [brandConnect, setBrandConnect] = useState(true);
-  const [addBrand, setAddBrand] = useState(false);
-  const [brandId, setBrandId] = useState();
   
   const brandOnclick = () => {
     setBrandModal(!brandModal);
   }
 
+  const getBrandTime = (e) => {
+    setBrandTime(e.target.value)
+  }
+
   useEffect(() => {
     setFBAsyncInit();
     loadFbSdk();
-  }, []);
+  }, []); //facebook sdk 연결
 
   const setFBAsyncInit = () => {
     window.fbAsyncInit = () => {
@@ -76,50 +78,36 @@ const Home = () => {
         setFbConnectModal(false);
       }
     },{scope:'user_likes, pages_show_list, pages_manage_posts,pages_messaging'})
-  }
+  } //facebook login 함수 => accesstoken, userid 얻을수 있다
 
   const fetchGetPageInfo = async () => {
     const response = await fetch(`https://graph.facebook.com/${userId}/accounts?access_token=${accessToken}`)
     return response.json();
   }
 
-  const fetchGetBrandInfo = async () => {
-    const response = await fetch()
-  }
-
   const {data:fbPageInfo} = useQuery('fbPageInfo',fetchGetPageInfo); //pageId,PageAccessToken,pageName 정보
-
   console.log(fbPageInfo);
   
-  const getBrandTime = (e) => {
-    setBrandTime(e.target.value)
-  }
-
   const brandCreateOnclick = async () => {
     const data = {
-      brandName : brandName,
-      brandTime : `Aisa/${brandTime}`,
+      pageId :fbPageInfo.data[0].id ,
+      pageName :fbPageInfo.data[0].name,
+      accessToken :fbPageInfo.data[0].access_token
     }
-    console.log(JSON.stringify(data));
-    await axios.post('api/brands',JSON.stringify(data),{headers:{"Content-Type":`application/json`}})
-    .then((response) => {
-      if(response.data.success === true){
-        setBrandModal(!brandModal);
-        setBrandConnect(!brandConnect);
-        setAddBrand(!addBrand);
-        setFbConnectModal(!fbConnectModal);
-        setBrandId(response.data.result.id);
-      }
-    })
-    .catch((error) => {
+    try{
+      const response = await axios.post('api/brands',JSON.stringify(data),{headers:{"Content-Type":`application/json`}})
+      console.log(response)
+      const brandId = response.data.result.id
+      const response2 = await axios.post(`api/brands/${brandId}/FACEBOOK`,JSON.stringify(data),{headers:{"Content-Type":`application/json`}})
+      console.log(response2)
+      setBrandModal(!brandModal);
+      setBrandConnect(!brandConnect);
+      setFbConnectModal(!fbConnectModal);
+    }catch(error){
       console.log(error);
-    })
+    }
   }
-
-  const brandSnsAdjust = async () => {
-    // await axios.post(`api/brands/${}/FACEBOOK`)
-  }
-
+  
     return (
       <styled.Wrapper>
         <styled.Header>
@@ -129,7 +117,7 @@ const Home = () => {
               <styled.Name>{userInfo.userName}</styled.Name>
               <styled.Name>{userInfo.userEmail}</styled.Name>
             </styled.NamedIdWrapper>
-            <styled.Circle>{userInfo.userName}</styled.Circle>
+            <styled.Circle>{userInfo.userName.slice(0,1)}</styled.Circle>
           </styled.HeaderRight>
         </styled.Header>
 
@@ -206,17 +194,6 @@ export default Home;
 
 
 
- // useEffect(() => {
-  //   if(accessToken){
-  //     axios.get(`https://graph.facebook.com/${userId}/accounts?access_token=${accessToken}`)
-  //     .then((response) => {
-  //       console.log(response);
-  //       setPageId(response.data.data[0].id);
-  //       setPageAccessToken(response.data.data[0].access_token);
-  //       setPageName(response.data.data[0].name);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     })
-  //   }
-  // },[userId])
+
+
+  
