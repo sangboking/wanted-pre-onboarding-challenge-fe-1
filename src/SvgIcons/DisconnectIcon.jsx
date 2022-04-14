@@ -9,7 +9,7 @@ export default function Disconnecticon() {
         <circle id="타원_406" data-name="타원 406" cx="12" cy="12" r="12" fill="#efc023"/>
       </g>
     </g>
-    <path id="패스_1073" data-name="패스 1073" d="M2596.168,3145H2612.4" transform="translate(-1456.454 -2438.12)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2"/>
+    <path id="패스_1073" data-name="패스 1073" d="M2596.168,3145H2612.4" transform="translate(-1456.454 -2438.12)" fill="none" stroke="#fff" strokeLinecap="round" strokeWidth="2"/>
   </g>
 </svg>
 

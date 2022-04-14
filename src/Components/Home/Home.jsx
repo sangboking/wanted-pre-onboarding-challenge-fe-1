@@ -6,15 +6,13 @@ import InstarS from '../../SvgIcons/InstarS';
 import TwitS from '../../SvgIcons/TwitS';
 import RightArrowIcon from '../../SvgIcons/RightArrowIcon';
 import LinkrLogoNavy from '../../SvgIcons/LinkrLogoNavy';
-import { useRecoilValue } from 'recoil';
-import { userInfoAtom } from '../../atom';
 import axios from 'axios';
 import { useQuery } from 'react-query';
 
 const Home = () => {
   const appId = process.env.REACT_APP_FB_APP_ID;
   const fbSrc = process.env.REACT_APP_FB_SRC;
-  const userInfo = useRecoilValue(userInfoAtom);
+  
   const [brandModal, setBrandModal] = useState(false);
   const [fbConnectModal, setFbConnectModal] = useState(false);
   const [brandName, setBrandName] = useState('');
@@ -80,26 +78,38 @@ const Home = () => {
     },{scope:'user_likes, pages_show_list, pages_manage_posts,pages_messaging'})
   } //facebook login 함수 => accesstoken, userid 얻을수 있다
 
-  const fetchGetPageInfo = async () => {
-    const response = await fetch(`https://graph.facebook.com/${userId}/accounts?access_token=${accessToken}`)
+  const accountInfo = async () => {
+    const response = await fetch('api/accounts')
     return response.json();
   }
 
+  const { data:accoutInfo, isLoading:accountLoading } = useQuery('accountInfo',accountInfo);
+
+  console.log(accoutInfo);
+
+  const fetchGetPageInfo = async () => {
+    const response = await fetch(`https://graph.facebook.com/${userId}/accounts?access_token=${accessToken}`)
+    return response.json();
+  };
+
   const {data:fbPageInfo} = useQuery('fbPageInfo',fetchGetPageInfo); //pageId,PageAccessToken,pageName 정보
-  console.log(fbPageInfo);
   
   const brandCreateOnclick = async () => {
-    const data = {
-      pageId :fbPageInfo.data[0].id ,
-      pageName :fbPageInfo.data[0].name,
-      accessToken :fbPageInfo.data[0].access_token
+    const brandData = {
+      brandName :brandName,
+      timeZone :`Asia/${brandTime}`
     }
     try{
-      const response = await axios.post('api/brands',JSON.stringify(data),{headers:{"Content-Type":`application/json`}})
-      console.log(response)
+      const response = await axios.post('api/brands',JSON.stringify(brandData),{headers:{"Content-Type":`application/json`}})
+      console.log(response);
+      const facebookData = {
+        pageId :fbPageInfo.data[0].id ,
+        pageName :fbPageInfo.data[0].name,
+        accessToken :fbPageInfo.data[0].access_token
+      }
       const brandId = response.data.result.id
-      const response2 = await axios.post(`api/brands/${brandId}/FACEBOOK`,JSON.stringify(data),{headers:{"Content-Type":`application/json`}})
-      console.log(response2)
+      const response2 = await axios.post(`api/brands/${brandId}/FACEBOOK`,JSON.stringify(facebookData),{headers:{"Content-Type":`application/json`}})
+      console.log(response2);
       setBrandModal(!brandModal);
       setBrandConnect(!brandConnect);
       setFbConnectModal(!fbConnectModal);
@@ -114,10 +124,10 @@ const Home = () => {
           <styled.LogoWrapper><LinkrLogoNavy width={100} height={100}/></styled.LogoWrapper>
           <styled.HeaderRight>
             <styled.NamedIdWrapper>
-              <styled.Name>{userInfo.userName}</styled.Name>
-              <styled.Name>{userInfo.userEmail}</styled.Name>
+              {accountLoading ? <></> : <styled.Name>{accoutInfo.result.userName}</styled.Name>}
+              {accountLoading ? <></> : <styled.Name>{accoutInfo.result.userEmail}</styled.Name>}
             </styled.NamedIdWrapper>
-            <styled.Circle>{userInfo.userName.slice(0,1)}</styled.Circle>
+            {accountLoading ? <></> : <styled.Circle>{accoutInfo.result.userName.slice(0,1)}</styled.Circle>}
           </styled.HeaderRight>
         </styled.Header>
 
@@ -148,7 +158,7 @@ const Home = () => {
               </styled.LeftTitleWrapper>
               <styled.LeftInput placeholder='브랜드 이름을 입력하세요.' value={brandName} onChange={(e) => setBrandName(e.target.value)}></styled.LeftInput>
               <styled.BrandTime onChange={getBrandTime} value={brandTime}>
-                <option selected value=''>브랜드 타임존</option>
+                <option defaultValue=''>브랜드 타임존</option>
                 <option value='Seoul'>(GMT+:09:00) Seoul</option>
               </styled.BrandTime>
             </styled.LeftContent>

@@ -19,6 +19,7 @@ export const ConnectBox = styled.div`
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
   background-color: #fff;
   margin-right: 1.875rem;
+  cursor:pointer;
 `;
 
 export const ConnectHeader = styled.div`
@@ -88,15 +89,6 @@ export const ConnectSnsWrapper = styled.div`
 
 export const SnsIcon = styled.div`
   margin-right:.625rem;
-`;
-
-export const Line = styled.div`
-  width: 75rem;
-  height: 1px;
-  background-color: #eaeaea;
-  margin: 0 auto;
-  margin-top: 3.75rem;
-  margin-bottom: 3.75rem;
 `;
 
 export const PlusIcon = styled.div`

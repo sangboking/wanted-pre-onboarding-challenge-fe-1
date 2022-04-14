@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import LinkrLogoNavy from '../SvgIcons/LinkrLogoNavy';
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   width:100%;
   height:100vh;
   margin:0 auto;
@@ -9,7 +8,7 @@ const Wrapper = styled.div`
   overflow-y: hidden;
 `;
 
-const LayOut = styled.div`
+export const LayOut = styled.div`
   width:30rem;
   margin:0 auto;
   margin-top: 15rem;
@@ -18,7 +17,7 @@ const LayOut = styled.div`
   align-items: center;
 `;
 
-const LogoWrapper = styled.div`
+export const LogoWrapper = styled.div`
   width: 9.081rem;
   height: 3.485rem;
   display: flex;
@@ -28,7 +27,7 @@ const LogoWrapper = styled.div`
   margin-bottom:1rem;
 `;
 
-const Title = styled.h1`
+export const Title = styled.h1`
   width:100%;
   margin:0 auto;
   margin-bottom:1.1rem;
@@ -42,7 +41,7 @@ const Title = styled.h1`
   color: #191919;
 `;
 
-const Intro = styled.h1`
+export const Intro = styled.h1`
   width:100%;
   margin:0 auto;
   margin-bottom:2.188rem;
@@ -56,7 +55,7 @@ const Intro = styled.h1`
   color: #191919;
 `;
 
-const Button = styled.button`
+export const Button = styled.button`
   width: 18.75rem;
   height: 3.125rem;
   border-radius: 15px;
@@ -73,21 +72,3 @@ const Button = styled.button`
   cursor: pointer;
   margin:0 auto;
 `;
-
-export default function JoinOut() {
-  return (
-    <Wrapper>
-      <LayOut>
-        <LogoWrapper>
-          <LinkrLogoNavy/>
-        </LogoWrapper>
-
-        <Title>회원탈퇴</Title>
-
-        <Intro>링커 회원탈퇴가 완료되었습니다.<br/>그동안 링커를 이용해주셔서 감사합니다.</Intro>
-
-        <Button>확인</Button>
-      </LayOut>
-    </Wrapper>
-  )
-}

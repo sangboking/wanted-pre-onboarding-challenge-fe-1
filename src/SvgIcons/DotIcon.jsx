@@ -7,7 +7,7 @@ export default function DotIcon(props) {
     <filter id="패스_1554" x="0" y="0" width="16" height="16" filterUnits="userSpaceOnUse">
       <feOffset dx="0.5" dy="0.5" input="SourceAlpha"/>
       <feGaussianBlur stdDeviation="0.5" result="blur"/>
-      <feFlood flood-opacity="0.161"/>
+      <feFlood floodOpacity="0.161"/>
       <feComposite operator="in" in2="blur"/>
       <feComposite in="SourceGraphic"/>
     </filter>
@@ -20,8 +20,8 @@ export default function DotIcon(props) {
       </g>
     </g>
     <g id="그룹_2340" data-name="그룹 2340" transform="translate(1389.25 231.251)">
-      <path id="패스_1702" data-name="패스 1702" d="M-2641.816,6656.351v6.5" transform="translate(2645.066 -6656.351)" fill="none" stroke="#676767" stroke-linecap="round" stroke-width="0.5"/>
-      <path id="패스_1703" data-name="패스 1703" d="M0,0V6.5" transform="translate(6.5 3.25) rotate(90)" fill="none" stroke="#676767" stroke-linecap="round" stroke-width="0.5"/>
+      <path id="패스_1702" data-name="패스 1702" d="M-2641.816,6656.351v6.5" transform="translate(2645.066 -6656.351)" fill="none" stroke="#676767" strokeLinecap="round" strokeWidth="0.5"/>
+      <path id="패스_1703" data-name="패스 1703" d="M0,0V6.5" transform="translate(6.5 3.25) rotate(90)" fill="none" stroke="#676767" strokeLinecap="round" strokeWidth="0.5"/>
     </g>
   </g>
 </svg>
