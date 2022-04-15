@@ -1,7 +1,6 @@
 import React from 'react'
 import { useQuery } from 'react-query';
 import * as styled from './FbPostModal.style'
-import MuiSwitch from '../SceduleMui/MuiSwitch';
 import { useRecoilState } from 'recoil';
 import {postModalAtom} from '../SceduleAtoms';
 import FaceBookS from '../../SvgIcons/FaceBookS';
@@ -69,8 +68,7 @@ export default function PostModal() {
                  </styled.SnsIconWrapper>
  
                  <styled.TstorageWrapper>
-                   <styled.TstorageIntro>임시저장</styled.TstorageIntro>
-                   <MuiSwitch/>
+                   {/* 오른쪽 상단 ... 복제,삭제 버튼 들어갈곳 */}
                  </styled.TstorageWrapper>
                </styled.PostBoxHead>
  
