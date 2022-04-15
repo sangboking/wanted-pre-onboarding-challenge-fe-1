@@ -1,6 +1,5 @@
 import React from 'react';
 import * as styled from './Login.style';
-import { Checkbox} from '@mui/material';
 import {Link,useNavigate} from 'react-router-dom';
 import LinkrLogoNavy from '../../SvgIcons/LinkrLogoNavy';
 import { useForm } from 'react-hook-form';
@@ -47,7 +46,7 @@ const Login = () => {
               <styled.InputBox placeholder='비밀번호' type='password' {...register("password",{required:true})}></styled.InputBox>
               
               <styled.CheckWrapper>
-                <Checkbox type="checkbox"></Checkbox>
+                
                 <styled.CheckLog>로그인 상태 유지</styled.CheckLog>
               </styled.CheckWrapper>
               

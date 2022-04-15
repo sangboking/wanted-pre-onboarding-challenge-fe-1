@@ -11,9 +11,7 @@ import PostingIcon from '../../SvgIcons/PostingIcon';
 import LeftBtnIcon from '../../SvgIcons/LeftBtnIcon';
 import RightBtnIcon from '../../SvgIcons/RightBtnIcon';
 import CloseIcon from '../../SvgIcons/CloseIcon';
-import PostModal from '../FbPostModal/FbPostModal';
-
-
+import PostModal from '../PostModal/PostModal';
 
 export default function SceduleWeek() {
   const [postModal,setPostModal] = useRecoilState(postModalAtom);
@@ -54,9 +52,9 @@ export default function SceduleWeek() {
 
         <styled.Content>
           <styled.Title>
-            <Link to='/scedule/week' style={{ textDecoration: 'none' }}><styled.Button>Week</styled.Button></Link>
-            <Link to='/scedule/month'style={{ textDecoration: 'none' }}><styled.Button2>Month</styled.Button2></Link>
-            <Link to='/scedule/stream'style={{ textDecoration: 'none' }}><styled.Button2>Stream</styled.Button2></Link>
+            <Link to='/sceduleWeek' style={{ textDecoration: 'none' }}><styled.Button>Week</styled.Button></Link>
+            <Link to='/sceduleMonth'style={{ textDecoration: 'none' }}><styled.Button2>Month</styled.Button2></Link>
+            <Link to='/sceduleStream'style={{ textDecoration: 'none' }}><styled.Button2>Stream</styled.Button2></Link>
 
             <styled.PrevIcon  onClick={()=>{prevWeek()}} style={{marginLeft:'1.875rem'}}><LeftBtnIcon/></styled.PrevIcon>
             <styled.NowDate>{startDate.format('M월D일')+endDate.format(' ~ M월D일')}</styled.NowDate>

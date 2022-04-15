@@ -1,42 +1,9 @@
 import styled from 'styled-components';
 
-export const ModalBack = styled.div`
-  width:100%;
-  height:100%;
-  position:absolute;
-  left:0;top:0;
-  background:rgba(0,0,0,0.6);
-  display:block;
-  z-index: 10;
-`;
-
-export const PostBox = styled.div`
-  position:absolute;
-  top:0;left:0;
-  right:0;bottom:0;
-  margin:auto;
-  width:56.125rem;
-  height:54rem;
-  background-color: #fff;
-  border-radius: 60px;
-  display: flex;
-  padding-left:1.625rem;
-  padding-right:1.625rem;
-  /* box-shadow : rgba(0,0,0,0.5) 0 0 0 100vw; */
-  z-index : 15;
-  overflow: auto;
-
-  @media screen and (max-width:1440px) {
-   height:58rem;
-  }
-`;
-
-export const LeftPostBox = styled.div`
-  width:27.5rem;
-  height: 85%;
-  /* padding:1rem ; */
-  margin-top:3rem;
-  margin-right:1.625rem;
+export const RightPostBox = styled.div`
+  width:25.075rem;
+  height:85%;
+  margin-top:2.875rem;
 `;
 
 export const PostBoxHead = styled.div`
@@ -45,131 +12,36 @@ export const PostBoxHead = styled.div`
   align-items: center;
 `;
 
-export const FaceBookLogo = styled.div`
-  
-`;
-
-export const SnsIconWrapper = styled.div`
-  display: flex;
-  align-items:center ;
-  justify-content:center ;
-`;
-
-export const SnsIcon = styled.div`
-  margin-right:1.25rem;
-`;
-
-export const SnsBigIcon = styled.img`
-  width:30px;
-  height:30px;
-  margin-right:2rem;
-`;
-
-export const PostContent = styled.div`
-  width:25.5rem;
-  height:70%;
-  border-radius: 10px;
-  border: solid 1px #eaeaea;
-  background-color: #fff;
-  margin-top:1.6rem;
-  padding:1rem;
-`;
-
-export const CautionWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top:1.4rem;
-`;
-
-export const CautionIntro = styled.h1`
-  font-size: 0.813rem;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  text-align: left;
-  color: #676767;
-  margin-left:.3rem;
-`;
-
-export const UserWrapper = styled.div`
-  display:flex ;
-  margin-bottom:1.5rem ;
-`;
-
-export const Circle = styled.div`
-  width:3.125rem;
-  height:3.125rem;
-  background-color: orange;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 3rem;
-  border: solid 0.5px #fff;;
-  margin-right: .5rem;
-`;
-
-export const UserName = styled.h1`
-  font-size: 0.875rem;
-  font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: -0.28px;
-  text-align: left;
-  color: #333;
-  margin-top:.2rem;
-`;
-
-export const PostTitle = styled.h1`
-  font-size: 0.875rem;
-  font-weight: 400;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: -0.26px;
-  text-align: left;
-  color: #191919;
-  margin-bottom:1.5rem;
-  margin-left:.8rem;
-`;
-
-export const ContentBox = styled.div`
-  width:100%;
-  height:65%;
-  background-color: #f2f2f2;
-  display:flex ;
-  align-items:center ;
-  justify-content:center ;
-  font-size: 0.813rem;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: -0.26px;
-  text-align: center;
-  color: #666;
-`;
-
-export const VerticalLine = styled.div`
-  width:.3px;
-  height:90%;
-  background-color:#eaeaea;
-  margin-top:3rem;
-  margin-right:1.625rem;
-`;
-
-export const RightPostBox = styled.div`
-  width:25.075rem;
-  height:85%;
-  margin-top:2.875rem;
-`;
-
 export const TstorageWrapper = styled.div`
   display:flex;
   align-items: center;
-  
+`;
+
+export const UserProfileWrapper = styled.div`
+  display: flex;
+`;
+
+export const UserProfileImage = styled.div`
+  width:2.25rem;
+  height:2.25rem;
+  border-radius: 15px;
+  border:1px solid red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-right: 2.125rem;
+`;
+
+export const UserProfileSns = styled.div`
+  position: absolute;
+  right:-.5rem;
+  top:1rem;
+  z-index: 10;
+`;
+
+export const DotIconWrapper = styled.div`
+  cursor: pointer;
 `;
 
 export const TstorageIntro = styled.h1`
@@ -240,7 +112,7 @@ export const ImgTitle = styled.h1`
   letter-spacing: -0.3px;
   text-align: left;
   color: #191919;
-  margin-top:1.5rem;
+  margin-top:1rem;
   margin-bottom:.875rem;
   margin-left:.3rem;
 `;

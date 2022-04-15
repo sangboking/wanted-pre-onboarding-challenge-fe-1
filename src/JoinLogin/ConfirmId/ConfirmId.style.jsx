@@ -1,12 +1,5 @@
 import styled from 'styled-components';
-import ReportGmailerrorredIcon from '@mui/icons-material/ReportGmailerrorred';
 
-export const Icon = styled(ReportGmailerrorredIcon)`
-  font-size: small;
-  position:absolute;
-  left:1.6rem;
-  top:1.4rem;
-`;
 
 export const Back = styled.div`
   width:100%;

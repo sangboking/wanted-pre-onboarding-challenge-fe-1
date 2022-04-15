@@ -14,7 +14,7 @@ import SceduleMonth from './Scedule/SceduleMonth/SceduleMonth';
 import SceduleStream from './Scedule/SceduleStream/SceduleStream';
 
 import InsightFb from './Insight/InsightFb/InsightFb';
-import InsightInstar from './Insight/InsightInstar/InsightInstar';
+import InsightInsta from './Insight/InsightInsta/InsightInsta';
 import InsightTwit from './Insight/InsightTwit/InsightTwit';
 
 import InboxMessage from './Inbox/InboxMessage/InboxMessage';
@@ -39,18 +39,18 @@ const router = () => {
             <Route path="/joinout" element={<JoinOut/>}/>
 
             {/* Scedule */}
-            <Route path="/scedule/week" element={<SceduleWeek/>}/>
-            <Route path="/scedule/month" element={<SceduleMonth/>}/>
-            <Route path="/scedule/stream" element={<SceduleStream/>}/>
+            <Route path="/sceduleWeek" element={<SceduleWeek/>}/>
+            <Route path="/sceduleMonth" element={<SceduleMonth/>}/>
+            <Route path="/sceduleStream" element={<SceduleStream/>}/>
 
             {/* Insight */}
-            <Route path='/insight/fb' element={<InsightFb/>}></Route>
-            <Route path='/insight/instar' element={<InsightInstar/>}></Route>
-            <Route path='/insight/twit' element={<InsightTwit/>}></Route>
+            <Route path='/insightFb' element={<InsightFb/>}></Route>
+            <Route path='/insightInsta' element={<InsightInsta/>}></Route>
+            <Route path='/insightTwit' element={<InsightTwit/>}></Route>
 
             {/* Inbox */}
-            <Route path='/inbox/message' element={<InboxMessage/>}></Route>
-            <Route path='/inbox/comment' element={<InboxComnet/>}></Route>
+            <Route path='/inboxMessage' element={<InboxMessage/>}></Route>
+            <Route path='/inboxComment' element={<InboxComnet/>}></Route>
 
             {/* Connect */}
             <Route path='/connect' element={<Connect/>}></Route>

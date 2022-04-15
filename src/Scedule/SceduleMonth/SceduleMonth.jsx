@@ -8,7 +8,7 @@ import MonthCalendar from '../MonthCalendar/MonthCalendar';
 import moment from 'moment';
 import LeftBtnIcon from '../../SvgIcons/LeftBtnIcon';
 import RightBtnIcon from '../../SvgIcons/RightBtnIcon';
-import PostModal from '../FbPostModal/FbPostModal';
+import PostModal from '../PostModal/PostModal';
 import CloseIcon from '../../SvgIcons/CloseIcon';
 import PostingIcon from '../../SvgIcons/PostingIcon';
 
@@ -46,9 +46,9 @@ export default function SceduleMonth() {
 
         <styled.Content>
           <styled.Title>
-            <Link to='/scedule/week' style={{ textDecoration: 'none' }}><styled.Button2>Week</styled.Button2></Link>
-            <Link to='/scedule/month' style={{ textDecoration: 'none' }}><styled.Button>Month</styled.Button></Link>
-            <Link to='/scedule/stream'><styled.Button2>Stream</styled.Button2></Link>
+            <Link to='/sceduleWeek' style={{ textDecoration: 'none' }}><styled.Button2>Week</styled.Button2></Link>
+            <Link to='/sceduleMonth' style={{ textDecoration: 'none' }}><styled.Button>Month</styled.Button></Link>
+            <Link to='/sceduleStream'><styled.Button2>Stream</styled.Button2></Link>
 
             <styled.PrevIcon  onClick={()=>{prevMonth()}} style={{marginLeft:'1.875rem'}}><LeftBtnIcon/></styled.PrevIcon>
             <styled.NowDate>{today.format('YYYY년 M월')}</styled.NowDate>

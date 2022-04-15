@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import * as styled from './Home.style';
 import HomeBrand from './HomeBrand';
 import FaceBookS from '../../SvgIcons/FaceBookS';
-import InstarS from '../../SvgIcons/InstarS';
+import InstaS from '../../SvgIcons/InstaS';
 import TwitS from '../../SvgIcons/TwitS';
 import RightArrowIcon from '../../SvgIcons/RightArrowIcon';
 import LinkrLogoNavy from '../../SvgIcons/LinkrLogoNavy';
 import axios from 'axios';
 import { useQuery } from 'react-query';
+
 
 const Home = () => {
   const appId = process.env.REACT_APP_FB_APP_ID;
@@ -85,8 +86,6 @@ const Home = () => {
 
   const { data:accoutInfo, isLoading:accountLoading } = useQuery('accountInfo',accountInfo);
 
-  console.log(accoutInfo);
-
   const fetchGetPageInfo = async () => {
     const response = await fetch(`https://graph.facebook.com/${userId}/accounts?access_token=${accessToken}`)
     return response.json();
@@ -101,11 +100,11 @@ const Home = () => {
     }
     try{
       const response = await axios.post('api/brands',JSON.stringify(brandData),{headers:{"Content-Type":`application/json`}})
-      console.log(response);
+      console.log(response.data.result.id);
       const facebookData = {
-        pageId :fbPageInfo.data[0].id ,
-        pageName :fbPageInfo.data[0].name,
-        accessToken :fbPageInfo.data[0].access_token
+        pageId : fbPageInfo.data[0].id ,
+        pageName : fbPageInfo.data[0].name,
+        pageAccessToken : fbPageInfo.data[0].access_token
       }
       const brandId = response.data.result.id
       const response2 = await axios.post(`api/brands/${brandId}/FACEBOOK`,JSON.stringify(facebookData),{headers:{"Content-Type":`application/json`}})
@@ -184,7 +183,7 @@ const Home = () => {
                 </styled.RightArrow>
               </styled.RightButton>
 
-              <styled.RightButton><InstarS/><styled.ButtonSpan>인스타그램 비지니스 계정 연동</styled.ButtonSpan><styled.RightArrow><RightArrowIcon width={12} height={12}/></styled.RightArrow></styled.RightButton>
+              <styled.RightButton><InstaS/><styled.ButtonSpan>인스타그램 비지니스 계정 연동</styled.ButtonSpan><styled.RightArrow><RightArrowIcon width={12} height={12}/></styled.RightArrow></styled.RightButton>
               <styled.RightButton><TwitS/><styled.ButtonSpan>트위터 프로필 연동</styled.ButtonSpan><styled.RightArrow><RightArrowIcon width={12} height={12}/></styled.RightArrow></styled.RightButton>
             </styled.RightContent>
           </styled.ModalContentWrapper>

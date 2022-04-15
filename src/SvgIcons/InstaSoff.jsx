@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function InstarSoff(props) {
+export default function InstaSoff(props) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" {...props}>
   <g id="레이어_2" data-name="레이어 2" transform="translate(0 0.231)">

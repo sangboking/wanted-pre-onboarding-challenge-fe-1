@@ -14,7 +14,7 @@ export default function ConfirmId() {
           <styled.Text>입니다.</styled.Text>
         </styled.IdWrapper>
         
-        <styled.AlertBox><styled.Icon fontSize='small'/>정보 보호를 위해 아이디의 일부만 보여집니다. 가려지지 않은 전체 아이디는 추가 인증을 통해 확인할 수 있습니다.</styled.AlertBox>
+        <styled.AlertBox>정보 보호를 위해 아이디의 일부만 보여집니다. 가려지지 않은 전체 아이디는 추가 인증을 통해 확인할 수 있습니다.</styled.AlertBox>
         
         <styled.ButtonWrapper>
           <Link to="/"><styled.GoButton>홈으로 바로가기</styled.GoButton></Link>

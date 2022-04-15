@@ -4,8 +4,8 @@ import { useQuery } from 'react-query';
 import DotIcon from '../../SvgIcons/DotIcon';
 import FaceBookS from '../../SvgIcons/FaceBookS';
 import FaceBookSoff from '../../SvgIcons/FaceBookSoff';
-import InstarS from '../../SvgIcons/InstarS';
-import InstarSoff from '../../SvgIcons/InstarSoff';
+import InstaS from '../../SvgIcons/InstaS';
+import InstaSoff from '../../SvgIcons/InstaSoff';
 import TwitS from '../../SvgIcons/TwitS';
 import TwitSoff from '../../SvgIcons/TwitSoff';
 import * as styled from './HomeBrand.style';
@@ -14,7 +14,7 @@ export default function HomeBrand({...props}) {
   const navigate = useNavigate();
 
   const navigateScedule = () => {
-    navigate('/scedule/week')
+    navigate('/sceduleWeek')
   }
 
   const fetchBrandInfo = async () => {
@@ -23,7 +23,6 @@ export default function HomeBrand({...props}) {
   }
  
   const {data:brandInfo,isLoading} = useQuery('brandInfo',fetchBrandInfo);
-  console.log(brandInfo);
 
   function PlusBrand(){
     return (
@@ -56,7 +55,7 @@ export default function HomeBrand({...props}) {
                       </styled.NameTimeWrapper>
                       <styled.ConnectSnsWrapper>
                         {brandInfo?.result[i].faceBookConnectedId ? <styled.SnsIcon><FaceBookS width={16} height={16}/></styled.SnsIcon> : <styled.SnsIcon><FaceBookSoff width={16} height={16}/></styled.SnsIcon>}
-                        {brandInfo?.result[i].instagramConnectedId ?<styled.SnsIcon><InstarS width={16} height={16}/></styled.SnsIcon> :<styled.SnsIcon><InstarSoff width={16} height={16}/></styled.SnsIcon>}
+                        {brandInfo?.result[i].instagramConnectedId ?<styled.SnsIcon><InstaS width={16} height={16}/></styled.SnsIcon> :<styled.SnsIcon><InstaSoff width={16} height={16}/></styled.SnsIcon>}
                         {brandInfo?.result[i].twitterConnectedId ? <styled.SnsIcon><TwitS width={16} height={16}/></styled.SnsIcon>:<styled.SnsIcon><TwitSoff width={16} height={16}/></styled.SnsIcon>}
                       </styled.ConnectSnsWrapper>
 

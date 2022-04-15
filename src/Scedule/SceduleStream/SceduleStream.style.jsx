@@ -144,7 +144,6 @@ export const StreamContentWrapper = styled.div`
   display:flex;
   margin-bottom:4rem;
   width:100%;
-  
 `;
 
 export const StreamBox = styled.div`
@@ -166,6 +165,29 @@ export const StreamBoxTitle = styled.div`
   border-bottom:solid 1px #e4e4e4;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
+`;
+
+export const StreamBoxFbPicture = styled.div`
+  width:100%;
+  height:34.375rem;
+  background-color: pink;
+`;
+
+export const StreamBoxFbText = styled.div`
+  width:100%;
+  height:5.875rem;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  padding-left:1.5rem;
+  padding-top:1.5rem;
+  font-size: 0.875rem;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.28px;
+  text-align: left;
+  color: #333;
 `;
 
 export const StreamBoxTitleIcon = styled.div`

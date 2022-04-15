@@ -1,11 +1,11 @@
 import React from 'react'
+import { useQuery } from 'react-query';
 import * as styled from './WeekCalendar.style'
 
 export default function WeekCalendar({startDate,endDate}) {
   
 
   const arr = ["월","화","수","목","금"];
-
         
   return (
     <styled.WeekCalendarWrapper>

@@ -5,7 +5,7 @@ import Sidebar from '../../Components/Sidebar/SideBar';
 import CautionIcon from '../../SvgIcons/CautionIcon';
 import DotIcon from '../../SvgIcons/DotIcon';
 import FaceBookS from '../../SvgIcons/FaceBookS';
-import InstarSoff from '../../SvgIcons/InstarSoff';
+import InstaSoff from '../../SvgIcons/InstaSoff';
 import LeftBtnIcon from '../../SvgIcons/LeftBtnIcon';
 import RightBtnIcon from '../../SvgIcons/RightBtnIcon';
 import SceduleIcon from '../../SvgIcons/SceduleIcon';
@@ -26,7 +26,7 @@ export default function InsightFb() {
           <styled.InsightHeader>
             <styled.IconWrapper>
               <Link to='/insight/fb'><styled.HeaderIcon style={{marginLeft:'.938rem'}}><FaceBookS/></styled.HeaderIcon></Link>
-              <Link to='/insight/instar'><styled.HeaderIcon><InstarSoff/></styled.HeaderIcon></Link>
+              <Link to='/insight/Insta'><styled.HeaderIcon><InstaSoff/></styled.HeaderIcon></Link>
               <Link to='/insight/twit'><styled.HeaderIcon><TwitSoff/></styled.HeaderIcon></Link>
             </styled.IconWrapper>
 
