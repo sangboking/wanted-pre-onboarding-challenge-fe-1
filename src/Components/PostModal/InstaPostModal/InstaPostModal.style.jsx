@@ -31,17 +31,19 @@ export const SnsIcon = styled.div`
 
 export const PostContent = styled.div`
   width:25.5rem;
-  height:70%;
+  height:40rem;
   border-radius: 10px;
   border: solid 1px #eaeaea;
   background-color: #fff;
   margin-top:1rem;
   padding:1rem;
+  position: relative;
 `;
 
 export const CautionWrapper = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   margin-top:1.4rem;
 `;
 
@@ -74,7 +76,9 @@ export const UserName = styled.h1`
   color: #333;
 `;
 
-export const PostTitle = styled.h1`
+export const PostTitle = styled.div`
+  width:24.5rem;
+  height:7.5rem;
   font-size: 0.875rem;
   font-weight: 400;
   font-stretch: normal;
@@ -83,13 +87,16 @@ export const PostTitle = styled.h1`
   letter-spacing: -0.26px;
   text-align: left;
   color: #191919;
-  margin-bottom:1.5rem;
+  margin-top: 3rem;
   margin-left:.8rem;
+  position: absolute;
+  bottom:0;
+  white-space: pre-line;
 `;
 
 export const ContentBox = styled.div`
   width:100%;
-  height:65%;
+  height:25rem;
   background-color: #f2f2f2;
   display:flex ;
   align-items:center ;
@@ -102,6 +109,24 @@ export const ContentBox = styled.div`
   letter-spacing: -0.26px;
   text-align: center;
   color: #666;
+`;
+
+export const IconWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  bottom:9rem;
+  left:2rem;
+  
+`;
+
+export const LeftIconWrapper = styled.div`
+  display: flex;
+`;
+
+export const InstaIcon = styled.div`
+  margin-right: 1rem;
 `;
 
 export const CautionIntro = styled.h1`

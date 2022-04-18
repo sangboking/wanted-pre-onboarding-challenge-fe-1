@@ -24,21 +24,21 @@ export default function Sidebar({...props}) {
           </styled.UserWrapper>
 
           <styled.MenuWrapper>
-            <Link to='/scedule/week' style={{ textDecoration: 'none' }}>
+            <Link to='/sceduleWeek' style={{ textDecoration: 'none' }}>
               <styled.WeekMenu sceduleColor={props.sceduleColor}>
                 <styled.IconWrapper><SceduleIcon width={20} height={20}/></styled.IconWrapper>
                 <styled.SceduleMenuName sceduleMenuColor={props.sceduleMenuColor}>스케줄</styled.SceduleMenuName>
               </styled.WeekMenu>
             </Link>
 
-            <Link to='/insight/fb' style={{ textDecoration: 'none' }}>
+            <Link to='/insightFb' style={{ textDecoration: 'none' }}>
               <styled.InsightMenu insightColor={props.insightColor}>
                 <styled.IconWrapper><InsightIcon width={20} height={20}/></styled.IconWrapper>
                 <styled.InsightMenuName insightMenuColor={props.insightMenuColor}>인사이트</styled.InsightMenuName>
               </styled.InsightMenu>
             </Link>
 
-            <Link to='/inbox/message' style={{ textDecoration: 'none' }}>
+            <Link to='/inboxMessage' style={{ textDecoration: 'none' }}>
               <styled.InboxMenu inboxColor={props.inboxColor}>
                 <styled.IconWrapper><InboxIcon width={20} height={20}/></styled.IconWrapper>
                 <styled.InboxMenuName inboxMenuColor={props.inboxMenuColor}>인박스</styled.InboxMenuName>              

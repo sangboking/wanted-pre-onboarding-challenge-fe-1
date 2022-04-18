@@ -11,16 +11,18 @@ import RightBtnIcon from '../../SvgIcons/RightBtnIcon';
 import PostModal from '../PostModal/PostModal';
 import CloseIcon from '../../SvgIcons/CloseIcon';
 import PostingIcon from '../../SvgIcons/PostingIcon';
+import { postTextAtom } from '../../atom';
 
 export default function SceduleMonth() {
 
   const [postModal,setPostModal] = useRecoilState(postModalAtom);
-
+  const [postText, setPostText] = useRecoilState(postTextAtom);
   const sceduleColor = useRecoilValue(sceduleColorAtom);
   const sceduleMenuColor = useRecoilValue(sceduleMenuColorAtom);
 
   const postModalClick = ()=>{
-    return setPostModal(!postModal)
+    setPostModal(!postModal);
+    setPostText('');
   }
 
   const [getMoment, setMoment] = useState(moment());

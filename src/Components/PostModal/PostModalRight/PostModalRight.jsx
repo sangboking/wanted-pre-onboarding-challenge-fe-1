@@ -1,6 +1,9 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
+import { useRecoilState } from 'recoil';
+import { getBrand } from '../../../apis/api';
+import { postTextAtom } from '../../../atom';
 import DotdotdotIcon from '../../../SvgIcons/DotdotdotIcon';
 import FaceBookS from '../../../SvgIcons/FaceBookS';
 import InstaS from '../../../SvgIcons/InstaS';
@@ -11,18 +14,13 @@ import * as styled from './PostModalRight.style';
 
 export default function PostModalRight({...props}) {
   
-  const [postText, setPostText] = useState('');
-  console.log(postText);
+  const [postText, setPostText] = useRecoilState(postTextAtom);
+ 
   const onChange = (e) => {
     setPostText(e.target.value);
   };
 
-  const getBrandId = async () => {
-    const response = await fetch('api/brands')
-    return response.json();
-  };
-
-  const {data:brandId} = useQuery('brandId',getBrandId);
+  const {data:brandData} = useQuery('brandId',getBrand);
  
   const fbPost = async () => {
     const postData = {
@@ -30,15 +28,16 @@ export default function PostModalRight({...props}) {
       facebookPost : true,
       instagramPost : false,
       twitterPost : false,
-      postDate : 1,
-      postNow : true
+      postDate : new Date(),
+      postNow : true,
     }
-    await axios.post(`api/brands/${brandId.result[0].id}/posts`, JSON.stringify(postData),{headers:{"Content-Type":`application/json`}})
+    await axios.post(`api/brands/${brandData.result[2].id}/posts`, JSON.stringify(postData),{headers:{"Content-Type":`application/json`}})
     .then((response) => {
-      console.log(response)
+      console.log(response);
     })
     .catch((error) => {
-      console.log(error)
+      console.log(error);
+      alert('게시에 오류가 발생하였습니다.');
     })
 
   }

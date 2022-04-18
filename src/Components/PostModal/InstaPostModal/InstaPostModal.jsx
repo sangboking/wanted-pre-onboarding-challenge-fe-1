@@ -1,15 +1,19 @@
 import React from 'react';
-
 import FaceBookSoff from '../../../SvgIcons/FaceBookSoff';
 import InstaS from '../../../SvgIcons/InstaS';
 import TwitSoff from '../../../SvgIcons/TwitSoff';
 import CautionIcon from '../../../SvgIcons/CautionIcon';
 import * as styled from './InstaPostModal.style';
 import InstaLogo from '../../../SvgIcons/InstaLogo';
+import HeartIcon from '../../../SvgIcons/HeartIcon';
+import MessageIcon from '../../../SvgIcons/MessageIcon';
+import ExportIcon from '../../../SvgIcons/ExportIcon';
+import BookMarkIcon from '../../../SvgIcons/BookMarkIcon';
+import { useRecoilValue } from 'recoil';
+import { postTextAtom } from '../../../atom';
 
 export default function InstaPostModal(props) {
-
- 
+  const postText = useRecoilValue(postTextAtom);
 
   return (
     <styled.LeftPostBox>
@@ -29,9 +33,23 @@ export default function InstaPostModal(props) {
           <styled.UserName>Linkr Kim</styled.UserName>
         </styled.UserWrapper>
 
-        <styled.PostTitle>포스팅 내용을 입력하세요.</styled.PostTitle>
+        { postText ? null : <styled.ContentBox>미리보기 화면은 실제 포스팅과 다를 수 있음을 알려드립니다.</styled.ContentBox>}
 
-        <styled.ContentBox>미리보기 화면은 실제 포스팅과 다를 수 있음을 알려드립니다.</styled.ContentBox>
+        <styled.IconWrapper>
+          <styled.LeftIconWrapper>
+            <styled.InstaIcon><HeartIcon/></styled.InstaIcon>
+            <styled.InstaIcon><MessageIcon/></styled.InstaIcon>
+            <styled.InstaIcon><ExportIcon/></styled.InstaIcon>
+          </styled.LeftIconWrapper>
+
+          <styled.InstaIcon style={{position:'absolute',right:'-19rem'}}><BookMarkIcon/></styled.InstaIcon>
+        </styled.IconWrapper>
+
+        { 
+          postText ?
+          <styled.PostTitle>{postText}</styled.PostTitle> :
+          <styled.PostTitle>포스팅 내용을 입력하세요.</styled.PostTitle>
+        }
       </styled.PostContent>
 
       <styled.CautionWrapper>

@@ -9,6 +9,7 @@ import InstaSoff from '../../SvgIcons/InstaSoff';
 import TwitS from '../../SvgIcons/TwitS';
 import TwitSoff from '../../SvgIcons/TwitSoff';
 import * as styled from './HomeBrand.style';
+import { getBrand } from '../../apis/api';
 
 export default function HomeBrand({...props}) {
   const navigate = useNavigate();
@@ -17,12 +18,7 @@ export default function HomeBrand({...props}) {
     navigate('/sceduleWeek')
   }
 
-  const fetchBrandInfo = async () => {
-    const response = await fetch('/api/brands');
-    return response.json();
-  }
- 
-  const {data:brandInfo,isLoading} = useQuery('brandInfo',fetchBrandInfo);
+  const {data:brandInfo,isLoading} = useQuery('brandInfo',getBrand);
 
   function PlusBrand(){
     return (

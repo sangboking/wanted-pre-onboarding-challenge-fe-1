@@ -12,10 +12,11 @@ import LeftBtnIcon from '../../SvgIcons/LeftBtnIcon';
 import RightBtnIcon from '../../SvgIcons/RightBtnIcon';
 import CloseIcon from '../../SvgIcons/CloseIcon';
 import PostModal from '../PostModal/PostModal';
+import { postTextAtom } from '../../atom';
 
 export default function SceduleWeek() {
   const [postModal,setPostModal] = useRecoilState(postModalAtom);
-
+  const [postText, setPostText] = useRecoilState(postTextAtom);
   const sceduleColor = useRecoilValue(sceduleColorAtom);
   const sceduleMenuColor = useRecoilValue(sceduleMenuColorAtom);
 
@@ -24,7 +25,8 @@ export default function SceduleWeek() {
   //               "21","22","23","24"] //포스트 모달창 시간 배열
   
   const postModalClick = ()=>{
-    return setPostModal(!postModal)
+    setPostModal(!postModal);
+    setPostText('');
   }
 
   const [getMoment, setMoment] = useState(moment());

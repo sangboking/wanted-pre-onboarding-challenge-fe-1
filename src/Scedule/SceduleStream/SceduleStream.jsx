@@ -8,27 +8,24 @@ import moment from 'moment';
 import PostModal from '../PostModal/PostModal';
 import CloseIcon from '../../SvgIcons/CloseIcon';
 import PostingIcon from '../../SvgIcons/PostingIcon';
-import FaceBookS from '../../SvgIcons/FaceBookS';
-import TwitS from '../../SvgIcons/TwitS';
 import LeftBtnIcon from '../../SvgIcons/LeftBtnIcon';
 import RightBtnIcon from '../../SvgIcons/RightBtnIcon';
-import axios from 'axios';
 import { useQuery } from 'react-query';
+import { getBrand, getFbPost } from '../../apis/api';
+import FaceBookS from '../../SvgIcons/FaceBookS';
 import InstaS from '../../SvgIcons/InstaS';
+import TwitS from '../../SvgIcons/TwitS';
+import { postTextAtom } from '../../atom';
 
 export default function SceduleStream() {
-
   const [postModal,setPostModal] = useRecoilState(postModalAtom);
-
   const sceduleColor = useRecoilValue(sceduleColorAtom);
   const sceduleMenuColor = useRecoilValue(sceduleMenuColorAtom);
-
-  // const timeOption = ["00","01","02","03","04","05","06","07","08","09","10",
-  //               "11","12","13","14","15","16","17","18","19","20",
-  //               "21","22","23","24"] //포스트 모달창 시간 배열
+  const [postText, setPostText] = useRecoilState(postTextAtom);
 
   const postModalClick = ()=>{
-    return setPostModal(!postModal)
+     setPostModal(!postModal);
+     setPostText('');
   }
 
   const [getMoment,setMoment] = useState(moment());
@@ -45,22 +42,15 @@ export default function SceduleStream() {
     setMoment(getMoment.clone().add(1, 'month'))
   }; //다음달 onClick 함수
 
-  const getBrandId = async () => {
-    const response = await fetch('api/brands');
-    return response.json();
-  }
+  const {data:brandInfo, isLoading:brandLoading} = useQuery('brandData', getBrand,{refetchInterval:100000});
 
-  const {data:brandId} = useQuery('brandId2',getBrandId);
-
-  const getFbPost = async () => {
-    const response = await fetch(`api/brands/${brandId.result[0].id}/posts`)
-    return response.json();
-  }
-
-  const {data:fbPost, isLoading} = useQuery('fbPost',getFbPost);
-  console.log(fbPost);
-
-
+  const {data:fbPost, isLoading:fbPostLoading} = useQuery(['fbPostData',brandInfo?.result[2].id],
+    () => getFbPost(brandInfo?.result[2].id),
+    {
+      enabled:!!brandInfo?.result[2].id
+    });
+  
+  const loading = brandLoading || fbPostLoading;
 
   return (
     <styled.Wrapper  postModal={postModal}>
@@ -89,8 +79,8 @@ export default function SceduleStream() {
 
           <styled.StreamWrapper>
             {
-              isLoading ? <h1>페이스북 게시글을 불러오는 중입니다..</h1> :
-                fbPost.result.map((a,i) => {
+              loading ? <h1>페이스북 게시글을 불러오는 중입니다..</h1> :
+                fbPost?.result.map((a,i) => {
                   return (
                     <styled.StreamContentWrapper key={i}>
                       
@@ -105,7 +95,7 @@ export default function SceduleStream() {
                         </styled.StreamBoxTitle> 
 
                         <styled.StreamBoxFbPicture>1</styled.StreamBoxFbPicture>
-                        <styled.StreamBoxFbText>{fbPost.result[i].content}</styled.StreamBoxFbText>
+                        <styled.StreamBoxFbText>{loading ?<h1>로딩중 입니다.</h1>:fbPost?.result[i].content}</styled.StreamBoxFbText>
                       </styled.StreamBox>
                       
                       <styled.StreamNote>
@@ -122,9 +112,6 @@ export default function SceduleStream() {
                   )
                 })
             }
-           
-
-           
             
           </styled.StreamWrapper>
 

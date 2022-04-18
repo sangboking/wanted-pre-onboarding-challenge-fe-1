@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const LeftPostBox = styled.div`
   width:27.5rem;
-  height: 85%;
+  height: 52rem;
   /* padding:1rem ; */
   margin-top:3rem;
   margin-right:1.625rem;
@@ -15,7 +15,7 @@ export const PostBoxHead = styled.div`
 `;
 
 export const TwitLogo = styled.div`
-  display: flex;
+  
 `;
 
 export const SnsIconWrapper = styled.div`
@@ -26,7 +26,7 @@ export const SnsIconWrapper = styled.div`
 
 export const SnsIcon = styled.div`
   margin-right:1.25rem;
-  cursor:pointer;
+  cursor: pointer;
 `;
 
 export const PostContent = styled.div`
@@ -37,11 +37,13 @@ export const PostContent = styled.div`
   background-color: #fff;
   margin-top:1rem;
   padding:1rem;
+  position: relative;
 `;
 
 export const CautionWrapper = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   margin-top:1.4rem;
 `;
 
@@ -85,11 +87,12 @@ export const PostTitle = styled.h1`
   color: #191919;
   margin-bottom:1.5rem;
   margin-left:.8rem;
+  white-space: pre-line;
 `;
 
 export const ContentBox = styled.div`
   width:100%;
-  height:65%;
+  height:25.375rem;
   background-color: #f2f2f2;
   display:flex ;
   align-items:center ;
@@ -114,4 +117,15 @@ export const CautionIntro = styled.h1`
   text-align: left;
   color: #676767;
   margin-left:.3rem;
+`;
+
+export const TwitIconWrapper = styled.div`
+  display: flex;
+  position: absolute;
+  bottom:2.7rem;
+  left:1.5rem;
+`;
+
+export const TwitIcon = styled.div`
+  margin-right: 6.5rem;
 `;
