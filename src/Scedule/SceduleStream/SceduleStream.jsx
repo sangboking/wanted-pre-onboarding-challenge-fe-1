@@ -15,10 +15,11 @@ import { getBrand, getFbPost } from '../../apis/api';
 import FaceBookS from '../../SvgIcons/FaceBookS';
 import InstaS from '../../SvgIcons/InstaS';
 import TwitS from '../../SvgIcons/TwitS';
-import { postTextAtom } from '../../atom';
+import { postImgPreviewAtom, postTextAtom } from '../../atom';
 
 export default function SceduleStream() {
   const [postModal,setPostModal] = useRecoilState(postModalAtom);
+  const [postImgPreview, setPostImgPreview] = useRecoilState(postImgPreviewAtom);
   const sceduleColor = useRecoilValue(sceduleColorAtom);
   const sceduleMenuColor = useRecoilValue(sceduleMenuColorAtom);
   const [postText, setPostText] = useRecoilState(postTextAtom);
@@ -26,6 +27,7 @@ export default function SceduleStream() {
   const postModalClick = ()=>{
      setPostModal(!postModal);
      setPostText('');
+     setPostImgPreview(null);
   }
 
   const [getMoment,setMoment] = useState(moment());

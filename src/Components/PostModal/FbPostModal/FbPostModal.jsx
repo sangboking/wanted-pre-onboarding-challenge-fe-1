@@ -8,12 +8,13 @@ import CommentIcon from '../../../SvgIcons/CommentIcon';
 import ShareIcon from '../../../SvgIcons/ShareIcon';
 import CautionIcon from '../../../SvgIcons/CautionIcon';
 import * as styled from './FbPostModal.style';
-import { useRecoilValue } from 'recoil';
-import { postTextAtom } from '../../../atom';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { postImgPreviewAtom, postTextAtom } from '../../../atom';
 
 
 export default function FbPostModal({...props}) { 
   const postText = useRecoilValue(postTextAtom);
+  const [postImgPreview, setPostImgPreview] = useRecoilState(postImgPreviewAtom);
   
   return (
     <styled.LeftPostBox>
@@ -38,9 +39,23 @@ export default function FbPostModal({...props}) {
         }
 
         {
-          postText ? 
+          postText || postImgPreview ? 
           null : 
           <styled.ContentBox>미리보기 화면은 실제 포스팅과 다를수 있음을 알려드립니다.</styled.ContentBox>
+        }
+
+        {
+          postImgPreview ?
+          <styled.PreviewImgWrapper>
+            {
+              postImgPreview.map((img,i) => {
+                return(
+                  <styled.PreviewImg img={img} key={i}></styled.PreviewImg>
+                )
+              })
+            }
+          </styled.PreviewImgWrapper> 
+          : null
         }
          <styled.Line/>
 

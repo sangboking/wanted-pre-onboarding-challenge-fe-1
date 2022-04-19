@@ -141,10 +141,10 @@ export const FileTitle = styled.h1`
   margin-bottom:0.75rem;
 `;
 
-export const FileButton = styled.button`
+export const FileLabel = styled.label`
   width: 6.375rem;
   height: 1.875rem;
-  border-radius: 15px;
+  border-radius: 15px; 
   background-color: #007aff;
   border:1px solid #007aff;
   font-size: 0.75rem;
@@ -155,7 +155,14 @@ export const FileButton = styled.button`
   letter-spacing: normal;
   text-align: center;
   color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
+`;
+
+export const FileUpload = styled.input`
+  display: none;
 `;
 
 export const Line = styled.div`

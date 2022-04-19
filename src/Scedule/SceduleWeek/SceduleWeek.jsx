@@ -12,11 +12,12 @@ import LeftBtnIcon from '../../SvgIcons/LeftBtnIcon';
 import RightBtnIcon from '../../SvgIcons/RightBtnIcon';
 import CloseIcon from '../../SvgIcons/CloseIcon';
 import PostModal from '../PostModal/PostModal';
-import { postTextAtom } from '../../atom';
+import { postImgPreviewAtom, postTextAtom } from '../../atom';
 
 export default function SceduleWeek() {
   const [postModal,setPostModal] = useRecoilState(postModalAtom);
   const [postText, setPostText] = useRecoilState(postTextAtom);
+  const [postImgPreview, setPostImgPreview] = useRecoilState(postImgPreviewAtom);
   const sceduleColor = useRecoilValue(sceduleColorAtom);
   const sceduleMenuColor = useRecoilValue(sceduleMenuColorAtom);
 
@@ -27,6 +28,7 @@ export default function SceduleWeek() {
   const postModalClick = ()=>{
     setPostModal(!postModal);
     setPostText('');
+    setPostImgPreview(null);
   }
 
   const [getMoment, setMoment] = useState(moment());

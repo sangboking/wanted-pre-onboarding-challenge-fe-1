@@ -107,6 +107,23 @@ export const ContentBox = styled.div`
   color: #666;
 `;
 
+export const PreviewImgWrapper = styled.div`
+  width:25.5rem;
+  height:18rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap:5px;
+  position: absolute;
+  bottom:4rem;
+`;
+
+export const PreviewImg = styled.img`
+  background-image: url(${props => props.img});
+  background-size:cover;
+  background-repeat: no-repeat;
+  flex: 1 1 40%;
+`;
+
 export const Line = styled.div`
   width:25.2rem;
   height:.3px;
