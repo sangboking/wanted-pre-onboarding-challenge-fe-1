@@ -45,8 +45,10 @@ export default function SceduleStream() {
     setMoment(getMoment.clone().add(1, 'month'))
   }; 
 
-  const {data:fbPost, isLoading:fbPostLoading} = useQuery('fbPostData',
-    () => getFbPost(brandId)
+  const {data:fbPost, isLoading:fbPostLoading} = useQuery('fbPostData', () => getFbPost(brandId),
+    {
+      refetchOnWindowFocus : false,
+    }
   );
   
   return (

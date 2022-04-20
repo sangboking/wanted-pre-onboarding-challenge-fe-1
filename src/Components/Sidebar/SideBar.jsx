@@ -14,7 +14,10 @@ export default function Sidebar({...props}) {
   const {brandId} = useParams();
 
   getDetailBrand(brandId);
-  const {data,isLoading} = useQuery('detailBrandInfo', () => getDetailBrand(brandId));
+  const {data,isLoading} = useQuery('detailBrandInfo', () => getDetailBrand(brandId),
+  {
+    refetchOnWindowFocus : false,
+  });
   
   
   return (

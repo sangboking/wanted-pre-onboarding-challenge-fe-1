@@ -31,14 +31,16 @@ const Home = () => {
     setBrandTime(e.target.value)
   }
 
-  const { data:accoutInfoData, isLoading:accountLoading } = useQuery('accountInfo',getAccountInfo);
+  const { data:accoutInfoData, isLoading:accountLoading } = useQuery('accountInfo',getAccountInfo,
+  {
+    refetchOnWindowFocus: false,
+  });
 
-  const {data:fbPageInfoData} = useQuery(['fbPageInfo'],() => 
-    getPageInfo(userId,accessToken),
-    {
-
-    }
-  ); 
+  
+  const { data:fbPageInfoData } = useQuery('fbPageInfo', () => getPageInfo(userId,accessToken),
+  {
+    refetchOnWindowFocus : false,
+  }); 
 
 
     return (

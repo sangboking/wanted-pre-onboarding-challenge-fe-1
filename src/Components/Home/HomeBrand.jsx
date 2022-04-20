@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate,useParams,Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import DotIcon from '../../SvgIcons/DotIcon';
 import FaceBookS from '../../SvgIcons/FaceBookS';
@@ -12,13 +12,11 @@ import * as styled from './HomeBrand.style';
 import { getBrand } from '../../apis/api';
 
 export default function HomeBrand({...props}) {
-  const navigate = useNavigate();
-
-  const navigateScedule = () => {
-    navigate('/sceduleWeek')
-  }
-
-  const {data:brandInfo,isLoading} = useQuery('brandInfo',getBrand);
+  
+  const {data:brandInfo,isLoading} = useQuery('brandInfo', getBrand, 
+  {
+    refetchOnWindowFocus: false,
+  });
 
   function PlusBrand(){
     return (
