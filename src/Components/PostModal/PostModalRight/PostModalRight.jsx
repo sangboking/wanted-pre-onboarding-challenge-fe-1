@@ -1,8 +1,7 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { useQuery } from 'react-query';
+import React from 'react';
+import { useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import { getBrand } from '../../../apis/api';
 import { postImgAtom, postImgPreviewAtom, postTextAtom } from '../../../atom';
 import DotdotdotIcon from '../../../SvgIcons/DotdotdotIcon';
 import FaceBookS from '../../../SvgIcons/FaceBookS';
@@ -17,40 +16,42 @@ export default function PostModalRight({...props}) {
   const [postText, setPostText] = useRecoilState(postTextAtom);
   const [imgFile, setImgFile] = useRecoilState(postImgAtom);
   const [postImgPreview, setPostImgPreview] = useRecoilState(postImgPreviewAtom);
+  const {brandId} = useParams();
  
   const getPostText = (e) => {
     setPostText(e.target.value);
   };
 
   const handleImgFile = (e) => {
-    setImgFile(e.target.value);
-    console.log(imgFile)
+    console.log(e.target.files[0]);
+    setImgFile(e.target.files[0]);
     setPostImgPreview([]);
-    for(let i=0; i<e.target.value.length; i++){
-      if(e.target.value[i]){
-        const reader = new FileReader();
-        reader.readAsDataURL(e.target.files[i]);
-        reader.onloadend = () => {
-        const preview = reader.result;
-        if(preview){
-          const basePreview = preview.toString();
-          setPostImgPreview(imgPreview => [...imgPreview,basePreview])
-          }
-        }
-      }
-    }
+    // for(let i=0; i<e.target.value.length; i++){
+    //   if(e.target.value[i]){
+    //     const reader = new FileReader();
+    //     reader.readAsDataURL(e.target.files[i]);
+    //     reader.onloadend = () => {
+    //     const preview = reader.result;
+    //     if(preview){
+    //       const basePreview = preview.toString();
+    //       setPostImgPreview(imgPreview => [...imgPreview,basePreview])
+    //       }
+    //     }
+    //   }
+    // }
   }
-
-  const {data:brandData} = useQuery('brandId',getBrand);
  
   const brandImagePost = async (e) => {
     e.preventDefault()
-    const file = imgFile;
-    const fd = new FormData();
-    fd.append('file',file)
-    await axios.post(`api/brands/${brandData.result[2].id}/file`,fd,{headers:{"Content-Type": `multipart/form-data`}})
-    .then((response) => {
-      console.log(response)
+    const fd = new FormData()
+    fd.append('source',imgFile)
+    await axios({
+      method:'post',
+      url:`/api/brands/${brandId}/file`,
+      data:fd,
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
     })
   }
  
@@ -62,9 +63,11 @@ export default function PostModalRight({...props}) {
       twitterPost : false,
       postDate : new Date(),
       postNow : true,
-      image : [{imageId:0}]
+      image : [
+        {}
+      ]
     }
-    await axios.post(`api/brands/${brandData.result[2].id}/posts`, JSON.stringify(postData),{headers:{"Content-Type":`application/json`}})
+    await axios.post(`/api/brands/${brandId}/posts`, JSON.stringify(postData),{headers:{"Content-Type":`application/json`}})
     .then((response) => {
       console.log(response);
     })
@@ -72,7 +75,6 @@ export default function PostModalRight({...props}) {
       console.log(error);
       alert('게시에 오류가 발생하였습니다.');
     })
-
   }
 
   return (
@@ -116,7 +118,7 @@ export default function PostModalRight({...props}) {
           }
           <styled.FileUpload id='file' type='file' multiple onChange={handleImgFile}></styled.FileUpload>
         </styled.FileWrapper>
-        <button onClick={brandImagePost} type='submit'>이미지 전송</button>
+        <button onClick={brandImagePost}>이미지 전송</button>
       <styled.Line/>
 
       <styled.UploadTitle>업로드 날짜를 선택하세요.</styled.UploadTitle>

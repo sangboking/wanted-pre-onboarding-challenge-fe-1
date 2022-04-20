@@ -32,7 +32,6 @@ export const UserWrapper = styled.div`
   background-color:#3C4165;
   display:flex;
   align-items: center;
-  justify-content: center;
 `;
 
 export const UserWrapper2 = styled.div`
@@ -54,6 +53,7 @@ export const Circle = styled.div`
   justify-content: center;
   border-radius: 3rem;
   margin-right:.875rem;
+  margin-left: 1.875rem;
   border: solid 0.5px #fff;;
 `;
 

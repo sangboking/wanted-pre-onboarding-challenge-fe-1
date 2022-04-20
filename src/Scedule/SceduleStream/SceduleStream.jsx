@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useParams} from 'react-router-dom'
 import * as styled from './SceduleStream.style'
 import Sidebar from '../../Components/Sidebar/SideBar';
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -11,11 +11,11 @@ import PostingIcon from '../../SvgIcons/PostingIcon';
 import LeftBtnIcon from '../../SvgIcons/LeftBtnIcon';
 import RightBtnIcon from '../../SvgIcons/RightBtnIcon';
 import { useQuery } from 'react-query';
-import { getBrand, getFbPost } from '../../apis/api';
 import FaceBookS from '../../SvgIcons/FaceBookS';
 import InstaS from '../../SvgIcons/InstaS';
 import TwitS from '../../SvgIcons/TwitS';
 import { postImgPreviewAtom, postTextAtom } from '../../atom';
+import { getFbPost } from '../../apis/api';
 
 export default function SceduleStream() {
   const [postModal,setPostModal] = useRecoilState(postModalAtom);
@@ -23,6 +23,7 @@ export default function SceduleStream() {
   const sceduleColor = useRecoilValue(sceduleColorAtom);
   const sceduleMenuColor = useRecoilValue(sceduleMenuColorAtom);
   const [postText, setPostText] = useRecoilState(postTextAtom);
+  const {brandId} = useParams();
 
   const postModalClick = ()=>{
      setPostModal(!postModal);
@@ -38,22 +39,16 @@ export default function SceduleStream() {
   
   const prevMonth = () => {
     setMoment(getMoment.clone().subtract(1, 'month'))
-  }; //이전달 onClick 함수
+  }; 
 
   const nextMonth = () => {
     setMoment(getMoment.clone().add(1, 'month'))
-  }; //다음달 onClick 함수
+  }; 
 
-  const {data:brandInfo, isLoading:brandLoading} = useQuery('brandData', getBrand,{refetchInterval:100000});
-
-  const {data:fbPost, isLoading:fbPostLoading} = useQuery(['fbPostData',brandInfo?.result[2].id],
-    () => getFbPost(brandInfo?.result[2].id),
-    {
-      enabled:!!brandInfo?.result[2].id
-    });
+  const {data:fbPost, isLoading:fbPostLoading} = useQuery('fbPostData',
+    () => getFbPost(brandId)
+  );
   
-  const loading = brandLoading || fbPostLoading;
-
   return (
     <styled.Wrapper  postModal={postModal}>
       <Sidebar sceduleColor={sceduleColor} sceduleMenuColor={sceduleMenuColor}/>
@@ -65,9 +60,9 @@ export default function SceduleStream() {
           <PostModal/>
 
           <styled.Title>
-            <Link to='/sceduleWeek'><styled.Button2>Week</styled.Button2></Link>
-            <Link to='/sceduleMonth'><styled.Button2>Month</styled.Button2></Link>
-            <Link to='/sceduleStream'><styled.Button>Stream</styled.Button></Link>
+            <Link to={{pathname:`/sceduleWeek/${brandId}`}}><styled.Button2>Week</styled.Button2></Link>
+            <Link to={{pathname:`/sceduleMonth/${brandId}`}}><styled.Button2>Month</styled.Button2></Link>
+            <Link to={{pathname:`/sceduleStream/${brandId}`}}><styled.Button>Stream</styled.Button></Link>
 
             <styled.PrevIcon  onClick={()=>{prevMonth()}} style={{marginLeft:'1.875rem'}}><LeftBtnIcon/></styled.PrevIcon>
             <styled.NowDate>{today.format('YYYY년 M월')}</styled.NowDate>
@@ -81,10 +76,10 @@ export default function SceduleStream() {
 
           <styled.StreamWrapper>
             {
-              loading ? <h1>페이스북 게시글을 불러오는 중입니다..</h1> :
-                fbPost?.result.map((a,i) => {
+              fbPostLoading ? <h1>페이스북 게시글을 불러오는 중입니다..</h1> :
+                fbPost?.result.map((post,i) => {
                   return (
-                    <styled.StreamContentWrapper key={i}>
+                    <styled.StreamContentWrapper key={post}>
                       
                       <styled.StreamBox>
                         <styled.StreamBoxTitle>
@@ -97,7 +92,7 @@ export default function SceduleStream() {
                         </styled.StreamBoxTitle> 
 
                         <styled.StreamBoxFbPicture>1</styled.StreamBoxFbPicture>
-                        <styled.StreamBoxFbText>{loading ?<h1>로딩중 입니다.</h1>:fbPost?.result[i].content}</styled.StreamBoxFbText>
+                        <styled.StreamBoxFbText>{fbPostLoading ?<h1>로딩중 입니다.</h1>:fbPost?.result[post].content}</styled.StreamBoxFbText>
                       </styled.StreamBox>
                       
                       <styled.StreamNote>

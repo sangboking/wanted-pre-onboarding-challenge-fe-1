@@ -10,7 +10,6 @@ import { useQuery } from 'react-query';
 import { addBrand, fbLogin, getAccountInfo, getPageInfo, loadFbSdk, setFBAsyncInit } from '../../apis/api';
 
 
-
 const Home = () => {
   const [brandModal, setBrandModal] = useState(false);
   const [fbConnectComment, setFbConnectComment] = useState(false)
@@ -18,6 +17,11 @@ const Home = () => {
   const [brandTime, setBrandTime] = useState('');
   const [accessToken,setAccessToken] = useState('');
   const [userId, setUserId] = useState('');
+
+  useEffect(() => {
+    setFBAsyncInit();
+    loadFbSdk();
+  }, []); //facebook sdk 연결
   
   const brandOnclick = () => {
     setBrandModal(!brandModal);
@@ -27,19 +31,15 @@ const Home = () => {
     setBrandTime(e.target.value)
   }
 
-  useEffect(() => {
-    setFBAsyncInit();
-    loadFbSdk();
-  }, []); //facebook sdk 연결
-
   const { data:accoutInfoData, isLoading:accountLoading } = useQuery('accountInfo',getAccountInfo);
 
-  const {data:fbPageInfoData} = useQuery(['fbPageInfo',fbLogin],() => 
+  const {data:fbPageInfoData} = useQuery(['fbPageInfo'],() => 
     getPageInfo(userId,accessToken),
     {
-      enabled: !!fbLogin,
+
     }
-    ); 
+  ); 
+
 
     return (
       <styled.Wrapper>
@@ -64,7 +64,7 @@ const Home = () => {
 
         <styled.Line/>
 
-        <styled.BrandBoxWrapper>
+        <styled.BrandBoxWrapper style={{textDecoration:'none'}}>
           <HomeBrand brandModal={brandModal} brandOnclick={brandOnclick} ></HomeBrand>
         </styled.BrandBoxWrapper>
     

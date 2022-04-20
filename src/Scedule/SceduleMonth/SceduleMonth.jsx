@@ -3,7 +3,7 @@ import * as styled from './SceduleMonth.style'
 import Sidebar from '../../Components/Sidebar/SideBar';
 import { useRecoilState, useRecoilValue} from 'recoil';
 import { postModalAtom, sceduleColorAtom, sceduleMenuColorAtom } from '../SceduleAtoms';
-import {Link} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import MonthCalendar from '../MonthCalendar/MonthCalendar';
 import moment from 'moment';
 import LeftBtnIcon from '../../SvgIcons/LeftBtnIcon';
@@ -20,6 +20,7 @@ export default function SceduleMonth() {
   const [postImgPreview, setPostImgPreview] = useRecoilState(postImgPreviewAtom);
   const sceduleColor = useRecoilValue(sceduleColorAtom);
   const sceduleMenuColor = useRecoilValue(sceduleMenuColorAtom);
+  const {brandId} = useParams();
 
   const postModalClick = ()=>{
     setPostModal(!postModal);
@@ -41,6 +42,7 @@ export default function SceduleMonth() {
     setMoment(getMoment.clone().add(1, 'month'))
   }; //다음달 onClick 함수
 
+
   return (
     <styled.Wrapper  postModal={postModal}>
       <Sidebar sceduleColor={sceduleColor} sceduleMenuColor={sceduleMenuColor}/>
@@ -50,9 +52,9 @@ export default function SceduleMonth() {
 
         <styled.Content>
           <styled.Title>
-            <Link to='/sceduleWeek' style={{ textDecoration: 'none' }}><styled.Button2>Week</styled.Button2></Link>
-            <Link to='/sceduleMonth' style={{ textDecoration: 'none' }}><styled.Button>Month</styled.Button></Link>
-            <Link to='/sceduleStream'><styled.Button2>Stream</styled.Button2></Link>
+            <Link to={{pathname:`/sceduleWeek/${brandId}`}} style={{ textDecoration: 'none' }}><styled.Button2>Week</styled.Button2></Link>
+            <Link to={{pathname:`/sceduleMonth/${brandId}`}} style={{ textDecoration: 'none' }}><styled.Button>Month</styled.Button></Link>
+            <Link to={{pathname:`/sceduleStream/${brandId}`}}><styled.Button2>Stream</styled.Button2></Link>
 
             <styled.PrevIcon  onClick={()=>{prevMonth()}} style={{marginLeft:'1.875rem'}}><LeftBtnIcon/></styled.PrevIcon>
             <styled.NowDate>{today.format('YYYY년 M월')}</styled.NowDate>

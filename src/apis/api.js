@@ -33,7 +33,6 @@ export const loadFbSdk = () => {
 export const fbLogin = (setAccessToken,setUserId,setFbConnectComment) => {
   window.FB.login((response)=>{
     if(response.status === 'connected'){
-      console.log(response)
       setAccessToken(response.authResponse.accessToken);
       setUserId(response.authResponse.userID);
       setFbConnectComment(true);
@@ -44,14 +43,8 @@ export const fbLogin = (setAccessToken,setUserId,setFbConnectComment) => {
       console.log('사용자가 페이스북에 로그인하지 않았으므로 웹페에지에 로그인 했는지 알수 없습니다. 혹은 로그아웃 되었습니다.')
       setFbConnectComment(false);
     }
-  },{scope:'user_likes, pages_show_list, pages_manage_posts,pages_messaging'})
+  },{scope:'user_likes, pages_show_list, pages_manage_posts, pages_messaging, pages_read_engagement'})
 } 
-
-//페이스북 게시글 포스팅
-export const getFbPost = async (brandId) => {
-  const response = await fetch(`api/brands/${brandId}/posts`)
-  return response.json();
-}
 
 //페이스북 페이지 정보
 export const getPageInfo = async (userId,accessToken) => {
@@ -59,33 +52,45 @@ export const getPageInfo = async (userId,accessToken) => {
   return response.json();
 };
 
-//브랜드 정보 
-export const getBrand = async () => {
-  const response = await fetch('api/brands');
-  return response.json();
+//페이스북 페이지 게시글 가져오기
+export const getFbPost = (brandId) => {
+  return fetch(`/api/brands/${brandId}/posts`)
+  .then(response => response.json());
 }
 
 //사용자 정보
 export const getAccountInfo = async () => {
-  const response = await fetch('api/accounts')
+  const response = await fetch('/api/accounts')
   return response.json();
 }
 
-//브랜드 추가
+//브랜드 정보 
+export const getBrand = async () => {
+  const response = await fetch('/api/brands');
+  return response.json();
+}
+
+//브랜드 상세정보
+export const getDetailBrand = async (brandId) => {
+  const response = await fetch(`/api/brands/${brandId}`)
+  return response.json();
+}
+
+//브랜드 추가 && 소셜등록
 export const addBrand = async (brandName,brandTime,fbPageInfoData,setBrandModal,setFbConnectComment) => {
   const brandData = {
     brandName :brandName,
     timeZone :`Asia/${brandTime}`
   }
   try{
-    const response = await axios.post('api/brands',JSON.stringify(brandData),{headers:{"Content-Type":`application/json`}})
+    const response = await axios.post('/api/brands',JSON.stringify(brandData),{headers:{"Content-Type":`application/json`}})
     const facebookData = {
       pageId : fbPageInfoData.data[0].id ,
       pageName : fbPageInfoData.data[0].name,
       pageAccessToken : fbPageInfoData.data[0].access_token
     }
     const brandId = response.data.result.id
-    const response2 = await axios.post(`api/brands/${brandId}/FACEBOOK`,JSON.stringify(facebookData),{headers:{"Content-Type":`application/json`}})
+    const response2 = await axios.post(`/api/brands/${brandId}/FACEBOOK`,JSON.stringify(facebookData),{headers:{"Content-Type":`application/json`}})
     console.log(response2);
     setBrandModal(false);
     setFbConnectComment(false);

@@ -7,7 +7,8 @@ export const postTextAtom = atom({
 
 export const postImgAtom = atom({
   key:"postImg",
-  default:null
+  default:null,
+  dangerouslyAllowMutability: true
 })
 
 export const postImgPreviewAtom = atom({

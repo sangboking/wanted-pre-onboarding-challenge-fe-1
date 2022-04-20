@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import * as styled from './SceduleWeek.style'
 import Sidebar from '../../Components/Sidebar/SideBar';
-import {Link} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import {useRecoilState, useRecoilValue} from 'recoil';
 import {postModalAtom, sceduleMenuColorAtom} from '../SceduleAtoms';
 import { sceduleColorAtom } from '../SceduleAtoms';
@@ -20,11 +20,13 @@ export default function SceduleWeek() {
   const [postImgPreview, setPostImgPreview] = useRecoilState(postImgPreviewAtom);
   const sceduleColor = useRecoilValue(sceduleColorAtom);
   const sceduleMenuColor = useRecoilValue(sceduleMenuColorAtom);
+  
+  const {brandId} = useParams();
 
   // const timeOption = ["00","01","02","03","04","05","06","07","08","09","10",
   //               "11","12","13","14","15","16","17","18","19","20",
   //               "21","22","23","24"] //포스트 모달창 시간 배열
-  
+ 
   const postModalClick = ()=>{
     setPostModal(!postModal);
     setPostText('');
@@ -56,9 +58,9 @@ export default function SceduleWeek() {
 
         <styled.Content>
           <styled.Title>
-            <Link to='/sceduleWeek' style={{ textDecoration: 'none' }}><styled.Button>Week</styled.Button></Link>
-            <Link to='/sceduleMonth'style={{ textDecoration: 'none' }}><styled.Button2>Month</styled.Button2></Link>
-            <Link to='/sceduleStream'style={{ textDecoration: 'none' }}><styled.Button2>Stream</styled.Button2></Link>
+            <Link to={{pathname:`/sceduleWeek/${brandId}`}} style={{ textDecoration: 'none' }}><styled.Button>Week</styled.Button></Link>
+            <Link to={{pathname:`/sceduleMonth/${brandId}`}} style={{ textDecoration: 'none' }}><styled.Button2>Month</styled.Button2></Link>
+            <Link to={{pathname:`/sceduleStream/${brandId}`}} style={{ textDecoration: 'none' }}><styled.Button2>Stream</styled.Button2></Link>
 
             <styled.PrevIcon  onClick={()=>{prevWeek()}} style={{marginLeft:'1.875rem'}}><LeftBtnIcon/></styled.PrevIcon>
             <styled.NowDate>{startDate.format('M월D일')+endDate.format(' ~ M월D일')}</styled.NowDate>

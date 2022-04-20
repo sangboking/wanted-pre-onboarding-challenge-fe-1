@@ -39,14 +39,14 @@ const router = () => {
             <Route path="/joinout" element={<JoinOut/>}/>
 
             {/* Scedule */}
-            <Route path="/sceduleWeek" element={<SceduleWeek/>}/>
-            <Route path="/sceduleMonth" element={<SceduleMonth/>}/>
-            <Route path="/sceduleStream" element={<SceduleStream/>}/>
+            <Route path="/sceduleWeek/:brandId" element={<SceduleWeek/>}/>
+            <Route path="/sceduleMonth/:brandId" element={<SceduleMonth/>}/>
+            <Route path="/sceduleStream/:brandId" element={<SceduleStream/>}/>
 
             {/* Insight */}
-            <Route path='/insightFb' element={<InsightFb/>}></Route>
-            <Route path='/insightInsta' element={<InsightInsta/>}></Route>
-            <Route path='/insightTwit' element={<InsightTwit/>}></Route>
+            <Route path='/insightFb/:brandId' element={<InsightFb/>}></Route>
+            <Route path='/insightInsta/:brandId' element={<InsightInsta/>}></Route>
+            <Route path='/insightTwit/:brandId' element={<InsightTwit/>}></Route>
 
             {/* Inbox */}
             <Route path='/inboxMessage' element={<InboxMessage/>}></Route>

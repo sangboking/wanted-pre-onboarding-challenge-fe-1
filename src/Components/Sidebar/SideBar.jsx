@@ -6,9 +6,15 @@ import InboxIcon from '../../SvgIcons/InboxIcon';
 import SettingIcon from '../../SvgIcons/SettingIcon';
 import Interlock from '../../SvgIcons/Interlock'
 import LinkrLogoSvg from '../../SvgIcons/LinkrLogoSvg';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { getDetailBrand } from '../../apis/api';
+import { useQuery } from 'react-query';
 
 export default function Sidebar({...props}) {
+  const {brandId} = useParams();
+
+  getDetailBrand(brandId);
+  const {data,isLoading} = useQuery('detailBrandInfo', () => getDetailBrand(brandId));
   
   
   return (
@@ -20,18 +26,18 @@ export default function Sidebar({...props}) {
 
           <styled.UserWrapper>
             <styled.Circle>R</styled.Circle>
-            <styled.UserName>Round design</styled.UserName>
+            {isLoading ? null : <styled.UserName>{data.result.brandName}</styled.UserName>}
           </styled.UserWrapper>
 
           <styled.MenuWrapper>
-            <Link to='/sceduleWeek' style={{ textDecoration: 'none' }}>
+            <Link to={{pathname:`/sceduleWeek/${brandId}`}} style={{ textDecoration: 'none' }}>
               <styled.WeekMenu sceduleColor={props.sceduleColor}>
                 <styled.IconWrapper><SceduleIcon width={20} height={20}/></styled.IconWrapper>
                 <styled.SceduleMenuName sceduleMenuColor={props.sceduleMenuColor}>스케줄</styled.SceduleMenuName>
               </styled.WeekMenu>
             </Link>
 
-            <Link to='/insightFb' style={{ textDecoration: 'none' }}>
+            <Link to={{pathname:`/insightFb/${brandId}`}} style={{ textDecoration: 'none' }}>
               <styled.InsightMenu insightColor={props.insightColor}>
                 <styled.IconWrapper><InsightIcon width={20} height={20}/></styled.IconWrapper>
                 <styled.InsightMenuName insightMenuColor={props.insightMenuColor}>인사이트</styled.InsightMenuName>

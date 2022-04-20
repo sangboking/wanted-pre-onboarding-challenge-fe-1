@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useParams,Link } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import DotIcon from '../../SvgIcons/DotIcon';
 import FaceBookS from '../../SvgIcons/FaceBookS';
@@ -38,26 +38,30 @@ export default function HomeBrand({...props}) {
           brandInfo.result.length === 0 && <PlusBrand/>
         }
         {
-          brandInfo.result.map((a,i) => {
+          brandInfo.result.map((brand,i) => {
             return(
-                <styled.ConnectBox key={i} onClick={navigateScedule}>
-                  <styled.ConnectHeader>
-                    <styled.ConnectCircle>{brandInfo.result[i].brandName.slice(0,1)}</styled.ConnectCircle>
-                    <styled.ConnectInfoWrapper>
-                      
-                      <styled.NameTimeWrapper>
-                        <styled.ConnectName>{brandInfo.result[i].brandName}</styled.ConnectName>
-                        <styled.ConnectTime>서울</styled.ConnectTime>
-                      </styled.NameTimeWrapper>
-                      <styled.ConnectSnsWrapper>
-                        {brandInfo?.result[i].faceBookConnectedId ? <styled.SnsIcon><FaceBookS width={16} height={16}/></styled.SnsIcon> : <styled.SnsIcon><FaceBookSoff width={16} height={16}/></styled.SnsIcon>}
-                        {brandInfo?.result[i].instagramConnectedId ?<styled.SnsIcon><InstaS width={16} height={16}/></styled.SnsIcon> :<styled.SnsIcon><InstaSoff width={16} height={16}/></styled.SnsIcon>}
-                        {brandInfo?.result[i].twitterConnectedId ? <styled.SnsIcon><TwitS width={16} height={16}/></styled.SnsIcon>:<styled.SnsIcon><TwitSoff width={16} height={16}/></styled.SnsIcon>}
-                      </styled.ConnectSnsWrapper>
+                <Link to={{
+                  pathname:`sceduleWeek/${brand.id}`
+                }} key={brand.id} style={{textDecoration:'none'}}>
+                  <styled.ConnectBox>
+                    <styled.ConnectHeader>
+                      <styled.ConnectCircle >{brandInfo.result[i].brandName.slice(0,1)}</styled.ConnectCircle>
+                      <styled.ConnectInfoWrapper>
+                        
+                        <styled.NameTimeWrapper>
+                          <styled.ConnectName>{brandInfo.result[i].brandName}</styled.ConnectName>
+                          <styled.ConnectTime>서울</styled.ConnectTime>
+                        </styled.NameTimeWrapper>
+                        <styled.ConnectSnsWrapper>
+                          {brandInfo?.result[i].faceBookConnectedId ? <styled.SnsIcon><FaceBookS width={16} height={16}/></styled.SnsIcon> : <styled.SnsIcon><FaceBookSoff width={16} height={16}/></styled.SnsIcon>}
+                          {brandInfo?.result[i].instagramConnectedId ?<styled.SnsIcon><InstaS width={16} height={16}/></styled.SnsIcon> :<styled.SnsIcon><InstaSoff width={16} height={16}/></styled.SnsIcon>}
+                          {brandInfo?.result[i].twitterConnectedId ? <styled.SnsIcon><TwitS width={16} height={16}/></styled.SnsIcon>:<styled.SnsIcon><TwitSoff width={16} height={16}/></styled.SnsIcon>}
+                        </styled.ConnectSnsWrapper>
 
-                    </styled.ConnectInfoWrapper>
-                  </styled.ConnectHeader>
-                </styled.ConnectBox>
+                      </styled.ConnectInfoWrapper>
+                    </styled.ConnectHeader>
+                  </styled.ConnectBox>
+                </Link>
             )
           })
         }
