@@ -93,7 +93,7 @@ const Home = () => {
             <styled.RightContent>
               <styled.RightTitleWrapper>
                 <styled.RightTitle>SNS 계정 연동</styled.RightTitle>
-                <styled.RightSpan>*선택항목 | 브랜드 생성 후 마이페이지에서 연동이 가능합니다.</styled.RightSpan>
+                <styled.RightSpan>*선택항목</styled.RightSpan>
               </styled.RightTitleWrapper>
               <styled.RightButton onClick={() => {fbLogin(setAccessToken,setUserId,setFbConnectComment)}}>
                 <FaceBookS/>

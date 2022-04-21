@@ -1,8 +1,8 @@
 import React from 'react'
 
-export default function DotdotdotIcon() {
+export default function DotdotdotIcon(props) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="46" height="33" viewBox="0 0 46 33">
+    <svg xmlns="http://www.w3.org/2000/svg" width="46" height="33" viewBox="0 0 46 33" {...props}>
       <g id="그룹_3576" data-name="그룹 3576" transform="translate(-672 -946)">
         <rect id="사각형_2157" data-name="사각형 2157" width="46" height="33" transform="translate(672 946)" fill="#fff" opacity="0"/>
         <circle id="타원_418" data-name="타원 418" cx="2" cy="2" r="2" transform="translate(693 961)" fill="#444"/>

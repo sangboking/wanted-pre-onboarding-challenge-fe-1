@@ -97,10 +97,12 @@ export const TextIconWrapper = styled.div`
 export const LocationIconWrapper = styled.div`
   display: flex;;
   margin-left: .4rem;
+  cursor: pointer;
 `;
 
 export const SmileIconWrapper = styled.div`
   margin-right:.4rem;
+  cursor: pointer;
 `;
 
 export const ImgTitle = styled.h1`
@@ -126,6 +128,49 @@ export const FileWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  position:relative;
+`;
+
+export const ImgUl = styled.ul`
+  position: absolute;
+  top:1rem;
+  left:1rem;
+`;
+
+export const ImgLi = styled.li`
+  margin-top:.3rem;
+  display: flex;
+  align-items: center;
+`;
+
+export const ImgName = styled.span`
+  font-size: 0.938rem;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.3px;
+  color: #191919;
+  margin-right:1.5rem;
+`;
+
+export const ImgVolume = styled.span`
+  font-size: 0.85rem;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.3px;
+  color: gray;
+  margin-right:1.5rem;
+`;
+
+export const ImgIconWrapper = styled.div`
+  margin-right: .5rem;
+`;
+
+export const XIconWrapper = styled.div`
+  cursor: pointer;
 `;
 
 export const FileTitle = styled.h1`

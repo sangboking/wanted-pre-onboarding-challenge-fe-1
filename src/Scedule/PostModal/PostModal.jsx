@@ -1,21 +1,23 @@
 import React, { useState } from 'react'
 import * as styled from './PostModal.style'
-import { useRecoilState} from 'recoil';
+import { useRecoilState, useSetRecoilState} from 'recoil';
 import {postModalAtom} from '../SceduleAtoms';
 import FbPostModal from '../../Components/PostModal/FbPostModal/FbPostModal';
 import InstaPostModal from '../../Components/PostModal/InstaPostModal/InstaPostModal';
 import TwitPostModal from '../../Components/PostModal/TwitPostModal/TwitPostModal'
 import PostModalRight from '../../Components/PostModal/PostModalRight/PostModalRight';
-import { postImgPreviewAtom } from '../../atom';
+import { postImgAtom, postImgPreviewAtom } from '../../atom';
 
 export default function PostModal() {
   const [postModal,setPostModal] = useRecoilState(postModalAtom);
   const [tabState, setTabState] = useState(1);
-  const [postImgPreview, setPostImgPreview] = useRecoilState(postImgPreviewAtom);
+  const setPostImgPreview = useSetRecoilState(postImgPreviewAtom);
+  const setPostImg = useSetRecoilState(postImgAtom);
 
   const postModalClick = ()=>{
     setPostModal(!postModal);
     setPostImgPreview(null);
+    setPostImg(null);
   }
   
 

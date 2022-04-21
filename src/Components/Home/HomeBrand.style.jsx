@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const BrandBox = styled.div`
-  width:23.75rem;
+  width:24rem;
   height: 14.063rem;
   border-radius: 15px;
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
@@ -24,8 +24,6 @@ export const ConnectBox = styled.div`
 
 export const ConnectHeader = styled.div`
   display: flex;
-  align-items: center;
-  margin-top: 1.875rem;
   margin-left: 1.875rem;
 `;
 
@@ -57,6 +55,7 @@ export const ConnectInfoWrapper = styled.div`
 export const NameTimeWrapper = styled.div`
   display: flex;
   align-items: center;
+  margin-top:1.875rem;
 `;
 
 export const ConnectName = styled.h1`
@@ -72,7 +71,7 @@ export const ConnectName = styled.h1`
 
 export const ConnectTime = styled.h1`
   font-size: 0.875rem;
-  font-weight: normal;
+  font-weight: 300;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
@@ -84,7 +83,22 @@ export const ConnectTime = styled.h1`
 
 export const ConnectSnsWrapper = styled.div`
   display: flex;
-  margin-top:.313rem;
+  margin-top:.563rem;
+`;
+
+export const ConnectBotWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-left: 1.875rem;
+  margin-top:5rem;
+`;
+
+export const ConnectBotUserWrapper = styled.div`
+  display: flex;
+`;
+
+export const DotIconWrapper = styled.div`
+  margin-right: 1.875rem;
 `;
 
 export const SnsIcon = styled.div`

@@ -9,42 +9,54 @@ import InstaS from '../../../SvgIcons/InstaS';
 import LocationIcon from '../../../SvgIcons/LocationIcon';
 import SmileIcon from '../../../SvgIcons/SmileIcon';
 import TwitS from '../../../SvgIcons/TwitS';
+import ImgIcon from '../../../SvgIcons/ImgIcon';
+import ImgXIcon from '../../../SvgIcons/ImgXIcon';
 import * as styled from './PostModalRight.style';
+import { changeBytes } from '../../../actions/action';
 
 export default function PostModalRight({...props}) {
-  
   const [postText, setPostText] = useRecoilState(postTextAtom);
   const [imgFile, setImgFile] = useRecoilState(postImgAtom);
   const [postImgPreview, setPostImgPreview] = useRecoilState(postImgPreviewAtom);
   const {brandId} = useParams();
- 
+
   const getPostText = (e) => {
     setPostText(e.target.value);
   };
 
-  const handleImgFile = (e) => {
-    console.log(e.target.files[0]);
-    setImgFile(e.target.files[0]);
+  const deleteImg = (e) => {
+    const filterImg = imgFile.filter((item,index)=> index !==e);
+    const filterPreviewImg = postImgPreview.filter((item,index)=> index !==e);
+    setImgFile(filterImg);
+    setPostImgPreview(filterPreviewImg);
+  }
+
+  const uploadFile = (e) => {
+    const imgArr = Array.from(e.target.files);
+    setImgFile(imgArr);
+    console.log(imgArr);
     setPostImgPreview([]);
-    // for(let i=0; i<e.target.value.length; i++){
-    //   if(e.target.value[i]){
-    //     const reader = new FileReader();
-    //     reader.readAsDataURL(e.target.files[i]);
-    //     reader.onloadend = () => {
-    //     const preview = reader.result;
-    //     if(preview){
-    //       const basePreview = preview.toString();
-    //       setPostImgPreview(imgPreview => [...imgPreview,basePreview])
-    //       }
-    //     }
-    //   }
-    // }
+    for(let i=0; i<e.target.value.length; i++){
+      if(e.target.files[i]){
+        const reader = new FileReader();
+        reader.readAsDataURL(e.target.files[i]);
+        reader.onloadend = () => {
+        const preview = reader.result;
+        if(preview){
+          const basePreview = preview.toString();
+          setPostImgPreview(imgPreview => [...imgPreview,basePreview])
+          }
+        }
+      }
+    }
   }
  
   const brandImagePost = async (e) => {
     e.preventDefault()
     const fd = new FormData()
-    fd.append('source',imgFile)
+    imgFile.map((img,index) => {
+      fd.append('source',img)
+    })
     await axios({
       method:'post',
       url:`/api/brands/${brandId}/file`,
@@ -76,7 +88,7 @@ export default function PostModalRight({...props}) {
       alert('게시에 오류가 발생하였습니다.');
     })
   }
-
+ 
   return (
     <styled.RightPostBox>
                
@@ -116,7 +128,25 @@ export default function PostModalRight({...props}) {
           {
             postImgPreview ? null : <styled.FileLabel htmlFor='file'>직접 업로드</styled.FileLabel>
           }
-          <styled.FileUpload id='file' type='file' multiple onChange={handleImgFile}></styled.FileUpload>
+          {
+            imgFile ? 
+            <styled.ImgUl>
+              {
+                imgFile.map((a,i) => 
+                  <styled.ImgLi key={i}>
+                    <styled.ImgIconWrapper>
+                      <ImgIcon width={13} height={13}/>
+                    </styled.ImgIconWrapper>
+                    <styled.ImgName>{a.name}</styled.ImgName>
+                    <styled.ImgVolume>{changeBytes(a.size)}</styled.ImgVolume>
+                    <styled.XIconWrapper onClick={() => deleteImg(i)}><ImgXIcon width={8} height={8}/></styled.XIconWrapper>
+                  </styled.ImgLi>
+                )
+              }
+            </styled.ImgUl>
+            :null
+          }
+          <styled.FileUpload id='file' type='file' multiple onChange={uploadFile}></styled.FileUpload>
         </styled.FileWrapper>
         <button onClick={brandImagePost}>이미지 전송</button>
       <styled.Line/>

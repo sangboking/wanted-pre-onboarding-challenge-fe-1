@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import {Link, useParams} from 'react-router-dom'
 import * as styled from './SceduleStream.style'
 import Sidebar from '../../Components/Sidebar/SideBar';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { postModalAtom, sceduleColorAtom, sceduleMenuColorAtom } from '../SceduleAtoms';
 import moment from 'moment';
 import PostModal from '../PostModal/PostModal';
@@ -14,21 +14,23 @@ import { useQuery } from 'react-query';
 import FaceBookS from '../../SvgIcons/FaceBookS';
 import InstaS from '../../SvgIcons/InstaS';
 import TwitS from '../../SvgIcons/TwitS';
-import { postImgPreviewAtom, postTextAtom } from '../../atom';
+import { postImgAtom, postImgPreviewAtom, postTextAtom } from '../../atom';
 import { getFbPost } from '../../apis/api';
 
 export default function SceduleStream() {
   const [postModal,setPostModal] = useRecoilState(postModalAtom);
-  const [postImgPreview, setPostImgPreview] = useRecoilState(postImgPreviewAtom);
+  const setPostImgPreview = useSetRecoilState(postImgPreviewAtom);
+  const setPostImg = useSetRecoilState(postImgAtom);
+  const setPostText = useSetRecoilState(postTextAtom);
   const sceduleColor = useRecoilValue(sceduleColorAtom);
   const sceduleMenuColor = useRecoilValue(sceduleMenuColorAtom);
-  const [postText, setPostText] = useRecoilState(postTextAtom);
   const {brandId} = useParams();
 
   const postModalClick = ()=>{
-     setPostModal(!postModal);
-     setPostText('');
-     setPostImgPreview(null);
+    setPostModal(!postModal);
+    setPostText('');
+    setPostImgPreview(null);
+    setPostImg(null);
   }
 
   const [getMoment,setMoment] = useState(moment());

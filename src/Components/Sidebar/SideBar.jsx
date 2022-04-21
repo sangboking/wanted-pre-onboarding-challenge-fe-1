@@ -13,7 +13,6 @@ import { useQuery } from 'react-query';
 export default function Sidebar({...props}) {
   const {brandId} = useParams();
 
-  getDetailBrand(brandId);
   const {data,isLoading} = useQuery('detailBrandInfo', () => getDetailBrand(brandId),
   {
     refetchOnWindowFocus : false,
@@ -70,7 +69,7 @@ export default function Sidebar({...props}) {
               </Link>
 
               <styled.UserWrapper2>
-                <styled.Circle>R</styled.Circle>
+                <styled.Circle style={{marginLeft:'0'}}>R</styled.Circle>
                 <styled.UserName style={{fontSize:'.938rem'}}>KANG DA</styled.UserName>
               </styled.UserWrapper2>
             </styled.SettingWrapper>

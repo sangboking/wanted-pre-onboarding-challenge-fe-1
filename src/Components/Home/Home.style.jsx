@@ -197,15 +197,16 @@ export const LeftTitleWrapper = styled.div`
   display:flex ;
   align-items:center ;
   margin-bottom:.7rem;
+  margin-left: .625rem;
 `;
 
 export const LeftTitle = styled.h3`
-  font-size: 0.875rem;
+  font-size: 0.938rem;
   font-weight: 500;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
-  letter-spacing: normal;
+  letter-spacing: -0.3px;
   text-align: left;
   color: #191919;
   margin-right:.625rem ;
@@ -290,15 +291,16 @@ export const RightTitleWrapper = styled.div`
   display:flex ;
   align-items:center ;
   margin-bottom:.8rem;
+  margin-left: .625rem;
 `;
 
 export const RightTitle = styled.h3`
-  font-size: 0.875rem;
+  font-size: 0.938rem;
   font-weight: 500;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
-  letter-spacing: normal;
+  letter-spacing: -0.3px;
   text-align: left;
   color: #191919;
   margin-right:.625rem;

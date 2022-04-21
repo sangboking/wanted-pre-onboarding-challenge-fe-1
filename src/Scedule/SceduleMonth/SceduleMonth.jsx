@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import * as styled from './SceduleMonth.style'
 import Sidebar from '../../Components/Sidebar/SideBar';
-import { useRecoilState, useRecoilValue} from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState} from 'recoil';
 import { postModalAtom, sceduleColorAtom, sceduleMenuColorAtom } from '../SceduleAtoms';
 import {Link, useParams} from 'react-router-dom';
 import MonthCalendar from '../MonthCalendar/MonthCalendar';
@@ -11,13 +11,14 @@ import RightBtnIcon from '../../SvgIcons/RightBtnIcon';
 import PostModal from '../PostModal/PostModal';
 import CloseIcon from '../../SvgIcons/CloseIcon';
 import PostingIcon from '../../SvgIcons/PostingIcon';
-import { postImgPreviewAtom, postTextAtom } from '../../atom';
+import { postImgAtom, postImgPreviewAtom, postTextAtom } from '../../atom';
 
 export default function SceduleMonth() {
-
+  const [getMoment, setMoment] = useState(moment());
   const [postModal,setPostModal] = useRecoilState(postModalAtom);
-  const [postText, setPostText] = useRecoilState(postTextAtom);
-  const [postImgPreview, setPostImgPreview] = useRecoilState(postImgPreviewAtom);
+  const setPostText = useSetRecoilState(postTextAtom);
+  const setPostImgPreview= useSetRecoilState(postImgPreviewAtom);
+  const setPostImg = useSetRecoilState(postImgAtom);
   const sceduleColor = useRecoilValue(sceduleColorAtom);
   const sceduleMenuColor = useRecoilValue(sceduleMenuColorAtom);
   const {brandId} = useParams();
@@ -26,13 +27,12 @@ export default function SceduleMonth() {
     setPostModal(!postModal);
     setPostText('');
     setPostImgPreview(null);
-  }
+    setPostImg(null);
+  };
 
-  const [getMoment, setMoment] = useState(moment());
   const today = getMoment;
   const firstWeek = today.clone().startOf('month').week();
   const lastWeek = today.clone().endOf('month').week() === 1?53:today.clone().endOf('month').week();
-
 
   const prevMonth = () => {
     setMoment(getMoment.clone().subtract(1, 'month'))
