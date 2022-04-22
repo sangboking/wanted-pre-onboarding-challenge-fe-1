@@ -30,12 +30,12 @@ export const loadFbSdk = () => {
 }
 
 //페이스북 로그인
-export const fbLogin = (setAccessToken,setUserId,setFbConnectComment) => {
+export const fbLogin = (setFbConnectComment,setPageAccessToken,setPageUserId,setPageName) => {
   window.FB.login((response)=>{
     if(response.status === 'connected'){
-      setAccessToken(response.authResponse.accessToken);
-      setUserId(response.authResponse.userID);
+      console.log(response);
       setFbConnectComment(true);
+      return getPageInfo(response.authResponse.userID,response.authResponse.accessToken,setPageAccessToken,setPageUserId,setPageName)
     }
     else if(response.status === 'not_authorized'){
       console.log('사용자가 페이스북에 로그인했지만 웹에서는 로그인하지 않았습니다.')
@@ -47,9 +47,16 @@ export const fbLogin = (setAccessToken,setUserId,setFbConnectComment) => {
 } 
 
 //페이스북 페이지 정보
-export const getPageInfo = async (userId,accessToken) => {
-  const response = await fetch(`https://graph.facebook.com/${userId}/accounts?access_token=${accessToken}`)
-  return response.json();
+export const getPageInfo = async (userId,accessToken,setPageAccessToken,setPageId,setPageName) => {
+  // const response = await fetch(`https://graph.facebook.com/${userId}/accounts?access_token=${accessToken}`)
+  // return response.json();
+  axios.get(`https://graph.facebook.com/${userId}/accounts?access_token=${accessToken}`)
+  .then((response) => {
+    console.log(response)
+    setPageAccessToken(response.data.data[0].access_token);
+    setPageId(response.data.data[0].id);
+    setPageName(response.data.data[0].name);
+  })
 };
 
 //페이스북 페이지 게시글 가져오기
@@ -77,7 +84,7 @@ export const getDetailBrand = async (brandId) => {
 }
 
 //브랜드 추가 && 소셜등록
-export const addBrand = async (brandName,brandTime,fbPageInfoData,setBrandModal,setFbConnectComment) => {
+export const addBrand = async (brandName,brandTime,pageAccessToken,pageId,pageName,setBrandModal,setFbConnectComment) => {
   const brandData = {
     brandName :brandName,
     timeZone :`Asia/${brandTime}`
@@ -85,9 +92,9 @@ export const addBrand = async (brandName,brandTime,fbPageInfoData,setBrandModal,
   try{
     const response = await axios.post('/api/brands',JSON.stringify(brandData),{headers:{"Content-Type":`application/json`}})
     const facebookData = {
-      pageId : fbPageInfoData.data[0].id ,
-      pageName : fbPageInfoData.data[0].name,
-      pageAccessToken : fbPageInfoData.data[0].access_token
+      pageId : pageId,
+      pageName : pageName,
+      pageAccessToken : pageAccessToken
     }
     const brandId = response.data.result.id
     const response2 = await axios.post(`/api/brands/${brandId}/FACEBOOK`,JSON.stringify(facebookData),{headers:{"Content-Type":`application/json`}})
@@ -97,6 +104,26 @@ export const addBrand = async (brandName,brandTime,fbPageInfoData,setBrandModal,
   }catch(error){
     console.log(error);
   }
+}
+
+//twitter setup
+export const setTwitInit = () => {
+  window.twttr = (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0],
+      t = window.twttr || {};
+    if (d.getElementById(id)) return t;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "https://platform.twitter.com/widgets.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  
+    t._e = [];
+    t.ready = function(f) {
+      t._e.push(f);
+    };
+  
+    return t;
+  }(document, "script", "twitter-wjs"));
 }
 
 

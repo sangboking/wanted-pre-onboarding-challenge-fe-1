@@ -7,7 +7,9 @@ import TwitS from '../../SvgIcons/TwitS';
 import RightArrowIcon from '../../SvgIcons/RightArrowIcon';
 import LinkrLogoNavy from '../../SvgIcons/LinkrLogoNavy';
 import { useQuery } from 'react-query';
-import { addBrand, fbLogin, getAccountInfo, getPageInfo, loadFbSdk, setFBAsyncInit } from '../../apis/api';
+import { addBrand, fbLogin, getAccountInfo, loadFbSdk, setFBAsyncInit, setTwitInit } from '../../apis/api';
+import Twit from './Twit';
+
 
 
 const Home = () => {
@@ -15,12 +17,14 @@ const Home = () => {
   const [fbConnectComment, setFbConnectComment] = useState(false)
   const [brandName, setBrandName] = useState('');
   const [brandTime, setBrandTime] = useState('');
-  const [accessToken,setAccessToken] = useState('');
-  const [userId, setUserId] = useState('');
+  const [pageAccessToken,setPageAccessToken] = useState('');
+  const [pageId, setPageId] = useState('');
+  const [pageName, setPageName] = useState('');
 
   useEffect(() => {
     setFBAsyncInit();
     loadFbSdk();
+    setTwitInit();
   }, []); //facebook sdk 연결
   
   const brandOnclick = () => {
@@ -31,17 +35,7 @@ const Home = () => {
     setBrandTime(e.target.value)
   }
 
-  const { data:accoutInfoData, isLoading:accountLoading } = useQuery('accountInfo',getAccountInfo,
-  {
-    refetchOnWindowFocus: false,
-  });
-
-  
-  const { data:fbPageInfoData } = useQuery('fbPageInfo', () => getPageInfo(userId,accessToken),
-  {
-    refetchOnWindowFocus : false,
-  }); 
-
+  const { data:accoutInfoData, isLoading:accountLoading,  } = useQuery('accountInfo',getAccountInfo);
 
     return (
       <styled.Wrapper>
@@ -95,7 +89,7 @@ const Home = () => {
                 <styled.RightTitle>SNS 계정 연동</styled.RightTitle>
                 <styled.RightSpan>*선택항목</styled.RightSpan>
               </styled.RightTitleWrapper>
-              <styled.RightButton onClick={() => {fbLogin(setAccessToken,setUserId,setFbConnectComment)}}>
+              <styled.RightButton onClick={() => {fbLogin(setFbConnectComment,setPageAccessToken,setPageId,setPageName)}}>
                 <FaceBookS/>
                 <styled.ButtonSpan>
                   {
@@ -116,11 +110,12 @@ const Home = () => {
 
           <styled.ModalButtonWrapper>
             <styled.CancelButton onClick={brandOnclick}>취소</styled.CancelButton>
-            <styled.CreateButton onClick={() => {addBrand(brandName,brandTime,fbPageInfoData,setBrandModal,setFbConnectComment)}}>생성하기</styled.CreateButton>
+            <styled.CreateButton onClick={() => {addBrand(brandName,brandTime,pageAccessToken,pageId,pageName,setBrandModal,setFbConnectComment)}}>생성하기</styled.CreateButton>
           </styled.ModalButtonWrapper>
         </styled.BrandModal>
         : null
         }
+        <Twit />
       </styled.Wrapper>
     );
 };

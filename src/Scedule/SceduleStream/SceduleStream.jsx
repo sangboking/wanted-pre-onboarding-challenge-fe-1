@@ -16,6 +16,7 @@ import InstaS from '../../SvgIcons/InstaS';
 import TwitS from '../../SvgIcons/TwitS';
 import { postImgAtom, postImgPreviewAtom, postTextAtom } from '../../atom';
 import { getFbPost } from '../../apis/api';
+import DotdotdotIcon from '../../SvgIcons/DotdotdotIcon';
 
 export default function SceduleStream() {
   const [postModal,setPostModal] = useRecoilState(postModalAtom);
@@ -37,8 +38,6 @@ export default function SceduleStream() {
 
   const today = getMoment;
 
-  const todayTime = today.format('YYYY년 M월 D일 h:mm');
-  
   const prevMonth = () => {
     setMoment(getMoment.clone().subtract(1, 'month'))
   }; 
@@ -49,9 +48,14 @@ export default function SceduleStream() {
 
   const {data:fbPost, isLoading:fbPostLoading} = useQuery('fbPostData', () => getFbPost(brandId),
     {
-      refetchOnWindowFocus : false,
+      
     }
   );
+  console.log(fbPost)
+  const date = new Date('2022-04-22T05:32:07.853767')
+  console.log(date.getFullYear())
+  console.log(date.getMonth())
+ 
   
   return (
     <styled.Wrapper  postModal={postModal}>
@@ -83,7 +87,7 @@ export default function SceduleStream() {
               fbPostLoading ? <h1>페이스북 게시글을 불러오는 중입니다..</h1> :
                 fbPost?.result.map((post,i) => {
                   return (
-                    <styled.StreamContentWrapper key={post}>
+                    <styled.StreamContentWrapper key={i}>
                       
                       <styled.StreamBox>
                         <styled.StreamBoxTitle>
@@ -92,17 +96,24 @@ export default function SceduleStream() {
                             <styled.StreamSnsIcon><InstaS/></styled.StreamSnsIcon>
                             <styled.StreamSnsIcon><TwitS/></styled.StreamSnsIcon>
                           </styled.StreamBoxTitleIcon>
-                          <styled.StreamBoxDate>{todayTime}<styled.StreamButton>수정</styled.StreamButton></styled.StreamBoxDate>
+                          <styled.StreamBoxDate>
+                            {
+                            `${new Date(post.postDate).getFullYear()}년 ${new Date(post.postDate).getMonth()+1}월 ${new Date(post.postDate).getDate()}일 ${new Date(post.postDate).getHours()}:${new Date(post.postDate).getMinutes()}`
+                            }
+                            <styled.StreamIcon>
+                              <DotdotdotIcon width={30} height={30}/>
+                            </styled.StreamIcon>
+                          </styled.StreamBoxDate>
                         </styled.StreamBoxTitle> 
 
-                        <styled.StreamBoxFbPicture>1</styled.StreamBoxFbPicture>
-                        <styled.StreamBoxFbText>{fbPostLoading ?<h1>로딩중 입니다.</h1>:fbPost?.result[post].content}</styled.StreamBoxFbText>
+                        <styled.StreamBoxFbPicture></styled.StreamBoxFbPicture>
+                        <styled.StreamBoxFbText>{fbPostLoading ?<h1>로딩중 입니다.</h1>:post.content}</styled.StreamBoxFbText>
                       </styled.StreamBox>
                       
                       <styled.StreamNote>
                         <styled.NoteWrapper>
-                          <styled.NoteTopLeft>Note</styled.NoteTopLeft>
-                          <styled.NoteTopRight>History</styled.NoteTopRight>
+                          <styled.NoteTopLeft>NOTE</styled.NoteTopLeft>
+                          <styled.NoteTopRight>HISTORY</styled.NoteTopRight>
                         </styled.NoteWrapper>
                         
                         <styled.NoteBottomWrapper placeholder='노트를 입력하고 엔터를 누르세요.'>

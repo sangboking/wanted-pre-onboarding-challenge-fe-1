@@ -16,7 +16,7 @@ export default function HomeBrand({...props}) {
   
   const {data:brandInfo,isLoading} = useQuery('brandInfo', getBrand, 
   {
-    refetchOnWindowFocus: false,
+    
   });
 
   function PlusBrand(){

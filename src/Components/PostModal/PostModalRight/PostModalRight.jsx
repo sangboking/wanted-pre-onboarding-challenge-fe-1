@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { postImgAtom, postImgPreviewAtom, postTextAtom } from '../../../atom';
@@ -18,6 +18,7 @@ export default function PostModalRight({...props}) {
   const [postText, setPostText] = useRecoilState(postTextAtom);
   const [imgFile, setImgFile] = useRecoilState(postImgAtom);
   const [postImgPreview, setPostImgPreview] = useRecoilState(postImgPreviewAtom);
+  const [imgInfo, setImgInfo] = useState([]);
   const {brandId} = useParams();
 
   const getPostText = (e) => {
@@ -51,7 +52,7 @@ export default function PostModalRight({...props}) {
     }
   }
  
-  const brandImagePost = async (e) => {
+  const brandImageUpload = async (e) => {
     e.preventDefault()
     const fd = new FormData()
     imgFile.map((img,index) => {
@@ -65,6 +66,10 @@ export default function PostModalRight({...props}) {
         'Content-Type': 'multipart/form-data'
       }
     })
+    .then((response) => {
+      console.log(response);
+      setImgInfo(response.data.result)
+    })
   }
  
   const fbPost = async () => {
@@ -75,9 +80,7 @@ export default function PostModalRight({...props}) {
       twitterPost : false,
       postDate : new Date(),
       postNow : true,
-      image : [
-        {}
-      ]
+      image : imgInfo
     }
     await axios.post(`/api/brands/${brandId}/posts`, JSON.stringify(postData),{headers:{"Content-Type":`application/json`}})
     .then((response) => {
@@ -148,7 +151,7 @@ export default function PostModalRight({...props}) {
           }
           <styled.FileUpload id='file' type='file' multiple onChange={uploadFile}></styled.FileUpload>
         </styled.FileWrapper>
-        <button onClick={brandImagePost}>이미지 전송</button>
+        <button onClick={brandImageUpload}>이미지 전송</button>
       <styled.Line/>
 
       <styled.UploadTitle>업로드 날짜를 선택하세요.</styled.UploadTitle>

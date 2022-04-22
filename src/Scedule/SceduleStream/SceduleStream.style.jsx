@@ -169,8 +169,8 @@ export const StreamBoxTitle = styled.div`
 
 export const StreamBoxFbPicture = styled.div`
   width:100%;
-  height:34.375rem;
-  background-color: pink;
+  height:32.7rem;
+  border-bottom: .1px solid #e4e4e4;
 `;
 
 export const StreamBoxFbText = styled.div`
@@ -208,21 +208,8 @@ export const StreamBoxDate = styled.h1`
   margin-right:1.625rem;
 `;
 
-export const StreamButton = styled.button`
-  width:2.875rem;
-  height:1.5rem ;
-  border-radius: 4px;
-  border:1px solid #f4f4f4;
-  background-color: #f4f4f4;
-  font-size: 0.688rem;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  text-align: center;
-  color: #333;
-  margin-left:1rem;
+export const StreamIcon = styled.div`
+  margin-left:2.563rem;
   cursor: pointer;
 `;
 
@@ -282,7 +269,7 @@ export const NoteTopRight = styled.div`
 
 export const NoteBottomWrapper = styled.div`
   resize: none;
-  height:5.844rem;
+  height:5.875rem;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   padding:.813rem;
