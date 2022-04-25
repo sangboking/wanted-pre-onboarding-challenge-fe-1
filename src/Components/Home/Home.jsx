@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import * as styled from './Home.style';
 import HomeBrand from './HomeBrand';
 import FaceBookS from '../../SvgIcons/FaceBookS';
@@ -7,19 +7,28 @@ import TwitS from '../../SvgIcons/TwitS';
 import RightArrowIcon from '../../SvgIcons/RightArrowIcon';
 import LinkrLogoNavy from '../../SvgIcons/LinkrLogoNavy';
 import { useQuery } from 'react-query';
-import { addBrand, fbLogin, getAccountInfo, loadFbSdk, setFBAsyncInit, setTwitInit } from '../../apis/api';
-import Twit from './Twit';
-
+import { addBrand, fbLogin, getAccountInfo, loadFbSdk, setFBAsyncInit, setTwitInit} from '../../apis/api';
+import { LoginSocialTwitter } from 'reactjs-social-login';
+import Example from '../Example';
 
 
 const Home = () => {
   const [brandModal, setBrandModal] = useState(false);
-  const [fbConnectComment, setFbConnectComment] = useState(false)
+  const [fbConnectComment, setFbConnectComment] = useState(false);
+  const [twitConnectComment, setTwitConnectComment] = useState(false);
   const [brandName, setBrandName] = useState('');
   const [brandTime, setBrandTime] = useState('');
   const [pageAccessToken,setPageAccessToken] = useState('');
   const [pageId, setPageId] = useState('');
   const [pageName, setPageName] = useState('');
+  const [twitOuathToken, setTwitOuathToken] = useState();
+  const [twitOauthSecret, setTwitOauthSecret] = useState();
+  const [twitUserId, setTwitUserId] = useState();
+  const [twitScreenName, setTwitScreenName] = useState();
+  const twitterRef = useRef(null); 
+  const [provider, setProvider] = useState('')
+  const [profile, setProfile] = useState()
+
 
   useEffect(() => {
     setFBAsyncInit();
@@ -37,6 +46,21 @@ const Home = () => {
 
   const { data:accoutInfoData, isLoading:accountLoading,  } = useQuery('accountInfo',getAccountInfo);
 
+  const onLoginStart = useCallback(() => {
+    alert('login start')
+  }, [])
+
+  const onLogoutFailure = useCallback(() => {
+    alert('logout fail')
+  }, [])
+
+  const onLogoutSuccess = useCallback(() => {
+    setProfile(null)
+    setProvider('')
+    alert('logout success')
+  }, [])
+
+  
     return (
       <styled.Wrapper>
         <styled.Header>
@@ -104,18 +128,51 @@ const Home = () => {
               </styled.RightButton>
 
               <styled.RightButton><InstaS/><styled.ButtonSpan>인스타그램 비지니스 계정 연동</styled.ButtonSpan><styled.RightArrow><RightArrowIcon width={12} height={12}/></styled.RightArrow></styled.RightButton>
-              <styled.RightButton><TwitS/><styled.ButtonSpan>트위터 프로필 연동</styled.ButtonSpan><styled.RightArrow><RightArrowIcon width={12} height={12}/></styled.RightArrow></styled.RightButton>
+              
+              <LoginSocialTwitter
+                ref={twitterRef}
+                client_id={process.env.REACT_APP_TWITTER_API_KEY}
+                client_secret={process.env.REACT_APP_TWITTER_APP_SECRET}
+                redirect_uri='https://localhost:3000'
+                onLoginStart={onLoginStart}
+                onLogoutSuccess={onLogoutSuccess}
+                onReject={(err) => console.log(err)}
+                onResolve={({ provider, data }) => {
+                  setProfile(data)
+                  console.log(data);
+                  setTwitOuathToken(data.oauth_token);
+                  setTwitOauthSecret(data.oauth_token_secret);
+                  setTwitUserId(data.user_id);
+                  setTwitScreenName(data.screen_name);
+                  setTwitConnectComment(true);
+                }}
+              >            
+                <styled.RightButton>
+                  <TwitS/>
+                  <styled.ButtonSpan>
+                    {
+                      twitConnectComment
+                      ?'트위터 프로필 연동완료'
+                      :'트위터 프로필 연동'
+                    }
+                  </styled.ButtonSpan>
+                  <styled.RightArrow>
+                    <RightArrowIcon width={12} height={12}/>
+                  </styled.RightArrow>
+                </styled.RightButton>
+              </LoginSocialTwitter>
+
             </styled.RightContent>
           </styled.ModalContentWrapper>
 
           <styled.ModalButtonWrapper>
             <styled.CancelButton onClick={brandOnclick}>취소</styled.CancelButton>
-            <styled.CreateButton onClick={() => {addBrand(brandName,brandTime,pageAccessToken,pageId,pageName,setBrandModal,setFbConnectComment)}}>생성하기</styled.CreateButton>
+            <styled.CreateButton onClick={() => {addBrand(brandName,brandTime,pageAccessToken,pageId,pageName,setBrandModal,setFbConnectComment,twitOuathToken,twitOauthSecret,twitScreenName,twitUserId,setTwitConnectComment)}}>생성하기</styled.CreateButton>
           </styled.ModalButtonWrapper>
         </styled.BrandModal>
         : null
         }
-        <Twit />
+        <Example />
       </styled.Wrapper>
     );
 };

@@ -84,7 +84,7 @@ export const getDetailBrand = async (brandId) => {
 }
 
 //브랜드 추가 && 소셜등록
-export const addBrand = async (brandName,brandTime,pageAccessToken,pageId,pageName,setBrandModal,setFbConnectComment) => {
+export const addBrand = async (brandName,brandTime,pageAccessToken,pageId,pageName,setBrandModal,setFbConnectComment,twitOuathToken,twitOauthSecret,twitScreenName,twitUserId,setTwitConnectComment) => {
   const brandData = {
     brandName :brandName,
     timeZone :`Asia/${brandTime}`
@@ -96,11 +96,28 @@ export const addBrand = async (brandName,brandTime,pageAccessToken,pageId,pageNa
       pageName : pageName,
       pageAccessToken : pageAccessToken
     }
+    const twitData = {
+      oauthToken : twitOuathToken,
+      oauthSecret : twitOauthSecret,
+      userId : twitUserId,
+      screenName : twitScreenName
+    }
     const brandId = response.data.result.id
-    const response2 = await axios.post(`/api/brands/${brandId}/FACEBOOK`,JSON.stringify(facebookData),{headers:{"Content-Type":`application/json`}})
-    console.log(response2);
-    setBrandModal(false);
-    setFbConnectComment(false);
+    if(facebookData.pageId){
+      const addFacebook = await axios.post(`/api/brands/${brandId}/FACEBOOK`,JSON.stringify(facebookData),{headers:{"Content-Type":`application/json`}})
+      console.log(addFacebook);
+      setBrandModal(false);
+      setFbConnectComment(false);
+    }
+
+    if(twitData.oauthToken){
+      const addTwit = await axios.post(`/api/brands/${brandId}/TWITTER`,JSON.stringify(twitData),{headers:{"Content-Type":`application/json`}})
+      console.log(addTwit);
+      setTwitConnectComment(false);
+      setBrandModal(false);
+    }
+    
+   
   }catch(error){
     console.log(error);
   }
