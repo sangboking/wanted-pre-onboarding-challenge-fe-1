@@ -133,6 +133,9 @@ export const Posth1 = styled.h1`
   line-height: normal;
   letter-spacing: normal;
   color: #191919;
+  @media screen and (max-width:1440px){
+   font-size:.8rem;
+  }
 `;
 
 export const StreamWrapper = styled.div`
