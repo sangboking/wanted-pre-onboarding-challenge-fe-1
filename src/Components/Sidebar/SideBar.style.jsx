@@ -9,7 +9,7 @@ export const SideBarWrapper = styled.div`
 export const SideBar = styled.div`
   width:15rem;
   height:100vh;
-  background-color: #262b53;
+  background-color:${props => props.theme.navyColor};
   border-top-right-radius: 50px 50px;
   border-right: 2px solid #ece7ef;;
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);

@@ -15,3 +15,4 @@ export const postImgPreviewAtom = atom({
   key:"postImgPreview",
   default:[]
 })
+

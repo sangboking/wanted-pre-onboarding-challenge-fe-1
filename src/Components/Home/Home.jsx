@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as styled from './Home.style';
 import HomeBrand from './HomeBrand';
 import FaceBookS from '../../SvgIcons/FaceBookS';
@@ -7,10 +7,9 @@ import TwitS from '../../SvgIcons/TwitS';
 import RightArrowIcon from '../../SvgIcons/RightArrowIcon';
 import LinkrLogoNavy from '../../SvgIcons/LinkrLogoNavy';
 import { useQuery } from 'react-query';
-import { addBrand, fbLogin, getAccountInfo, loadFbSdk, setFBAsyncInit, setTwitInit} from '../../apis/api';
+import { addBrand, fbLogin, getAccountInfo, loadFbSdk, setFBAsyncInit } from '../../apis/api';
 import { LoginSocialTwitter } from 'reactjs-social-login';
 import Example from '../Example';
-
 
 const Home = () => {
   const [brandModal, setBrandModal] = useState(false);
@@ -25,15 +24,12 @@ const Home = () => {
   const [twitOauthSecret, setTwitOauthSecret] = useState();
   const [twitUserId, setTwitUserId] = useState();
   const [twitScreenName, setTwitScreenName] = useState();
-  const twitterRef = useRef(null); 
-  const [provider, setProvider] = useState('')
-  const [profile, setProfile] = useState()
-
-
+ 
+  const REDIRECT_URI = 'https://localhost:3000'
+ 
   useEffect(() => {
     setFBAsyncInit();
     loadFbSdk();
-    setTwitInit();
   }, []); //facebook sdk 연결
   
   const brandOnclick = () => {
@@ -46,21 +42,6 @@ const Home = () => {
 
   const { data:accoutInfoData, isLoading:accountLoading,  } = useQuery('accountInfo',getAccountInfo);
 
-  const onLoginStart = useCallback(() => {
-    alert('login start')
-  }, [])
-
-  const onLogoutFailure = useCallback(() => {
-    alert('logout fail')
-  }, [])
-
-  const onLogoutSuccess = useCallback(() => {
-    setProfile(null)
-    setProvider('')
-    alert('logout success')
-  }, [])
-
-  
     return (
       <styled.Wrapper>
         <styled.Header>
@@ -89,7 +70,7 @@ const Home = () => {
         </styled.BrandBoxWrapper>
     
         {
-          brandModal ?
+          brandModal &&
           <styled.BrandModal>
           <styled.ModalTitle>Create brand</styled.ModalTitle>
           <styled.ModalIntro>어서오세요! 브랜드를 생성해볼까요?</styled.ModalIntro>
@@ -129,38 +110,37 @@ const Home = () => {
 
               <styled.RightButton><InstaS/><styled.ButtonSpan>인스타그램 비지니스 계정 연동</styled.ButtonSpan><styled.RightArrow><RightArrowIcon width={12} height={12}/></styled.RightArrow></styled.RightButton>
               
-              <LoginSocialTwitter
-                ref={twitterRef}
-                client_id={process.env.REACT_APP_TWITTER_API_KEY}
-                client_secret={process.env.REACT_APP_TWITTER_APP_SECRET}
-                redirect_uri='https://localhost:3000'
-                onLoginStart={onLoginStart}
-                onLogoutSuccess={onLogoutSuccess}
-                onReject={(err) => console.log(err)}
-                onResolve={({ provider, data }) => {
-                  setProfile(data)
-                  console.log(data);
-                  setTwitOuathToken(data.oauth_token);
-                  setTwitOauthSecret(data.oauth_token_secret);
-                  setTwitUserId(data.user_id);
-                  setTwitScreenName(data.screen_name);
-                  setTwitConnectComment(true);
-                }}
-              >            
-                <styled.RightButton>
-                  <TwitS/>
-                  <styled.ButtonSpan>
-                    {
-                      twitConnectComment
-                      ?'트위터 프로필 연동완료'
-                      :'트위터 프로필 연동'
-                    }
-                  </styled.ButtonSpan>
-                  <styled.RightArrow>
-                    <RightArrowIcon width={12} height={12}/>
-                  </styled.RightArrow>
-                </styled.RightButton>
-              </LoginSocialTwitter>
+              <>
+                <LoginSocialTwitter
+                  client_id={process.env.REACT_APP_TWITTER_API_KEY}
+                  client_secret={process.env.REACT_APP_TWITTER_APP_SECRET}
+                  redirect_uri={REDIRECT_URI}
+                  onReject={(err) => console.log(err)}
+                  onResolve={({ provider, data }) => {
+                    console.log(data);
+                    setTwitOuathToken(data.oauth_token);
+                    setTwitOauthSecret(data.oauth_token_secret);
+                    setTwitUserId(data.user_id);
+                    setTwitScreenName(data.screen_name);
+                    setTwitConnectComment(true);
+                  }}
+                >            
+                  <styled.RightButton>
+                    <TwitS/>
+                    <styled.ButtonSpan>
+                      {
+                        twitConnectComment
+                        ?'트위터 프로필 연동완료'
+                        :'트위터 프로필 연동'
+                      }
+                    </styled.ButtonSpan>
+                    <styled.RightArrow>
+                      <RightArrowIcon width={12} height={12}/>
+                    </styled.RightArrow>
+                  </styled.RightButton>
+                </LoginSocialTwitter>
+              </>
+             
 
             </styled.RightContent>
           </styled.ModalContentWrapper>
@@ -170,9 +150,10 @@ const Home = () => {
             <styled.CreateButton onClick={() => {addBrand(brandName,brandTime,pageAccessToken,pageId,pageName,setBrandModal,setFbConnectComment,twitOuathToken,twitOauthSecret,twitScreenName,twitUserId,setTwitConnectComment)}}>생성하기</styled.CreateButton>
           </styled.ModalButtonWrapper>
         </styled.BrandModal>
-        : null
         }
+
         <Example />
+        
       </styled.Wrapper>
     );
 };

@@ -72,8 +72,8 @@ export const Button = styled.button`
   width:6rem;
   height: 2.18rem;;
   border-radius: 10px;
-  background-color:#262b53;
-  border:1px solid #262b53;
+  background-color:${props => props.theme.navyColor};
+  border:1px solid ${props => props.theme.navyColor};
   font-size: 0.938rem;
   font-weight: normal;
   font-stretch: normal;

@@ -10,13 +10,14 @@ import CloseIcon from '../../SvgIcons/CloseIcon';
 import PostingIcon from '../../SvgIcons/PostingIcon';
 import LeftBtnIcon from '../../SvgIcons/LeftBtnIcon';
 import RightBtnIcon from '../../SvgIcons/RightBtnIcon';
-import { useQuery } from 'react-query';
 import FaceBookS from '../../SvgIcons/FaceBookS';
 import InstaS from '../../SvgIcons/InstaS';
 import TwitS from '../../SvgIcons/TwitS';
+import DotdotdotIcon from '../../SvgIcons/DotdotdotIcon';
+import { useQuery } from 'react-query';
 import { postImgAtom, postImgPreviewAtom, postTextAtom } from '../../atom';
 import { getFbPost } from '../../apis/api';
-import DotdotdotIcon from '../../SvgIcons/DotdotdotIcon';
+
 
 export default function SceduleStream() {
   const [postModal,setPostModal] = useRecoilState(postModalAtom);
@@ -26,6 +27,7 @@ export default function SceduleStream() {
   const sceduleColor = useRecoilValue(sceduleColorAtom);
   const sceduleMenuColor = useRecoilValue(sceduleMenuColorAtom);
   const {brandId} = useParams();
+ 
 
   const postModalClick = ()=>{
     setPostModal(!postModal);
@@ -52,10 +54,6 @@ export default function SceduleStream() {
     }
   );
   console.log(fbPost)
-  const date = new Date('2022-04-22T05:32:07.853767')
-  console.log(date.getFullYear())
-  console.log(date.getMonth())
- 
   
   return (
     <styled.Wrapper  postModal={postModal}>
@@ -106,7 +104,9 @@ export default function SceduleStream() {
                           </styled.StreamBoxDate>
                         </styled.StreamBoxTitle> 
 
-                        <styled.StreamBoxFbPicture></styled.StreamBoxFbPicture>
+                        <styled.StreamBoxFbPicture>
+                          {/* 이미지 공간 */}
+                        </styled.StreamBoxFbPicture>
                         <styled.StreamBoxFbText>{fbPostLoading ?<h1>로딩중 입니다.</h1>:post.content}</styled.StreamBoxFbText>
                       </styled.StreamBox>
                       

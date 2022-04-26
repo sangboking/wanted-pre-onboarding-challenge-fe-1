@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import FaceBookLogo from '../../../SvgIcons/FaceBookLogo';
 import FaceBookS from '../../../SvgIcons/FaceBookS';
 import InstaSoff from '../../../SvgIcons/InstaSoff';
@@ -8,13 +8,15 @@ import CommentIcon from '../../../SvgIcons/CommentIcon';
 import ShareIcon from '../../../SvgIcons/ShareIcon';
 import CautionIcon from '../../../SvgIcons/CautionIcon';
 import * as styled from './FbPostModal.style';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { postImgPreviewAtom, postTextAtom } from '../../../atom';
+import CautionModal from '../../CautionModal/CautionModal';
 
 
 export default function FbPostModal({...props}) { 
   const postText = useRecoilValue(postTextAtom);
-  const [postImgPreview, setPostImgPreview] = useRecoilState(postImgPreviewAtom);
+  const postImgPreview = useRecoilValue(postImgPreviewAtom);
+  const [cautionModal, setCautionModal] = useState(false);
   
   return (
     <styled.LeftPostBox>
@@ -75,7 +77,15 @@ export default function FbPostModal({...props}) {
 
       <styled.CautionWrapper>
         <CautionIcon/>
-        <styled.CautionIntro>채널별 유의사항 확인하기.</styled.CautionIntro>
+        <styled.CautionIntro
+          onMouseEnter={() => {setCautionModal(true)}} 
+          onMouseLeave={() => {setCautionModal(false)}}
+        >
+            채널별 유의사항 확인하기.
+            {cautionModal && 
+              <CautionModal />
+            }
+        </styled.CautionIntro>
       </styled.CautionWrapper>
     </styled.LeftPostBox>
   )

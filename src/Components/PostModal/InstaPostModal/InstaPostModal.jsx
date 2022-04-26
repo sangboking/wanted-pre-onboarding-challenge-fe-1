@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import FaceBookSoff from '../../../SvgIcons/FaceBookSoff';
 import InstaS from '../../../SvgIcons/InstaS';
 import TwitSoff from '../../../SvgIcons/TwitSoff';
@@ -11,9 +11,11 @@ import ExportIcon from '../../../SvgIcons/ExportIcon';
 import BookMarkIcon from '../../../SvgIcons/BookMarkIcon';
 import { useRecoilValue } from 'recoil';
 import { postTextAtom } from '../../../atom';
+import CautionModal from '../../CautionModal/CautionModal';
 
 export default function InstaPostModal(props) {
   const postText = useRecoilValue(postTextAtom);
+  const [cautionModal, setCautionModal] = useState(false);
 
   return (
     <styled.LeftPostBox>
@@ -54,7 +56,14 @@ export default function InstaPostModal(props) {
 
       <styled.CautionWrapper>
         <CautionIcon/>
-        <styled.CautionIntro>채널별 유의사항 확인하기.</styled.CautionIntro>
+        <styled.CautionIntro
+          onMouseEnter={() => {setCautionModal(true)}} 
+          onMouseLeave={() => {setCautionModal(false)}}
+        >채널별 유의사항 확인하기.
+         {cautionModal && 
+          <CautionModal />
+         }
+        </styled.CautionIntro>
       </styled.CautionWrapper>
     </styled.LeftPostBox>
   )

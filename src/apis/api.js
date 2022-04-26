@@ -1,5 +1,6 @@
 import axios from "axios";
 
+
 //페이스북 linkr-app 연결
 export const setFBAsyncInit = () => {
   window.fbAsyncInit = () => {
@@ -90,7 +91,8 @@ export const addBrand = async (brandName,brandTime,pageAccessToken,pageId,pageNa
     timeZone :`Asia/${brandTime}`
   }
   try{
-    const response = await axios.post('/api/brands',JSON.stringify(brandData),{headers:{"Content-Type":`application/json`}})
+    const response = await axios.post('/api/brands',JSON.stringify(brandData),{headers:{"Content-Type":`application/json`}});
+    setBrandModal(false);
     const facebookData = {
       pageId : pageId,
       pageName : pageName,
@@ -117,30 +119,8 @@ export const addBrand = async (brandName,brandTime,pageAccessToken,pageId,pageNa
       setBrandModal(false);
     }
     
-   
   }catch(error){
     console.log(error);
   }
 }
-
-//twitter setup
-export const setTwitInit = () => {
-  window.twttr = (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0],
-      t = window.twttr || {};
-    if (d.getElementById(id)) return t;
-    js = d.createElement(s);
-    js.id = id;
-    js.src = "https://platform.twitter.com/widgets.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  
-    t._e = [];
-    t.ready = function(f) {
-      t._e.push(f);
-    };
-  
-    return t;
-  }(document, "script", "twitter-wjs"));
-}
-
 

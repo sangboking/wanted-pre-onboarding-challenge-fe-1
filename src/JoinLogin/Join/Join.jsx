@@ -108,7 +108,7 @@ export default function Join()  {
       birthDay : `${getValues('year')}-${getValues('month')}-${getValues('day')}`
     }
 
-    if(emailVerified === true){
+    if(emailVerified && getValues('checkbox1') && getValues('checkbox2')){
       console.log(JSON.stringify(data));
       await axios.post(`/api/accounts`,JSON.stringify(data),{headers:{"Content-Type":`application/json`}})
       .then((response) => {
@@ -124,7 +124,7 @@ export default function Join()  {
     return (
       <styled.Wrapper>
         {
-          joinModal ? 
+          joinModal &&
           <styled.JoinCompleteBack>
             <styled.JoinCompletBox>
               <styled.JoinBox>회원가입이 완료되었습니다!</styled.JoinBox>
@@ -133,17 +133,15 @@ export default function Join()  {
               </Link>
             </styled.JoinCompletBox> 
           </styled.JoinCompleteBack>
-          : null
         }
         {
-          overlapModal ? 
+          overlapModal && 
           <styled.JoinCompleteBack>
             <styled.JoinCompletBox>
               <styled.JoinBox>이미 가입된 계정입니다.</styled.JoinBox>
               <styled.JoinButton2 onClick={()=>{setOverlapModal(false)}}>확인</styled.JoinButton2>
             </styled.JoinCompletBox> 
           </styled.JoinCompleteBack>
-          : null
         }
 
         <styled.LayOut>
@@ -280,11 +278,3 @@ export default function Join()  {
     );
 };
 
-
-
-
-
-
-//1.이메일 작성후 인증번호 발송 => 이메일 backend로 전송
-//2.전송된 이메일 code값 backend에서 받아오기 => 이때 받아온 code가 사용자가 입력한 인증번호와 같을시 하단에 인증이 완료되었습니다 메세지 주기
-//3.그후 밑 사용자 정보 모두 입력후 전체 정보가 기입되고 가입하기 누르면 backend로 사용자 정보 보내고 로그인하기 모달창 띄우기 => 회원가입 완료

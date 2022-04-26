@@ -166,4 +166,5 @@ export const CautionIntro = styled.h1`
   text-align: left;
   color: #676767;
   margin-left:.3rem;
+  position: relative;
 `;

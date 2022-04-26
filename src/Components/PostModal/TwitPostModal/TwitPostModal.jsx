@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import FaceBookSoff from '../../../SvgIcons/FaceBookSoff';
 import CautionIcon from '../../../SvgIcons/CautionIcon';
 import * as styled from './TwitPostModal.style';
@@ -11,9 +11,11 @@ import { postTextAtom } from '../../../atom';
 import ReloadTwitIcon from '../../../SvgIcons/ReloadTwitIcon';
 import HeartTwitIcon from '../../../SvgIcons/HeartTwitIcon';
 import ShareTwitIcon from '../../../SvgIcons/ShareTwitIcon';
+import CautionModal from '../../CautionModal/CautionModal';
 
 export default function TwitPostModal({...props}) {
   const postText = useRecoilValue(postTextAtom);
+  const [cautionModal, setCautionModal] = useState(false);
 
   return (
     <styled.LeftPostBox>
@@ -53,7 +55,14 @@ export default function TwitPostModal({...props}) {
 
       <styled.CautionWrapper>
         <CautionIcon/>
-        <styled.CautionIntro>채널별 유의사항 확인하기.</styled.CautionIntro>
+        <styled.CautionIntro
+          onMouseEnter={() => {setCautionModal(true)}} 
+          onMouseLeave={() => {setCautionModal(false)}}
+        >채널별 유의사항 확인하기.
+         {cautionModal && 
+          <CautionModal />
+         }
+        </styled.CautionIntro>
       </styled.CautionWrapper>
     </styled.LeftPostBox>
   )
