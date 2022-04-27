@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { postImgAtom, postImgPreviewAtom, postTextAtom } from '../../../atom';
@@ -18,7 +18,6 @@ export default function PostModalRight({...props}) {
   const [postText, setPostText] = useRecoilState(postTextAtom);
   const [imgFile, setImgFile] = useRecoilState(postImgAtom);
   const [postImgPreview, setPostImgPreview] = useRecoilState(postImgPreviewAtom);
-  const [imgInfo, setImgInfo] = useState([]);
   const {brandId} = useParams();
 
   const getPostText = (e) => {
@@ -30,7 +29,7 @@ export default function PostModalRight({...props}) {
     const filterPreviewImg = postImgPreview.filter((item,index)=> index !==e);
     setImgFile(filterImg);
     setPostImgPreview(filterPreviewImg);
-  }
+  };
 
   const uploadFile = (e) => {
     const imgArr = Array.from(e.target.files);
@@ -50,29 +49,28 @@ export default function PostModalRight({...props}) {
         }
       }
     }
-  }
- 
-  const brandImageUpload = async (e) => {
-    e.preventDefault()
-    const fd = new FormData()
-    imgFile.map((img,index) => {
-      fd.append('source',img)
-    })
-    await axios({
-      method:'post',
-      url:`/api/brands/${brandId}/file`,
-      data:fd,
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    })
-    .then((response) => {
-      console.log(response);
-      setImgInfo(response.data.result)
-    })
-  }
+  };
  
   const fbPost = async () => {
+    var imgInfo ;
+    if(imgFile ?? false){
+      const fd = new FormData()
+      imgFile.map((img,index) => {
+        fd.append('source',img)
+      })
+      await axios({
+        method:'post',
+        url:`/api/brands/${brandId}/file`,
+        data:fd,
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      .then((response) => {
+        console.log(response);
+        imgInfo = response.data.result
+      })
+    }
     const postData = {
       content : postText,
       facebookPost : true,
@@ -84,13 +82,14 @@ export default function PostModalRight({...props}) {
     }
     await axios.post(`/api/brands/${brandId}/posts`, JSON.stringify(postData),{headers:{"Content-Type":`application/json`}})
     .then((response) => {
-      console.log(response);
+      console.log(response)
+      alert('페이스북에 게시글이 게시되었습니다.')
     })
     .catch((error) => {
       console.log(error);
       alert('게시에 오류가 발생하였습니다.');
     })
-  }
+  };
  
   return (
     <styled.RightPostBox>
@@ -151,7 +150,6 @@ export default function PostModalRight({...props}) {
           }
           <styled.FileUpload id='file' type='file' multiple onChange={uploadFile}></styled.FileUpload>
         </styled.FileWrapper>
-        <button onClick={brandImageUpload}>이미지 전송</button>
       <styled.Line/>
 
       <styled.UploadTitle>업로드 날짜를 선택하세요.</styled.UploadTitle>

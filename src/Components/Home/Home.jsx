@@ -25,8 +25,6 @@ const Home = () => {
   const [twitUserId, setTwitUserId] = useState();
   const [twitScreenName, setTwitScreenName] = useState();
  
-  const REDIRECT_URI = 'https://localhost:3000'
- 
   useEffect(() => {
     setFBAsyncInit();
     loadFbSdk();
@@ -114,7 +112,7 @@ const Home = () => {
                 <LoginSocialTwitter
                   client_id={process.env.REACT_APP_TWITTER_API_KEY}
                   client_secret={process.env.REACT_APP_TWITTER_APP_SECRET}
-                  redirect_uri={REDIRECT_URI}
+                  redirect_uri={process.env.REACT_APP_DOMAIN}
                   onReject={(err) => console.log(err)}
                   onResolve={({ provider, data }) => {
                     console.log(data);

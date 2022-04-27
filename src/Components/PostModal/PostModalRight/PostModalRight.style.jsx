@@ -25,7 +25,7 @@ export const UserProfileImage = styled.div`
   width:2.25rem;
   height:2.25rem;
   border-radius: 15px;
-  border:1px solid red;
+  border:1px solid #eaeaea;
   display: flex;
   align-items: center;
   justify-content: center;
