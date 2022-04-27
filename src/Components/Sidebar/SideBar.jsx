@@ -9,8 +9,11 @@ import LinkrLogoSvg from '../../SvgIcons/LinkrLogoSvg';
 import { Link, useParams } from 'react-router-dom';
 import { getDetailBrand } from '../../apis/api';
 import { useQuery } from 'react-query';
+import { useRecoilValue } from 'recoil';
+import { postModalAtom } from '../../Scedule/SceduleAtoms';
 
 export default function Sidebar({...props}) {
+  const postModal = useRecoilValue(postModalAtom);
   const {brandId} = useParams();
 
   const {data,isLoading} = useQuery('detailBrandInfo', () => getDetailBrand(brandId),
@@ -20,7 +23,7 @@ export default function Sidebar({...props}) {
   
   
   return (
-      <styled.SideBarWrapper>
+      <styled.SideBarWrapper postModal={postModal}>
         <styled.SideBar>
           <styled.LogoWrapper>
             <Link to='/'><LinkrLogoSvg/></Link>

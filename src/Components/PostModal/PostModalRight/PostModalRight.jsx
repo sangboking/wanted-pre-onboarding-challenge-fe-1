@@ -2,7 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import { postImgAtom, postImgPreviewAtom, postTextAtom } from '../../../atom';
+import { loadingAtom, postImgAtom, postImgPreviewAtom, postTextAtom } from '../../../atom';
 import DotdotdotIcon from '../../../SvgIcons/DotdotdotIcon';
 import FaceBookS from '../../../SvgIcons/FaceBookS';
 import InstaS from '../../../SvgIcons/InstaS';
@@ -18,6 +18,7 @@ export default function PostModalRight({...props}) {
   const [postText, setPostText] = useRecoilState(postTextAtom);
   const [imgFile, setImgFile] = useRecoilState(postImgAtom);
   const [postImgPreview, setPostImgPreview] = useRecoilState(postImgPreviewAtom);
+  const [loading, setLoading] = useRecoilState(loadingAtom);
   const {brandId} = useParams();
 
   const getPostText = (e) => {
@@ -52,6 +53,7 @@ export default function PostModalRight({...props}) {
   };
  
   const fbPost = async () => {
+    setLoading(true);
     var imgInfo ;
     if(imgFile ?? false){
       const fd = new FormData()
@@ -83,6 +85,7 @@ export default function PostModalRight({...props}) {
     await axios.post(`/api/brands/${brandId}/posts`, JSON.stringify(postData),{headers:{"Content-Type":`application/json`}})
     .then((response) => {
       console.log(response)
+      setLoading(false);
       alert('페이스북에 게시글이 게시되었습니다.')
     })
     .catch((error) => {

@@ -4,6 +4,7 @@ export const SideBarWrapper = styled.div`
   width:15rem;
   height:100vh;
   position:fixed ;
+  background-color: ${props => props.postModal ? 'rgba(0,0,0,.6)': '#f5f6f8'};
 `;
 
 export const SideBar = styled.div`

@@ -39,3 +39,14 @@ export const VerticalLine = styled.div`
   margin-right:1.625rem;
 `;
 
+export const LoadingWrapper = styled.div`
+  position: absolute;
+  top:23rem;
+  left:26rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 20;
+`;
+
