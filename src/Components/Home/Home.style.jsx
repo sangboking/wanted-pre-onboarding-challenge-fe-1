@@ -29,6 +29,7 @@ export const LogoWrapper = styled.div`
 
 export const HeaderRight = styled.div`
   display: flex;
+  align-items: center;
 `;
 
 export const NamedIdWrapper = styled.div`
@@ -37,7 +38,7 @@ export const NamedIdWrapper = styled.div`
   text-align:right;
   justify-content: center;
   margin-right:.5rem;
-  margin-top:1rem;
+  margin-top:.6rem;
 `;
 
 export const Name = styled.span`

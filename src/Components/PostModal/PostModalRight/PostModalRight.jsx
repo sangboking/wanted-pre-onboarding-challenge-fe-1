@@ -1,7 +1,9 @@
 import axios from 'axios';
+import { ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { loadingAtom, postImgAtom, postImgPreviewAtom, postTextAtom } from '../../../atom';
 import DotdotdotIcon from '../../../SvgIcons/DotdotdotIcon';
 import FaceBookS from '../../../SvgIcons/FaceBookS';
@@ -18,7 +20,7 @@ export default function PostModalRight({...props}) {
   const [postText, setPostText] = useRecoilState(postTextAtom);
   const [imgFile, setImgFile] = useRecoilState(postImgAtom);
   const [postImgPreview, setPostImgPreview] = useRecoilState(postImgPreviewAtom);
-  const [loading, setLoading] = useRecoilState(loadingAtom);
+  const setLoading = useSetRecoilState(loadingAtom);
   const {brandId} = useParams();
 
   const getPostText = (e) => {
@@ -86,7 +88,12 @@ export default function PostModalRight({...props}) {
     .then((response) => {
       console.log(response)
       setLoading(false);
-      alert('페이스북에 게시글이 게시되었습니다.')
+      toast.success("페이스북에 글을 게시하였습니다!",{
+        position: toast.POSITION.TOP_CENTER,
+        autoClose:1000,
+        closeOnClick:true,
+        progress:undefined
+      })
     })
     .catch((error) => {
       console.log(error);
@@ -169,6 +176,8 @@ export default function PostModalRight({...props}) {
         <styled.CancelButton  onClick={props.postModalClick}>취소</styled.CancelButton>
         <styled.PostButton2 onClick={fbPost}>게시</styled.PostButton2>
       </styled.ButtonWrapper>
+
+      <ToastContainer position='top-center'/>
 
     </styled.RightPostBox>
   )

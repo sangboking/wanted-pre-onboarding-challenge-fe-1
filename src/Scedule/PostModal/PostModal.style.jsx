@@ -24,7 +24,7 @@ export const PostBox = styled.div`
   padding-right:1.625rem;
   /* box-shadow : rgba(0,0,0,0.5) 0 0 0 100vw; */
   z-index : 15;
-  overflow: auto;
+  
 
   @media screen and (max-width:1440px) {
    height:58rem;
@@ -41,12 +41,23 @@ export const VerticalLine = styled.div`
 
 export const LoadingWrapper = styled.div`
   position: absolute;
-  top:23rem;
+  top:25rem;
   left:26rem;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   z-index: 20;
+`;
+
+export const LoadingComment = styled.h1`
+  margin-top: 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.32px;
+  color: #191919;
 `;
 

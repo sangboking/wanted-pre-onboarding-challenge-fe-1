@@ -7,7 +7,7 @@ import InstaPostModal from '../../Components/PostModal/InstaPostModal/InstaPostM
 import TwitPostModal from '../../Components/PostModal/TwitPostModal/TwitPostModal'
 import PostModalRight from '../../Components/PostModal/PostModalRight/PostModalRight';
 import { loadingAtom, postImgAtom, postImgPreviewAtom } from '../../atom';
-import { Watch } from 'react-loader-spinner';
+import { Watch,Grid } from 'react-loader-spinner';
 
 export default function PostModal() {
   const [postModal,setPostModal] = useRecoilState(postModalAtom);
@@ -28,26 +28,26 @@ export default function PostModal() {
          postModal &&
          <styled.ModalBack>
            <styled.PostBox>
-             {
-              tabState === 1 
-              ? <FbPostModal tabState={tabState} setTabState={setTabState}/> 
-              : tabState === 2 
-                ? <InstaPostModal tabState={tabState} setTabState={setTabState}/> 
-                : <TwitPostModal tabState={tabState} setTabState={setTabState}/>
-             }   
+            {
+            tabState === 1 
+            ? <FbPostModal tabState={tabState} setTabState={setTabState}/> 
+            : tabState === 2 
+              ? <InstaPostModal tabState={tabState} setTabState={setTabState}/> 
+              : <TwitPostModal tabState={tabState} setTabState={setTabState}/>
+            }   
  
              <styled.VerticalLine/>
 
             {
               loading &&  
               <styled.LoadingWrapper>
-                <Watch
-                    height="100"
-                    width="100"
+                <Grid
+                    height="30"
+                    width="30"
                     color="navy"
                     ariaLabel='loading'
                 />
-                <h1>로딩중입니다..</h1>
+                <styled.LoadingComment>게시글 작성중 입니다..</styled.LoadingComment>
              </styled.LoadingWrapper>
             }
 
