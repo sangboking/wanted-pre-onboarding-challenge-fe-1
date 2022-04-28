@@ -22,15 +22,7 @@ export const LinkrLogo = styled.div`
   justify-content: center;
   cursor: pointer;
   margin: 0 auto;
-  margin-bottom: 2.922rem;
-`;
-
-export const NavyLine = styled.div`
-  width:6rem;
-  height:4px;
-  background-color: #1a225c;
-  margin:0 auto;
-  margin-bottom: 2.75rem;
+  margin-bottom: 4.448rem;
 `;
 
 export const Intro = styled.h2`
@@ -42,7 +34,37 @@ export const Intro = styled.h2`
   letter-spacing: normal;
   text-align: center;
   color: #676767;
-  margin-bottom:2.5rem;
+  margin-bottom:2.285rem;
+`;
+
+export const InputLabelWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const InputLabel = styled.h1`
+  font-size: 0.938rem;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.3px;
+  text-align: left;
+  color: #191919;
+  margin-left:.875rem;
+  margin-bottom: .313rem;
+`;
+
+export const WarningLabel = styled.h1`
+  font-size: 0.75rem;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: -0.24px;
+  color: #e23838;
+  margin-right: .875rem;
 `;
 
 export const InputBox = styled.input`
@@ -59,7 +81,7 @@ export const InputBox = styled.input`
   letter-spacing: normal;
   text-align: left;
   color: #676767;
-  margin-bottom:1.25rem;
+  margin-bottom:1.219rem;
   &:focus{
     outline: none;
   }
@@ -69,7 +91,8 @@ export const CheckWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: right;
-  margin-bottom:1.8rem;
+  margin-bottom:1.875rem;
+  margin-right: .8rem;
 `;
 
 export const CheckLog = styled.h3`
@@ -84,12 +107,20 @@ export const CheckLog = styled.h3`
   margin-right:.5rem;
 `;
 
-export const Button = styled.button`
+export const CheckBox = styled.input`
+  background-color: #fff;
+  border-radius: 15px;
+  &:focus{
+    outline: none;
+  }
+`;
+
+export const LoginButton = styled.button`
   width:100%;
   height:3.125rem;
   border-radius: 15px;
-  border:1px solid #112553;
-  background-color: #112553;
+  border:1px solid ${props => props.formState ? props.theme.navyColor : '#b8b8b8'};
+  background-color: ${props => props.formState ? props.theme.navyColor :'#b8b8b8'};
   padding:1rem;
   font-size: 0.875rem;
   font-weight: 500;

@@ -19,7 +19,9 @@ export default function Join()  {
   와 이를 이용하는 링커 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 
   아울러 여러분의 링커 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습
   니다.`;
-  const {register, handleSubmit, formState:{errors}, setError, getValues} = useForm();
+  const {register, handleSubmit, formState:{errors}, setError, getValues, formState} = useForm({
+    mode:"onChange"
+  });
   const [joinModal,setJoinModal] = useState(false);
   const [overlapModal, setOverlapModal] = useState(false);
   const [emailSendModal, setEmailSendModal] = useState(false);
@@ -27,8 +29,7 @@ export default function Join()  {
   const [codeConfirmModal, setCodeConfirmModal] = useState(false);
   const [emailVerified, setEmailVerified] = useState();
   const regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-
-   
+  
   const onValid = (data) => {
     
     if(data.password !== data.confirmPassword){
@@ -57,10 +58,10 @@ export default function Join()  {
     }
     else{
       console.log(data);
-  } //invalid 검사
+  } 
 }
 
-  const emailSendOnclick = async () => {
+  const emailSend = async () => {
     const email = getValues('email');
     if(regExp.test(email) === true ){
       await axios.get(`/api/auth/signup/${email}`)
@@ -78,7 +79,7 @@ export default function Join()  {
     }
   } 
 
-  const emailConfirmOnclick = async () => {
+  const emailConfirm = async () => {
     const email = getValues('email');
     const emailCode = getValues('emailCode');
     console.log(emailCode);
@@ -100,7 +101,7 @@ export default function Join()  {
   }
 
   const joinOnclick = async () => {
-     const data = {
+    const data = {
       userEmail : getValues('email'),
       password : getValues('password'),
       userName : getValues('username'),
@@ -113,13 +114,15 @@ export default function Join()  {
       await axios.post(`/api/accounts`,JSON.stringify(data),{headers:{"Content-Type":`application/json`}})
       .then((response) => {
         console.log(response)
-        setJoinModal(true);
+        setJoinModal(!joinModal);
       })
       .catch((error) => {
         console.log(error)
       })
     }
-  }
+  };
+
+  console.log(joinModal)
   
     return (
       <styled.Wrapper>
@@ -149,29 +152,31 @@ export default function Join()  {
           <styled.Intro>환영합니다! 링커에 가입해보세요.</styled.Intro>
         
         <styled.FormStyled onSubmit={handleSubmit(onValid)}>
-          <styled.InputTitle style={{marginTop:'2.5rem'}}>아이디(email)</styled.InputTitle> 
+          <styled.EmailWrapper>
+            <styled.InputTitle>아이디(E-mail)</styled.InputTitle>
+            <styled.AlertSpan>{errors?.email?.message}</styled.AlertSpan> 
+          </styled.EmailWrapper>
           <styled.IdEmailWrapper>
             <styled.Input {...register("email",
             {
               required:true,
-              pattern:{value:/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i ,message:"* 유효하지 않은 이메일 입니다."}
+              pattern:{value:/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i ,message:"이메일 형식이 올바르지 않습니다."}
             })} />
-            <styled.TopButton onClick={emailSendOnclick}>인증번호 발송</styled.TopButton>
+            <styled.TopButton onClick={emailSend}>인증번호 발송</styled.TopButton>
           </styled.IdEmailWrapper>
-          <styled.AlertSpan style={{marginTop:'.5rem'}}>{errors?.email?.message}</styled.AlertSpan>
           {
             emailSendModal === true 
             ? <styled.AlertSpan2 style={{marginTop:'.5rem'}}>* 이메일이 발송되었습니다.</styled.AlertSpan2>
             : null
           }
           
-          <styled.InputTitle>이메일 인증번호</styled.InputTitle>
+          <styled.InputTitle style={{marginTop:'1.063rem'}}>이메일 인증번호</styled.InputTitle>
           <styled.IdEmailWrapper>
             <styled.Input {...register("emailCode",
             {
               required:true
             })}/>
-            <styled.TopButton onClick={emailConfirmOnclick}>확인</styled.TopButton>
+            <styled.TopButton onClick={emailConfirm}>확인</styled.TopButton>
           </styled.IdEmailWrapper>
           {
             emailCodeModal === true
@@ -186,35 +191,42 @@ export default function Join()  {
         
           <styled.InputTitleWrapper>
             <styled.InputTitle2>비밀번호</styled.InputTitle2>
-            <styled.PwSpan>* 영문,숫자 조합 8~12자를 입력해 주세요!</styled.PwSpan>
+            <styled.AlertSpan>{errors?.password?.message}</styled.AlertSpan>
           </styled.InputTitleWrapper>
-          <styled.PwInput type="password" {...register("password", 
+          <styled.PwInput type="password" placeholder='영문,숫자 조합 8~12자를 입력해 주세요!' {...register("password", 
             {
               required:true ,
-              pattern:{value:/^[A-Za-z0-9]{6,12}$/,message:'* 영문, 숫자 조합 8~12자를 입력해주세요'},
-              maxLength:{value:12,message:'*최대 비밀먼호는 12자 입니다.'} ,
-              minLength:{value:8,message:'*최소 비밀번호는 8자 입니다.'}
+              pattern:{value:/^[A-Za-z0-9]{6,12}$/,message:'영문, 숫자 조합 8~12자를 입력해주세요'},
+              maxLength:{value:12,message:'최대 비밀먼호는 12자 입니다.'} ,
+              minLength:{value:8,message:'최소 비밀번호는 8자 입니다.'}
             })}>
           </styled.PwInput>
-          <styled.AlertSpan>{errors?.password?.message}</styled.AlertSpan>
           
-          <styled.InputTitle>비밀번호 확인</styled.InputTitle>
+          <styled.InputTitleWrapper>
+            <styled.InputTitle>비밀번호 확인</styled.InputTitle>
+            <styled.AlertSpan>{errors?.confirmPassword?.message}</styled.AlertSpan>
+          </styled.InputTitleWrapper>
           <styled.PwInput type="password" {...register("confirmPassword",
             {
-            required:true,
-            pattern:{value:/^[A-Za-z0-9]{6,12}$/,message:'* 영문, 숫자 조합 8~12자를 입력해주세요'},
-            maxLength:{value:12,message:'*최대 비밀먼호는 12자 입니다.'},
-            minLength:{value:8,message:'*최소 비밀번호는 8자 입니다.'}
+              required:true,
+              pattern:{value:/^[A-Za-z0-9]{6,12}$/,message:'영문, 숫자 조합 8~12자를 입력해주세요'},
+              maxLength:{value:12,message:'최대 비밀먼호는 12자 입니다.'},
+              minLength:{value:8,message:'최소 비밀번호는 8자 입니다.'}
             })}> 
           </styled.PwInput>
-          <styled.AlertSpan>{errors?.confirmPassword?.message}</styled.AlertSpan>
         
-          <styled.InputTitle>이름</styled.InputTitle>
+          <styled.InputTitleWrapper>
+            <styled.InputTitle>이름</styled.InputTitle>
+            <styled.AlertSpan>{errors?.username?.message}</styled.AlertSpan>
+          </styled.InputTitleWrapper>
           <styled.PwInput {...register("username", 
-            {required:true})}>
+            {
+              required:true,
+              minLength:{value:2, message:'두 글자 이상 입력해 주세요.'}
+            })}>
           </styled.PwInput>
 
-          <styled.InputTitle>생년월일</styled.InputTitle>
+          <styled.InputTitle style={{marginTop:'1.063rem'}}>생년월일</styled.InputTitle>
           <styled.BirthWrapper>
             <styled.YearBox placeholder='년(YYYY)' {...register("year", 
               {
@@ -237,8 +249,10 @@ export default function Join()  {
               })}>   
             </styled.DayBox>
           </styled.BirthWrapper>
+
           <styled.Line/>
-          <styled.Title2>이용약관</styled.Title2>
+          
+          <styled.Title2>링커 이용약관</styled.Title2>
           <styled.TextBox readOnly>
             <styled.TextWrapper>
               <h3>여러분을 환영합니다</h3>
@@ -254,7 +268,7 @@ export default function Join()  {
             />
           </styled.ConfrimWrapper>
         
-          <styled.Title2>개인정보보호정책</styled.Title2>
+          <styled.Title2>링커 개인정보보호정책</styled.Title2>
           <styled.TextBox>
             <h3>여러분을 환영합니다</h3>
             <p>{rule}</p>
@@ -271,7 +285,7 @@ export default function Join()  {
           <styled.AlertSpan>{errors?.checkbox2?.message}</styled.AlertSpan>
           
         
-          <styled.JoinButton onClick={joinOnclick}>가입하기</styled.JoinButton>
+          <styled.JoinButton formState={formState.isValid} disabled={!formState.isValid} onClick={joinOnclick}>가입하기</styled.JoinButton>
         </styled.FormStyled>
         </styled.LayOut>
       </styled.Wrapper>   

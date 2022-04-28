@@ -41,6 +41,12 @@ export const Intro = styled.h2`
   margin-left: .766rem;
 `;
 
+export const EmailWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 2.313rem;
+`;
+
 export const InputTitle = styled.h1`
   font-size: 1rem;
   font-weight: 500;
@@ -50,7 +56,6 @@ export const InputTitle = styled.h1`
   letter-spacing: -0.32px;
   text-align: left;
   color: #191919;
-  margin-top:1.5rem;
   margin-left: .766rem;
 `;
 
@@ -107,7 +112,8 @@ export const TopButton = styled.button`
 export const InputTitleWrapper = styled.div`
   display:flex ;
   align-items: center;
-  margin-top: 1.5rem;
+  margin-top: 1.063rem;
+  justify-content: space-between;
 `;
 
 export const InputTitle2 = styled.h1`
@@ -157,11 +163,12 @@ export const PwInput = styled.input`
 `;
 
 export const Line = styled.div`
-  width:32rem;
+  width:30rem;
   height: 0.031rem;
-  margin-top:2rem;
-  margin-bottom:1.6rem;
-  background-color: #aaa;
+  margin-top:1.25rem;
+  margin-bottom:1.375rem;
+  margin-left:1rem;
+  background-color: #eaeaea;
 `;
 
 export const BirthWrapper = styled.div`
@@ -247,7 +254,7 @@ export const TextBox = styled.div`
   color: #191919;
   background-color: #fff;
   border:1px solid #fff;
-  padding:0.625rem 0.6rem 0.582rem 0.813rem;
+  padding:1rem 0.438rem 1.168rem 1rem;
   border-radius: 15px;
   //우측 스크롤바 css
   &::-webkit-scrollbar {
@@ -275,7 +282,7 @@ export const ConfrimWrapper = styled.div`
 
 export const Title3 = styled.h2`
   position:absolute;
-  right:2rem;
+  right:0;
   font-size: 0.813rem;
   font-weight: 500;
   font-stretch: normal;
@@ -289,23 +296,19 @@ export const Title3 = styled.h2`
 
 export const CheckBox = styled.input`
   background-color: #fff;
-  border: 1px solid red;
   border-radius: 15px;
   position:absolute;
-  right:0;
+  right:-1.7rem;
   &:focus{
     outline: none;
-  }
-  &:checked{
-    background-color: red;
   }
 `;
 
 export const JoinButton = styled.button`
   width:32rem;
   height:3.125rem;
-  background-color: #112553;
-  border: 1px solid #112553;
+  background-color: ${props => props.formState ? props.theme.navyColor :'#b8b8b8'};
+  border: 1px solid ${props => props.formState ? props.theme.navyColor :'#b8b8b8'};
   color: rgba(255, 255, 255, 0.9);
   border-radius: .8rem;
   margin-top:2rem;
@@ -387,7 +390,7 @@ export const FormStyled2 = styled.form`
 export const AlertSpan = styled.h1`
   font-size: .8rem;
   color:red;
-  margin-left: 1rem;
+  margin-left: 2.563rem;
 `;
 
 export const AlertSpan2 = styled.h1`

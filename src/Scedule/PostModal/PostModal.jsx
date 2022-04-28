@@ -7,7 +7,7 @@ import InstaPostModal from '../../Components/PostModal/InstaPostModal/InstaPostM
 import TwitPostModal from '../../Components/PostModal/TwitPostModal/TwitPostModal'
 import PostModalRight from '../../Components/PostModal/PostModalRight/PostModalRight';
 import { loadingAtom, postImgAtom, postImgPreviewAtom } from '../../atom';
-import { Watch,Grid } from 'react-loader-spinner';
+import { Grid } from 'react-loader-spinner';
 
 export default function PostModal() {
   const [postModal,setPostModal] = useRecoilState(postModalAtom);

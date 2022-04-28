@@ -79,7 +79,7 @@ export default function PostModalRight({...props}) {
       content : postText,
       facebookPost : true,
       instagramPost : false,
-      twitterPost : false,
+      twitterPost : true,
       postDate : new Date(),
       postNow : true,
       image : imgInfo

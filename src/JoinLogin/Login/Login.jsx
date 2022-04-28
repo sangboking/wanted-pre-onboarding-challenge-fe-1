@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as styled from './Login.style';
 import {Link,useNavigate} from 'react-router-dom';
 import LinkrLogoNavy from '../../SvgIcons/LinkrLogoNavy';
@@ -8,9 +8,14 @@ import axios from 'axios';
 
 const Login = () => {
   const navigate = useNavigate();
-  const {register, handleSubmit, getValues} = useForm();
+  const [loginModal, setLoginModal] = useState(false);
+  
+  const {register, handleSubmit, getValues, formState} = useForm({
+    mode: "onChange",
+  });
+  
   const onValid = (data) => {
-    
+   
   } 
   
   const loginOnclick = async () => {
@@ -26,31 +31,36 @@ const Login = () => {
       }
     })
     .catch((error) => {
-      console.log(error);
+      setLoginModal(!loginModal);
     })
-  }
+  };
 
     return (
         <styled.Wrapper>
           
           <styled.LayOut>
             <styled.LinkrLogo><LinkrLogoNavy/></styled.LinkrLogo>
-
-            <styled.NavyLine/>
             
             <styled.Intro>반갑습니다! 계정에 로그인 해볼까요?</styled.Intro>
             
             <styled.FormStyle onSubmit={handleSubmit(onValid)}>
-              <styled.InputBox placeholder='아이디(email)' {...register("email",{required:true})}></styled.InputBox>
+              <styled.InputLabelWrapper>
+                <styled.InputLabel>아이디(E-mail)</styled.InputLabel>
+                {loginModal && <styled.WarningLabel>아이디가 또는 비밀번호가 일치하지 않습니다.</styled.WarningLabel>}
+              </styled.InputLabelWrapper>
+              <styled.InputBox autoComplete='off' {...register("email",{required:true})}></styled.InputBox>
               
-              <styled.InputBox placeholder='비밀번호' type='password' {...register("password",{required:true})}></styled.InputBox>
+              <styled.InputLabelWrapper>
+                <styled.InputLabel>비밀번호</styled.InputLabel>
+              </styled.InputLabelWrapper>
+              <styled.InputBox type='password' {...register("password",{required:true})}></styled.InputBox>
               
               <styled.CheckWrapper>
-                
+                <styled.CheckBox type='checkbox' />
                 <styled.CheckLog>로그인 상태 유지</styled.CheckLog>
               </styled.CheckWrapper>
               
-              <styled.Button onClick={loginOnclick}>로그인하기</styled.Button>
+              <styled.LoginButton formState={formState.isValid} disabled={!formState.isValid} onClick={loginOnclick}>로그인하기</styled.LoginButton>
             </styled.FormStyle>
             
             <styled.Line></styled.Line>

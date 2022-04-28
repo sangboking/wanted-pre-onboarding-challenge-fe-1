@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+export const FormStyle = styled.form``;
+
 export const Wrapper = styled.div`
   width:100%;
   height:100vh;
@@ -15,7 +17,7 @@ export const LayOut = styled.div`
 `;
 
 export const Title = styled.h1`
- font-size: 1.75rem;
+  font-size: 1.75rem;
   font-weight: 500;
   font-stretch: normal;
   font-style: normal;
@@ -23,6 +25,7 @@ export const Title = styled.h1`
   letter-spacing: -0.56px;
   text-align: left;
   margin-bottom:0.625rem;
+  margin-left:.875rem;
 `;
 
 export const Intro = styled.h2`
@@ -35,9 +38,10 @@ export const Intro = styled.h2`
   text-align: left;
   color: #676767;
   margin-bottom: 2.5rem;
+  margin-left:.875rem;
 `;
 
-export const Name = styled.h3`
+export const InputLabel = styled.h3`
   font-size: 1rem;
   font-weight: 500;
   font-stretch: normal;
@@ -47,13 +51,14 @@ export const Name = styled.h3`
   text-align: left;
   color: #191919;
   margin-bottom:0.438rem;
+  margin-left:.875rem;
 `;
 
-export const InputBox = styled.input`
+export const NameInputBox = styled.input`
   border-radius: 15px;
   background-color: #fff;
   border:1px solid #fff;
-  width:28.625rem;
+  width:30rem;
   height: 3.125rem;
   padding-left: 1.375rem;
   font-size: 0.875rem;
@@ -63,22 +68,88 @@ export const InputBox = styled.input`
   line-height: normal;
   letter-spacing: -0.28px;
   text-align: left;
-  color: #666;
-  margin-bottom:1.938rem;
+  color: #676767;
+  margin-bottom:1.063rem;
   &:focus{
     outline: none;
   }
 `;
 
-export const Button = styled.button`
+export const BirthWrapper = styled.div`
+  display: flex;
+`;
+
+export const YearInputBox = styled.input`
+  width: 9.3rem;
+  height: 3.125rem;
   border-radius: 15px;
-  width:30.5rem;
+  border:1px solid #fff;
+  background-color: #fff;
+  padding-left: 1.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.28px;
+  text-align: left;
+  color: #676767;
+  margin-right: .625rem;
+  &:focus{
+    outline: none;
+  }
+`;
+
+export  const MonthInputBox = styled.input`
+  width: 8rem;
+  height: 3.125rem;
+  border-radius: 15px;
+  border:1px solid #fff;
+  background-color: #fff;
+  padding-left: 1.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.28px;
+  text-align: left;
+  color: #676767;
+  margin-right:.625rem;
+  &:focus{
+    outline: none;
+  }
+`;
+
+export const DayInputBox = styled.input`
+  width: 8rem;
+  height: 3.125rem;
+  border-radius: 15px;
+  border:1px solid #fff;
+  background-color: #fff;
+  padding-left: 1.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.28px;
+  text-align: left;
+  color: #676767;
+  &:focus{
+    outline: none;
+  }
+`;
+
+export const FindIdButton = styled.button`
+  border-radius: 15px;
+  width:31.5rem;
   height:3.125rem;
   font-size:0.875rem;
   color: rgba(250, 250, 250, 0.9);
-  background-color:#112553;
-  border:1px solid #112553;
+  background-color: ${props => props.formState ? props.theme.navyColor :'#b8b8b8'};
+  border:1px solid ${props => props.formState ? props.theme.navyColor :'#b8b8b8'};
   font-weight: 500;
-  margin-top:.5rem;
+  margin-top:2.5rem;
   cursor: pointer;
 `;

@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+export const FormStyle = styled.form``;
+
 export const Wrapper = styled.div`
   width:100%;
   height:100vh;
@@ -24,6 +26,7 @@ export const Title = styled.h1`
   text-align: left;
   color: #191919;
   margin-bottom:0.625rem;
+  margin-left:.891rem;
 `;
 
 export const Intro = styled.h2`
@@ -36,6 +39,7 @@ export const Intro = styled.h2`
   text-align: left;
   color: #676767;
   margin-bottom:2.5rem;
+  margin-left:.891rem;
 `;
 
 export const Name = styled.h3`
@@ -48,6 +52,7 @@ export const Name = styled.h3`
   text-align: left;
   color: #191919;
   margin-bottom:0.438rem;
+  margin-left:.891rem;
 `;
 
 export const InputBox = styled.input`
