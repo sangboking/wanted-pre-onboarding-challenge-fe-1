@@ -32,7 +32,6 @@ export default function Join()  {
   const regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
   
   const onValid = (data) => {
-    
     if(data.password !== data.confirmPassword){
       setError(
         "password",
@@ -45,22 +44,19 @@ export default function Join()  {
         {shouldFocus:true}
       )
     }
-    else if(data.checkbox1 === false){
+    if(data.checkbox1 === false){
       setError(
         "checkbox1",
         {message:"* 링커 이용약관과 개인정보 보호정책에 모두 동의하여 주세요."}
       )
     }
-    else if(data.checkbox2 === false){
+    if(data.checkbox2 === false){
       setError(
         "checkbox2",
         {message:"* 링커 이용약관과 개인정보 보호정책에 모두 동의하여 주세요."}
       )
     }
-    else{
-      console.log(data);
-  } 
-}
+};
 
   const emailSend = async () => {
     const email = getValues('email');
@@ -75,10 +71,7 @@ export default function Join()  {
         setOverlapModal(!overlapModal);
       })
     }
-    else{
-      console.log('정규식에 일치하지 않습니다.')
-    }
-  } 
+  }; 
 
   const emailConfirm = async () => {
     const email = getValues('email');
@@ -99,7 +92,7 @@ export default function Join()  {
     .catch((error) => {
       console.log(error);
     })
-  }
+  };
 
   const joinOnclick = async () => {
     const data = {
@@ -114,7 +107,6 @@ export default function Join()  {
       console.log(JSON.stringify(data));
       await axios.post(`/api/accounts`,JSON.stringify(data),{headers:{"Content-Type":`application/json`}})
       .then((response) => {
-        console.log(response)
         setJoinModal(!joinModal);
       })
       .catch((error) => {
@@ -122,8 +114,6 @@ export default function Join()  {
       })
     }
   };
-
-  console.log(joinModal)
   
     return (
       <styled.Wrapper>
@@ -159,9 +149,9 @@ export default function Join()  {
             : null
           }
           
-          <styled.InputTitle autoComplete='off' style={{marginTop:'1.063rem'}}>이메일 인증번호</styled.InputTitle>
+          <styled.InputTitle style={{marginTop:'1.063rem'}}>이메일 인증번호</styled.InputTitle>
           <styled.IdEmailWrapper>
-            <styled.Input {...register("emailCode",
+            <styled.Input autoComplete='off' {...register("emailCode",
             {
               required:true
             })}/>
@@ -266,7 +256,7 @@ export default function Join()  {
           </styled.TextBox>
           <styled.ConfrimWrapper>
             <styled.Title3>동의합니다</styled.Title3>
-            <styled.CheckBox type="checkbox" {...register("checkbox2",
+            <styled.CheckBox type='checkbox' {...register("checkbox2",
               {
                 require:true
               })}

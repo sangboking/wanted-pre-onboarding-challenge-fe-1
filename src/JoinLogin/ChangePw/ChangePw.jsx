@@ -1,6 +1,7 @@
 import React from 'react'
 import * as styled from './ChangePw.style';
 import { useForm } from 'react-hook-form';
+import ChangePwModal from '../../Components/ChangePwModal/ChangePwModal';
 
 export default function ChangePw() {
   const pwdRegExp = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
@@ -17,13 +18,13 @@ export default function ChangePw() {
         {shouldFocus:true}
       )
     }
-
-  
-  }
+  };
 
   return (
-    <styled.FormStyle onSubmit={handleSubmit(onValid)}>
-      <styled.Wrapper>
+    <styled.Wrapper>
+      <ChangePwModal />
+
+      <styled.FormStyle onSubmit={handleSubmit(onValid)}>
         <styled.Title>비밀번호 변경하기</styled.Title>
         
         <styled.Intro>새 비밀번호를 입력해주세요.</styled.Intro>
@@ -62,7 +63,8 @@ export default function ChangePw() {
         </styled.InputBox>
         
         <styled.Button formState={formState.isValid} disabled={!formState.isValid}>비밀번호 변경하기</styled.Button>
-      </styled.Wrapper>
-    </styled.FormStyle>
-  )
+      </styled.FormStyle>
+    </styled.Wrapper>
+)
 }
+

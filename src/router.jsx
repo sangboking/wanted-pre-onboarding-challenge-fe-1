@@ -60,7 +60,6 @@ const router = () => {
 
             {/* Setting */}
             <Route path='/info' element={<MyInfo/>}></Route>
-
            </>
           </Routes>
         </BrowserRouter>

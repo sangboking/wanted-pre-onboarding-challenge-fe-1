@@ -21,7 +21,6 @@ export default function Sidebar({...props}) {
     refetchOnWindowFocus : false,
   });
   
-  
   return (
       <styled.SideBarWrapper postModal={postModal}>
         <styled.SideBar>
@@ -30,28 +29,27 @@ export default function Sidebar({...props}) {
           </styled.LogoWrapper>
 
           <styled.UserWrapper>
-            <styled.Circle>R</styled.Circle>
             {isLoading ? null : <styled.UserName>{data.result.brandName}</styled.UserName>}
           </styled.UserWrapper>
 
           <styled.MenuWrapper>
             <Link to={{pathname:`/sceduleWeek/${brandId}`}} style={{ textDecoration: 'none' }}>
               <styled.WeekMenu sceduleColor={props.sceduleColor}>
-                <styled.IconWrapper><SceduleIcon width={20} height={20}/></styled.IconWrapper>
+                <styled.IconWrapper><SceduleIcon width={18} height={18}/></styled.IconWrapper>
                 <styled.SceduleMenuName sceduleMenuColor={props.sceduleMenuColor}>스케줄</styled.SceduleMenuName>
               </styled.WeekMenu>
             </Link>
 
             <Link to={{pathname:`/insightFb/${brandId}`}} style={{ textDecoration: 'none' }}>
               <styled.InsightMenu insightColor={props.insightColor}>
-                <styled.IconWrapper><InsightIcon width={20} height={20}/></styled.IconWrapper>
+                <styled.IconWrapper><InsightIcon width={18} height={18}/></styled.IconWrapper>
                 <styled.InsightMenuName insightMenuColor={props.insightMenuColor}>인사이트</styled.InsightMenuName>
               </styled.InsightMenu>
             </Link>
 
             <Link to='/inboxMessage' style={{ textDecoration: 'none' }}>
               <styled.InboxMenu inboxColor={props.inboxColor}>
-                <styled.IconWrapper><InboxIcon width={20} height={20}/></styled.IconWrapper>
+                <styled.IconWrapper><InboxIcon width={18} height={18}/></styled.IconWrapper>
                 <styled.InboxMenuName inboxMenuColor={props.inboxMenuColor}>인박스</styled.InboxMenuName>              
               </styled.InboxMenu>
             </Link>
@@ -59,14 +57,14 @@ export default function Sidebar({...props}) {
             <styled.SettingWrapper>
               <Link to='/info' style={{ textDecoration: 'none' }}>
                 <styled.SettingMenu InfoMenuColor={props.InfoMenuColor}>
-                  <styled.IconWrapper><SettingIcon width={20} height={20}/></styled.IconWrapper>
+                  <styled.IconWrapper><SettingIcon width={18} height={18}/></styled.IconWrapper>
                   <styled.DefaultMenuName InfoNameColor={props.InfoNameColor}>설정</styled.DefaultMenuName>
                 </styled.SettingMenu>
               </Link>
               
               <Link to='/connect' style={{ textDecoration: 'none' }}>
                 <styled.SettingMenu2 MenuColor={props.MenuColor}>
-                  <styled.IconWrapper><Interlock width={20} height={20}/></styled.IconWrapper>
+                  <styled.IconWrapper><Interlock width={18} height={18}/></styled.IconWrapper>
                   <styled.DefaultMenuName2 NameColor={props.NameColor}>연동</styled.DefaultMenuName2>
                 </styled.SettingMenu2>
               </Link>
