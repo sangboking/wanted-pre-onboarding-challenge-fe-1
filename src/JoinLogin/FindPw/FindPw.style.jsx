@@ -76,14 +76,14 @@ export const InputBox = styled.input`
   }
 `;
 
-export const Button = styled.button`
+export const FindPwButton = styled.button`
   border-radius: 15px;
   width:30.5rem;
   padding:1rem;
   font-size:0.875rem;
   color: rgba(250, 250, 250, 0.9);
-  background-color:#112553;
-  border:1px solid #112553;
+  background-color: ${props => props.formState ? props.theme.navyColor :'#b8b8b8'};
+  border:1px solid ${props => props.formState ? props.theme.navyColor :'#b8b8b8'};
   font-weight: 500;
   margin-top:.5rem;
   cursor: pointer;

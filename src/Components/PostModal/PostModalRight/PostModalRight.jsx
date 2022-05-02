@@ -64,7 +64,7 @@ export default function PostModalRight({...props}) {
       })
       await axios({
         method:'post',
-        url:`/api/brands/${brandId}/file`,
+        url:`/api/brands/${brandId}/image`,
         data:fd,
         headers: {
           'Content-Type': 'multipart/form-data'
@@ -86,7 +86,7 @@ export default function PostModalRight({...props}) {
     }
     await axios.post(`/api/brands/${brandId}/posts`, JSON.stringify(postData),{headers:{"Content-Type":`application/json`}})
     .then((response) => {
-      console.log(response)
+      console.log(response);
       setLoading(false);
       toast.success("페이스북에 글을 게시하였습니다!",{
         position: toast.POSITION.TOP_CENTER,

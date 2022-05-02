@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import * as styled from './Join.style';
-import {Link} from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import JoinCompletModal from '../../Components/JoinModal/JoinCompletModal';
+import JoinDuplicateModal from '../../Components/JoinModal/JoinDuplicateModal';
 
 export default function Join()  {
   const rule = `
@@ -71,7 +72,7 @@ export default function Join()  {
       })
       .catch((error) => {
         console.log(error);
-        setOverlapModal(true);
+        setOverlapModal(!overlapModal);
       })
     }
     else{
@@ -128,23 +129,11 @@ export default function Join()  {
       <styled.Wrapper>
         {
           joinModal &&
-          <styled.JoinCompleteBack>
-            <styled.JoinCompletBox>
-              <styled.JoinBox>회원가입이 완료되었습니다!</styled.JoinBox>
-              <Link to='/login'>
-                <styled.JoinButton2>로그인</styled.JoinButton2>
-              </Link>
-            </styled.JoinCompletBox> 
-          </styled.JoinCompleteBack>
+          <JoinCompletModal />
         }
         {
           overlapModal && 
-          <styled.JoinCompleteBack>
-            <styled.JoinCompletBox>
-              <styled.JoinBox>이미 가입된 계정입니다.</styled.JoinBox>
-              <styled.JoinButton2 onClick={()=>{setOverlapModal(false)}}>확인</styled.JoinButton2>
-            </styled.JoinCompletBox> 
-          </styled.JoinCompleteBack>
+          <JoinDuplicateModal />
         }
 
         <styled.LayOut>
@@ -157,7 +146,7 @@ export default function Join()  {
             <styled.AlertSpan>{errors?.email?.message}</styled.AlertSpan> 
           </styled.EmailWrapper>
           <styled.IdEmailWrapper>
-            <styled.Input {...register("email",
+            <styled.Input autoComplete='off'{...register("email",
             {
               required:true,
               pattern:{value:/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i ,message:"이메일 형식이 올바르지 않습니다."}
@@ -170,7 +159,7 @@ export default function Join()  {
             : null
           }
           
-          <styled.InputTitle style={{marginTop:'1.063rem'}}>이메일 인증번호</styled.InputTitle>
+          <styled.InputTitle autoComplete='off' style={{marginTop:'1.063rem'}}>이메일 인증번호</styled.InputTitle>
           <styled.IdEmailWrapper>
             <styled.Input {...register("emailCode",
             {
@@ -219,7 +208,7 @@ export default function Join()  {
             <styled.InputTitle>이름</styled.InputTitle>
             <styled.AlertSpan>{errors?.username?.message}</styled.AlertSpan>
           </styled.InputTitleWrapper>
-          <styled.PwInput {...register("username", 
+          <styled.PwInput autoComplete='off' {...register("username", 
             {
               required:true,
               minLength:{value:2, message:'두 글자 이상 입력해 주세요.'}
@@ -228,7 +217,7 @@ export default function Join()  {
 
           <styled.InputTitle style={{marginTop:'1.063rem'}}>생년월일</styled.InputTitle>
           <styled.BirthWrapper>
-            <styled.YearBox placeholder='년(YYYY)' {...register("year", 
+            <styled.YearBox autoComplete='off' placeholder='년(YYYY)' {...register("year", 
               {
                 required:true,
                 minLength:4,
@@ -236,15 +225,17 @@ export default function Join()  {
               })}>
             </styled.YearBox>
 
-            <styled.MonthBox placeholder='월(mm)' {...register("month",
+            <styled.MonthBox autoComplete='off' placeholder='월(mm)' {...register("month",
               {
                 required:true,
+                minLength:2,
                 maxLength:2,
               })}>
             </styled.MonthBox>
-            <styled.DayBox placeholder='일(dd)' {...register("day", 
+            <styled.DayBox autoComplete='off' placeholder='일(dd)' {...register("day", 
               {
                 required:true,
+                minLength:2,
                 maxLength:2
               })}>   
             </styled.DayBox>

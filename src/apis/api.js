@@ -1,6 +1,5 @@
 import axios from "axios";
 
-
 //페이스북 linkr-app 연결
 export const setFBAsyncInit = () => {
   window.fbAsyncInit = () => {
