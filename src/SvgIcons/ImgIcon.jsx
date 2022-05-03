@@ -2,9 +2,8 @@ import React from 'react'
 
 export default function ImgIcon(props) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" {...props}>
-      <path id="패스_2541" data-name="패스 2541" d="M.45,16.177V.723A.311.311,0,0,1,.788.45H12.053l4.293,3.339a.26.26,0,0,1,.1.2V16.177a.311.311,0,0,1-.338.273H.788A.311.311,0,0,1,.45,16.177Zm11.811-14.8V3.8h3.122Zm-11.1,14.5H15.891V4.324H11.923a.311.311,0,0,1-.338-.273V.975H1.165Z" transform="translate(0.05 0.05)" fill="#fff" stroke="#676767" strokeMiterlimit="10" strokeWidth="1"/>
+    <svg xmlns="http://www.w3.org/2000/svg" width="12.636" height="16.7" viewBox="0 0 12.636 16.7" {...props}>
+      <path id="패스_2618" data-name="패스 2618" d="M.45,16.177V.723A.263.263,0,0,1,.7.45h8.4l3.2,3.339a.3.3,0,0,1,.078.2V16.177a.263.263,0,0,1-.252.273H.7A.263.263,0,0,1,.45,16.177Zm8.811-14.8V3.8H11.59ZM.984,15.873H11.969V4.324H9.009a.263.263,0,0,1-.252-.273V.975H.984Z" transform="translate(-0.1 -0.1)" fill="#fff" stroke="#676767" stroke-miterlimit="10" stroke-width="0.7"/>
     </svg>
-
   )
 }

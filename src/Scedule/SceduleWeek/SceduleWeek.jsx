@@ -59,7 +59,7 @@ export default function SceduleWeek() {
             <Link to={{pathname:`/sceduleMonth/${brandId}`}} style={{ textDecoration:'none' }}><styled.Button2>Month</styled.Button2></Link>
             <Link to={{pathname:`/sceduleStream/${brandId}`}} style={{ textDecoration:'none' }}><styled.Button2>Stream</styled.Button2></Link>
 
-            <styled.PrevIcon  onClick={()=>{prevWeek()}} style={{marginLeft:'1.875rem'}}><LeftBtnIcon/></styled.PrevIcon>
+            <styled.PrevIcon  onClick={()=>{prevWeek()}} style={{marginLeft:'1.875rem'}}><LeftBtnIcon /></styled.PrevIcon>
             <styled.NowDate>{startDate.format('M월D일')+endDate.format(' ~ M월D일')}</styled.NowDate>
             <styled.PrevIcon onClick={()=>{nextWeek()}}><RightBtnIcon/></styled.PrevIcon>
 

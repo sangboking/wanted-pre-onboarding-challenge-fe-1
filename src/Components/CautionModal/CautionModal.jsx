@@ -45,14 +45,6 @@ export default function CautionModal() {
         <styled.Cautionh1>트위터</styled.Cautionh1>
         <styled.Cautionh2>- 최대 280자</styled.Cautionh2>
       </styled.CautionhWrapper>
-
-      <styled.CautionLine style={{marginBottom:'1rem'}}/>
-
-      <styled.CautionBotWrapper>
-        <styled.Cautionh1>여러 종류의 SNS를 선택한 경우</styled.Cautionh1>
-        <styled.Cautionh1>컨텐츠 제한이 가장 적은 채널이 기준입니다.</styled.Cautionh1>
-      </styled.CautionBotWrapper>
-
       
     </styled.CautionModal>
   )

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { loadingAtom, postImgAtom, postImgPreviewAtom, postTextAtom } from '../../../atom';
@@ -13,16 +13,20 @@ import SmileIcon from '../../../SvgIcons/SmileIcon';
 import TwitS from '../../../SvgIcons/TwitS';
 import ImgIcon from '../../../SvgIcons/ImgIcon';
 import ImgXIcon from '../../../SvgIcons/ImgXIcon';
+import ImageUploadIcon from '../../../SvgIcons/ImageUploadIcon';
 import * as styled from './PostModalRight.style';
-import { changeBytes } from '../../../actions/action';
+import { changeBytes, fbPostOnclick, instaPostOnclick, twitPostOnclick } from '../../../actions/action';
 
 export default function PostModalRight({...props}) {
+  const [fbPostState, setFbPostState] = useState(true);
+  const [instaPostState, setInstaPostState] = useState(true);
+  const [twitPostState, setTwitPostState] = useState(true);
   const [postText, setPostText] = useRecoilState(postTextAtom);
   const [imgFile, setImgFile] = useRecoilState(postImgAtom);
   const [postImgPreview, setPostImgPreview] = useRecoilState(postImgPreviewAtom);
   const setLoading = useSetRecoilState(loadingAtom);
   const {brandId} = useParams();
-
+  
   const getPostText = (e) => {
     setPostText(e.target.value);
   };
@@ -77,9 +81,9 @@ export default function PostModalRight({...props}) {
     }
     const postData = {
       content : postText,
-      facebookPost : true,
+      facebookPost : fbPostState,
       instagramPost : false,
-      twitterPost : true,
+      twitterPost : twitPostState,
       postDate : new Date(),
       postNow : true,
       image : imgInfo
@@ -95,7 +99,7 @@ export default function PostModalRight({...props}) {
         progress:undefined
       })
     })
-    .catch((error) => {
+    .catch(() => {
       alert('게시에 오류가 발생하였습니다.');
       setLoading(false);
     })
@@ -106,16 +110,29 @@ export default function PostModalRight({...props}) {
                
       <styled.PostBoxHead>
         <styled.UserProfileWrapper>
-          <styled.UserProfileImage>
-          <styled.UserProfileSns><FaceBookS width={16} height={16}/></styled.UserProfileSns>
-          </styled.UserProfileImage>
-
-          <styled.UserProfileImage>
-          <styled.UserProfileSns><InstaS width={16} height={16}/></styled.UserProfileSns>
-          </styled.UserProfileImage>
-          <styled.UserProfileImage>
-            <styled.UserProfileSns><TwitS width={16} height={16}/></styled.UserProfileSns>
-          </styled.UserProfileImage>
+         
+          { 
+            props.data.result.faceBookConnectedId  &&
+            <styled.UserFbImage onClick={()=> fbPostOnclick(setFbPostState,fbPostState)} fbPostState={fbPostState}>
+              <styled.UserProfileSns>
+                <FaceBookS width={16} height={16}/>
+              </styled.UserProfileSns>
+            </styled.UserFbImage>
+          }
+          
+          {
+            props.data.result.instagramConnectedId &&
+            <styled.UserInstaImage onClick={() => instaPostOnclick(setInstaPostState,instaPostState)} instaPostState={instaPostState}>
+              <styled.UserProfileSns><InstaS width={16} height={16}/></styled.UserProfileSns>
+            </styled.UserInstaImage>
+          }
+         
+          {
+            props.data.result.twitterConnectedId &&
+            <styled.UserTwitImage  onClick={() => twitPostOnclick(setTwitPostState,twitPostState)} twitPostState={twitPostState}>
+              <styled.UserProfileSns><TwitS width={16} height={16}/></styled.UserProfileSns>
+            </styled.UserTwitImage>
+          }
         </styled.UserProfileWrapper>
         <styled.TstorageWrapper>
         <styled.DotIconWrapper><DotdotdotIcon/></styled.DotIconWrapper>
@@ -136,29 +153,29 @@ export default function PostModalRight({...props}) {
 
       <styled.ImgTitle>파일첨부</styled.ImgTitle>
         <styled.FileWrapper>
-          <styled.FileTitle></styled.FileTitle>
-          {
-            postImgPreview ? null : <styled.FileLabel htmlFor='file'>직접 업로드</styled.FileLabel>
-          }
-          {
-            imgFile ? 
-            <styled.ImgUl>
-              {
-                imgFile.map((a,i) => 
-                  <styled.ImgLi key={i}>
-                    <styled.ImgIconWrapper>
-                      <ImgIcon width={13} height={13}/>
-                    </styled.ImgIconWrapper>
-                    <styled.ImgName>{a.name}</styled.ImgName>
-                    <styled.ImgVolume>{changeBytes(a.size)}</styled.ImgVolume>
-                    <styled.XIconWrapper onClick={() => deleteImg(i)}><ImgXIcon width={8} height={8}/></styled.XIconWrapper>
-                  </styled.ImgLi>
-                )
-              }
-            </styled.ImgUl>
-            :null
-          }
+          <styled.FileLayOut>
+            {
+              imgFile && 
+              <styled.ImgUl>
+                {
+                  imgFile.map((a,i) => 
+                    <styled.ImgLi key={i}>
+                      <>
+                        <styled.ImgIconWrapper>
+                          <ImgIcon width={15} height={15}/>
+                        </styled.ImgIconWrapper>
+                        <styled.ImgName>{a.name}</styled.ImgName>
+                        <styled.ImgVolume>{changeBytes(a.size)}</styled.ImgVolume>
+                      </>
+                      <styled.XIconWrapper onClick={() => deleteImg(i)}><ImgXIcon width={8} height={8}/></styled.XIconWrapper>
+                    </styled.ImgLi>
+                  )
+                }
+              </styled.ImgUl>
+            }
           <styled.FileUpload id='file' type='file' multiple onChange={uploadFile}></styled.FileUpload>
+          </styled.FileLayOut>
+          <styled.ImageIconWrapper htmlFor='file'><ImageUploadIcon width={13} height={13}/></styled.ImageIconWrapper>
         </styled.FileWrapper>
       <styled.Line/>
 

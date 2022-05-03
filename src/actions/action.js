@@ -8,3 +8,15 @@ export const changeBytes = (volume) => {
   }
   return(n.toFixed(n < 10 && l > 0 ? 1 : 0) + ' ' + units[l]);
 }
+
+export const fbPostOnclick = (setFbPostState,fbPostState) => {
+  setFbPostState(!fbPostState);
+}
+
+export const instaPostOnclick = (setInstaState,instaState) => {
+  setInstaState(!instaState);
+}
+
+export const twitPostOnclick = (setTwitState,twitState) => {
+  setTwitState(!twitState);
+}

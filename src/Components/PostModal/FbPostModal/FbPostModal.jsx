@@ -76,7 +76,7 @@ export default function FbPostModal({...props}) {
       </styled.PostContent>
 
       <styled.CautionWrapper>
-        <CautionIcon/>
+        <CautionIcon width={16 } height={16}/>
         <styled.CautionIntro
           onMouseEnter={() => {setCautionModal(true)}} 
           onMouseLeave={() => {setCautionModal(false)}}

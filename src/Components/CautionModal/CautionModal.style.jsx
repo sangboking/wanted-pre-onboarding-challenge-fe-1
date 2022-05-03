@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 
 export const CautionModal = styled.div`
-  width: 18.25rem;
-  height: 20rem;
+  width: 11.688rem;
+  height: 15.5rem;
   border-radius: 15px;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.16);
   background-color: #fff;
   position: absolute;
-  top:-21rem;
-  right:-3.3rem;
+  top:-16.3rem;
+  right:0;
   display: flex;
   flex-direction: column;
 `;
@@ -45,13 +45,9 @@ export const Cautionh2 = styled.h2`
 
 export const CautionLine = styled.div`
   margin: 0 auto;
-  width: 15.531rem;
+  width: 8.978rem;
   height: 1px;
   background-color: #eaeaea;
   margin-top:1.375rem;
   margin-bottom: 1.25rem;
-`;
-
-export const CautionBotWrapper = styled.div`
-  margin:0 auto;
 `;

@@ -21,16 +21,43 @@ export const UserProfileWrapper = styled.div`
   display: flex;
 `;
 
-export const UserProfileImage = styled.div`
+export const UserFbImage = styled.div`
   width:2.25rem;
   height:2.25rem;
   border-radius: 15px;
-  border:1px solid #eaeaea;
+  border:1px solid ${props => props.fbPostState ? '#eaeaea' : 'red'};
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   margin-right: 2.125rem;
+  cursor: pointer;
+`;
+
+export const UserInstaImage = styled.div`
+  width:2.25rem;
+  height:2.25rem;
+  border-radius: 15px;
+  border:1px solid ${props => props.instaPostState ? '#eaeaea' : 'red'};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-right: 2.125rem;
+  cursor: pointer;
+`;
+
+export const UserTwitImage = styled.div`
+  width:2.25rem;
+  height:2.25rem;
+  border-radius: 15px;
+  border:1px solid ${props => props.twitPostState ? '#eaeaea' : 'red'};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-right: 2.125rem;
+  cursor: pointer;
 `;
 
 export const UserProfileSns = styled.div`
@@ -121,9 +148,9 @@ export const ImgTitle = styled.h1`
 
 export const FileWrapper = styled.div`
   width:25.375rem;
-  height:10rem;
+  height:11.438rem;
   border-radius:5px ;
-  border: solid 0.3px #eaeaea;
+  border: solid 1px #eaeaea;
   background-color: #fff;
   display: flex;
   flex-direction: column;
@@ -131,16 +158,41 @@ export const FileWrapper = styled.div`
   position:relative;
 `;
 
-export const ImgUl = styled.ul`
-  position: absolute;
-  top:1rem;
-  left:1rem;
+export const FileLayOut = styled.div`
+  width: 23.875rem;
+  height: 8.563rem;
+  border: solid 1px #eaeaea;
+  margin-top: .75rem;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 0.44rem;
+    height:3rem;
+  }
+  &::-webkit-scrollbar-thumb{
+    background-color: rgba(175, 175, 175, 0.72);
+    border-radius: 10px;
+    height: 1rem;
+  }
+  &::-webkit-scrollbar-track { 
+    background-color: #e4e4e4; 
+    border-radius: 100px; 
+  }
 `;
+
+export const ImageIconWrapper = styled.label`
+  position: absolute;
+  right:1.2rem;
+  bottom:.3rem;
+  cursor: pointer;
+`;
+
+export const ImgUl = styled.ul``;
 
 export const ImgLi = styled.li`
   margin-top:.3rem;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 `;
 
 export const ImgName = styled.span`
@@ -150,7 +202,7 @@ export const ImgName = styled.span`
   font-style: normal;
   line-height: normal;
   letter-spacing: -0.3px;
-  color: #191919;
+  color: #b8b8b8;
   margin-right:1.5rem;
 `;
 
@@ -161,29 +213,18 @@ export const ImgVolume = styled.span`
   font-style: normal;
   line-height: normal;
   letter-spacing: -0.3px;
-  color: gray;
-  margin-right:1.5rem;
+  color: #b8b8b8;
+  margin-top: .5rem;
 `;
 
 export const ImgIconWrapper = styled.div`
-  margin-right: .5rem;
+  margin-left: 1.188rem;
 `;
 
 export const XIconWrapper = styled.div`
   cursor: pointer;
-`;
-
-export const FileTitle = styled.h1`
-  font-size: 0.75rem;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: -0.24px;
-  text-align: center;
-  color: #191919;
-  margin-top:3.653rem;
-  margin-bottom:0.75rem;
+  margin-top:.2rem;
+  margin-right:.5rem;
 `;
 
 export const FileLabel = styled.label`

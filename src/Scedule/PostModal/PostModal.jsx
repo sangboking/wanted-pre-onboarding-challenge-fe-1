@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useParams } from 'react-router-dom';
 import * as styled from './PostModal.style'
 import { useRecoilState, useRecoilValue, useSetRecoilState} from 'recoil';
 import {postModalAtom} from '../SceduleAtoms';
@@ -8,6 +9,8 @@ import TwitPostModal from '../../Components/PostModal/TwitPostModal/TwitPostModa
 import PostModalRight from '../../Components/PostModal/PostModalRight/PostModalRight';
 import { loadingAtom, postImgAtom, postImgPreviewAtom } from '../../atom';
 import { Grid } from 'react-loader-spinner';
+import { useQuery } from 'react-query';
+import { getDetailBrand } from '../../apis/api';
 
 export default function PostModal() {
   const [postModal,setPostModal] = useRecoilState(postModalAtom);
@@ -15,13 +18,19 @@ export default function PostModal() {
   const setPostImgPreview = useSetRecoilState(postImgPreviewAtom);
   const setPostImg = useSetRecoilState(postImgAtom);
   const loading = useRecoilValue(loadingAtom);
+  const {brandId} = useParams();
 
   const postModalClick = ()=>{
     setPostModal(!postModal);
     setPostImgPreview(null);
     setPostImg(null);
   };
-  
+
+  const {data,isLoading} = useQuery('detailBrandInfo', () => getDetailBrand(brandId),
+  {
+    refetchOnWindowFocus : false,
+  });
+
   return (
     <>
       {
@@ -51,7 +60,7 @@ export default function PostModal() {
              </styled.LoadingWrapper>
             }
 
-             <PostModalRight postModalClick={postModalClick}/>
+             <PostModalRight postModalClick={postModalClick} data={data} isLoading={isLoading}/>
 
              
 
