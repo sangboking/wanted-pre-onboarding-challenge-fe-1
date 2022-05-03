@@ -104,7 +104,6 @@ export default function Join()  {
     }
 
     if(emailVerified && getValues('checkbox1') && getValues('checkbox2')){
-      console.log(JSON.stringify(data));
       await axios.post(`/api/accounts`,JSON.stringify(data),{headers:{"Content-Type":`application/json`}})
       .then((response) => {
         setJoinModal(!joinModal);

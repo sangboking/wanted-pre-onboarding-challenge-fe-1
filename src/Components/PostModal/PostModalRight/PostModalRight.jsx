@@ -96,8 +96,8 @@ export default function PostModalRight({...props}) {
       })
     })
     .catch((error) => {
-      console.log(error);
       alert('게시에 오류가 발생하였습니다.');
+      setLoading(false);
     })
   };
  

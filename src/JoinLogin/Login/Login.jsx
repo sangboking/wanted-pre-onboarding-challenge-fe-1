@@ -23,7 +23,6 @@ const Login = () => {
       email : getValues('email'),
       password : getValues('password')
     }
-    console.log(JSON.stringify(data));
     await axios.post(`/api/auth`,JSON.stringify(data),{headers:{"Content-Type":`application/json`}})
     .then((response) => {
       if(response.data.success === true){
