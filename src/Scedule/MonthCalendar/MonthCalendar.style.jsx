@@ -57,6 +57,7 @@ export const CalendarTh2 = styled.th`
   width:6rem;
   padding-top:.5rem;
   padding-left:.5rem;
+  text-align: center;
 `;
 
 export const CalendarTbody = styled.tbody`

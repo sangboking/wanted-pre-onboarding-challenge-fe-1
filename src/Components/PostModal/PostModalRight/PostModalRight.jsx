@@ -16,11 +16,15 @@ import ImgXIcon from '../../../SvgIcons/ImgXIcon';
 import ImageUploadIcon from '../../../SvgIcons/ImageUploadIcon';
 import * as styled from './PostModalRight.style';
 import { changeBytes, fbPostOnclick, instaPostOnclick, twitPostOnclick } from '../../../actions/action';
+import CautionIcon from '../../../SvgIcons/CautionIcon';
+import PostLimitModal from '../../PostLimitModal/PostLimitModal';
 
 export default function PostModalRight({...props}) {
   const [fbPostState, setFbPostState] = useState(true);
   const [instaPostState, setInstaPostState] = useState(true);
   const [twitPostState, setTwitPostState] = useState(true);
+  const [cautionModal, setCautionModal] = useState(false);
+  const [fileCautionModal, setFileCautionModal] = useState(false);
   const [postText, setPostText] = useRecoilState(postTextAtom);
   const [imgFile, setImgFile] = useRecoilState(postImgAtom);
   const [postImgPreview, setPostImgPreview] = useRecoilState(postImgPreviewAtom);
@@ -139,7 +143,24 @@ export default function PostModalRight({...props}) {
         </styled.TstorageWrapper>
       </styled.PostBoxHead>
 
-      <styled.ImgTitle>포스팅 내용</styled.ImgTitle>
+      <styled.ImgTitleWrapper>
+       <styled.ImgTitle>포스팅 내용</styled.ImgTitle>
+       <styled.LimitWrapper>
+         <styled.PostTextLimit>
+           {
+            twitPostState ? `${postText.length}/280` : `${postText.length}/5000`
+           }
+          </styled.PostTextLimit>
+          <styled.CautionIconWrapper
+            onMouseEnter={() => setCautionModal(true)}
+            onMouseLeave={() => setCautionModal(false)}
+          >
+            <CautionIcon width={12} height={12}/>
+          </styled.CautionIconWrapper>
+       </styled.LimitWrapper>
+
+       {/* {cautionModal && <PostLimitModal />} */} 
+      </styled.ImgTitleWrapper>
 
       <styled.TextAreaWrapper>
         <styled.TextArea placeholder='포스팅 내용을 입력하세요.' maxLength='5000' value={postText} onChange={getPostText}/>
@@ -151,7 +172,25 @@ export default function PostModalRight({...props}) {
       </styled.TextAreaWrapper>
 
 
-      <styled.ImgTitle>파일첨부</styled.ImgTitle>
+      <styled.ImgTitleWrapper>
+       <styled.ImgTitle>파일첨부</styled.ImgTitle>
+       <styled.LimitWrapper>
+         <styled.PostTextLimit>
+           {
+             twitPostState ? `${imgFile?.length || 0}/4` : `${imgFile?.length}/10`
+           }
+         </styled.PostTextLimit>
+         <styled.CautionIconWrapper
+          onMouseEnter={() => setFileCautionModal(true)}
+          onMouseLeave={() => setFileCautionModal(false)} 
+         >
+           <CautionIcon width={12} height={12}/>
+         </styled.CautionIconWrapper>
+       </styled.LimitWrapper>
+
+       {fileCautionModal && <PostLimitModal />}
+      </styled.ImgTitleWrapper>
+
         <styled.FileWrapper>
           <styled.FileLayOut>
             {

@@ -59,8 +59,8 @@ export const getPageInfo = async (userId,accessToken,setPageAccessToken,setPageI
   })
 };
 
-//페이스북 페이지 게시글 가져오기
-export const getFbPost = async (brandId) => {
+//포스팅한 게시글 가져오기
+export const getPost = async (brandId) => {
   const response = await fetch(`/api/brands/${brandId}/posts`)
   return response.json();
 }

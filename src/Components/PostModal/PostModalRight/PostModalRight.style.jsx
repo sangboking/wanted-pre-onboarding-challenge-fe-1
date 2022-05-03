@@ -25,39 +25,42 @@ export const UserFbImage = styled.div`
   width:2.25rem;
   height:2.25rem;
   border-radius: 15px;
-  border:1px solid ${props => props.fbPostState ? '#eaeaea' : 'red'};
+  border:1px solid #eaeaea;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   margin-right: 2.125rem;
   cursor: pointer;
+  opacity: ${props => props.fbPostState ? 1 : .5};
 `;
 
 export const UserInstaImage = styled.div`
   width:2.25rem;
   height:2.25rem;
   border-radius: 15px;
-  border:1px solid ${props => props.instaPostState ? '#eaeaea' : 'red'};
+  border:1px solid #eaeaea;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   margin-right: 2.125rem;
   cursor: pointer;
+  opacity: ${props => props.instaPostState ? 1 : .5};
 `;
 
 export const UserTwitImage = styled.div`
   width:2.25rem;
   height:2.25rem;
   border-radius: 15px;
-  border:1px solid ${props => props.twitPostState ? '#eaeaea' : 'red'};
+  border:1px solid #eaeaea;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   margin-right: 2.125rem;
   cursor: pointer;
+  opacity: ${props => props.twitPostState ? 1 : .5};
 `;
 
 export const UserProfileSns = styled.div`
@@ -89,7 +92,6 @@ export const TextAreaWrapper = styled.div`
   background-color: #fff;
   height:25%;
   padding:0.813rem 0.75rem 0 0.75rem;
-  margin-top:.75rem;
   display: flex;
   flex-direction: column;
 `;
@@ -132,6 +134,12 @@ export const SmileIconWrapper = styled.div`
   cursor: pointer;
 `;
 
+export const ImgTitleWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 export const ImgTitle = styled.h1`
   font-size: 0.938rem;
   font-weight: 500;
@@ -144,6 +152,28 @@ export const ImgTitle = styled.h1`
   margin-top:1rem;
   margin-bottom:.875rem;
   margin-left:.3rem;
+`;
+
+export const LimitWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const PostTextLimit = styled.h1`
+  font-size: 0.75rem;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #676767;
+  margin-right: .375rem;
+`;
+
+export const CautionIconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const FileWrapper = styled.div`

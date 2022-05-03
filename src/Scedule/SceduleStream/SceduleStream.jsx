@@ -16,7 +16,7 @@ import TwitS from '../../SvgIcons/TwitS';
 import DotdotdotIcon from '../../SvgIcons/DotdotdotIcon';
 import { useQuery } from 'react-query';
 import { postImgAtom, postImgPreviewAtom, postTextAtom } from '../../atom';
-import { getFbPost } from '../../apis/api';
+import {  getPost } from '../../apis/api';
 
 
 export default function SceduleStream() {
@@ -48,12 +48,12 @@ export default function SceduleStream() {
     setMoment(getMoment.clone().add(1, 'month'))
   }; 
 
-  const {data:fbPost, isLoading:fbPostLoading} = useQuery('fbPostData', () => getFbPost(brandId),
+  const {data:fbPost, isLoading:fbPostLoading} = useQuery('fbPostData', () => getPost(brandId),
     {
       
     }
   );
-  console.log(fbPost)
+
   
   return (
     <styled.Wrapper  postModal={postModal}>

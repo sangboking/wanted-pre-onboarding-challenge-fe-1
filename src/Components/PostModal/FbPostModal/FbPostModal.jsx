@@ -82,7 +82,8 @@ export default function FbPostModal({...props}) {
           onMouseLeave={() => {setCautionModal(false)}}
         >
             채널별 유의사항 확인하기.
-            {cautionModal && 
+            {
+              cautionModal && 
               <CautionModal />
             }
         </styled.CautionIntro>
