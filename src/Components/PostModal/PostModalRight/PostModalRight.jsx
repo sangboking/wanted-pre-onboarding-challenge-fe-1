@@ -177,7 +177,7 @@ export default function PostModalRight({...props}) {
        <styled.LimitWrapper>
          <styled.PostTextLimit>
            {
-             twitPostState ? `${imgFile?.length || 0}/4` : `${imgFile?.length}/10`
+             twitPostState ? `${imgFile?.length || 0}/4` : `${imgFile?.length || 0}/10`
            }
          </styled.PostTextLimit>
          <styled.CautionIconWrapper

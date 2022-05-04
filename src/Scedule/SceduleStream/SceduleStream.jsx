@@ -84,6 +84,7 @@ export default function SceduleStream() {
             {
               fbPostLoading ? <h1>페이스북 게시글을 불러오는 중입니다..</h1> :
                 fbPost?.result.map((post,i) => {
+                  
                   return (
                     <styled.StreamContentWrapper key={i}>
                       
@@ -96,7 +97,7 @@ export default function SceduleStream() {
                           </styled.StreamBoxTitleIcon>
                           <styled.StreamBoxDate>
                             {
-                            `${new Date(post.postDate).getFullYear()}년 ${new Date(post.postDate).getMonth()+1}월 ${new Date(post.postDate).getDate()}일 ${new Date(post.postDate).getHours()}:${new Date(post.postDate).getMinutes()}`
+                            `${new Date(post.postDate).getFullYear()}년 ${new Date(post.postDate).getMonth()+1}월 ${new Date(post.postDate).getDate()}일 ${new Date(post.postDate).getHours()+9}:${new Date(post.postDate).getMinutes()}`
                             }
                             <styled.StreamIcon>
                               <DotdotdotIcon width={30} height={30}/>

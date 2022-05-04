@@ -3,28 +3,32 @@ import * as styled from './WeekCalendar.style';
 import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { getPost } from '../../apis/api';
+import FaceBookS from '../../SvgIcons/FaceBookS';
+import InstaS from '../../SvgIcons/InstaS';
+import TwitS from '../../SvgIcons/TwitS';
+import HeartIcon from '../../SvgIcons/HeartIcon';
+import CommentIcon from '../../SvgIcons/CommentIcon';
 
 export default function WeekCalendar({startDate,endDate}) {
   const { brandId } = useParams();
 
   const arr = ["월","화","수","목","금"];
 
-  const {data, isLoading} = useQuery('getPost', () => getPost(brandId));
+  const {data} = useQuery('getPost', () => getPost(brandId));
 
- 
-     
+  console.log(new Date(data?.result[9].createDate))
+
   return (
     <styled.WeekCalendarWrapper>
       <styled.CalendarContent>
-        <styled.CalendarHead style={{borderTopLeftRadius:'15px'}}>
+        <styled.CalendarHead style={{borderTopLeftRadius:'14px'}}>
           <styled.SunHeadDate>일 {startDate.format('M/D')}</styled.SunHeadDate> 
         </styled.CalendarHead>
-        {
-          data.result[0].postDate.substring(0,10) === startDate.format().substring(0,10)
+        {/* {
+          data?.result[0].postDate.substring(0,10) === startDate.format().substring(0,10)
           ? '날짜같음 데이터 바인딩 할게요'
-          :'날짜다름 바인딩안댐'
-        }
-        
+          :null
+        } */}
       </styled.CalendarContent>
 
      {
@@ -34,13 +38,36 @@ export default function WeekCalendar({startDate,endDate}) {
             <styled.CalendarHead>
               <styled.HeadDate>{day} {startDate.clone().add(i+1,'days').format('M/D')}</styled.HeadDate>
             </styled.CalendarHead>
+            <styled.PostingWrapper>
             {
-              data.result[i].postDate.substring(5,10) === startDate.clone().add(i+1,'days').format('MM-DD')
-              ? data.result.map((a,i) => {
-                return a.content
+              data?.result.map((a,index) => {
+                if(a.postDate.substring(5,10) === startDate.clone().add(i+1,'days').format('MM-DD') ){
+                  return (
+                      <styled.PostWrapper key={index}>
+                        <styled.PostTopWrapper>
+                          <styled.IconWrapper>
+                            <FaceBookS width={14} height={14} />
+                            <InstaS width={14} height={14}/>
+                            <TwitS  width={14} height={14}/>
+                          </styled.IconWrapper>
+
+                          <styled.PostTime>{`${new Date(data.result[index].createDate).getHours()+9}:${new Date(data.result[index].createDate).getMinutes()}`}</styled.PostTime>
+                        </styled.PostTopWrapper>
+
+                        <styled.PostImg></styled.PostImg>
+
+                        <styled.PostText>{a.content}</styled.PostText>
+
+                        <styled.PostBotWrapper>
+                          <styled.BotIconWrapper> <HeartIcon width={12} height={12}/></styled.BotIconWrapper>
+                          <styled.BotIconWrapper><CommentIcon width={12} height={12} /></styled.BotIconWrapper>
+                        </styled.PostBotWrapper>
+                      </styled.PostWrapper>
+                  )
+                }
               })
-              :'날짜다름 바인딩안댐'
             }
+            </styled.PostingWrapper>
           </styled.CalendarContent>
         )
        })
@@ -50,6 +77,11 @@ export default function WeekCalendar({startDate,endDate}) {
         <styled.CalendarHead style={{borderTopRightRadius:'10px'}}>
           <styled.SatHeadDate>토 {endDate.format('M/D')}</styled.SatHeadDate>
         </styled.CalendarHead>
+        {
+          data?.result[0].postDate.substring(0,10) === endDate.format().substring(0,10)
+          ? '날짜같음 데이터 바인딩 할게요'
+          :null
+        }
       </styled.CalendarContent>
       
       
