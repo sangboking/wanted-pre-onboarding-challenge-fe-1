@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import InstaS from '../../SvgIcons/InstaS';
 
 export const WeekCalendarWrapper = styled.div`
   margin-top: 2.188rem;
@@ -18,10 +17,13 @@ export const CalendarContent = styled.div`
   width: 9.688rem;
   height: 100%;
   border-right:1px solid #eaeaea;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
   overflow-y: auto;
   &::-webkit-scrollbar {
     width: 0.44rem;
     height:3rem;
+    display: none;
   }
   &::-webkit-scrollbar-thumb{
     background-color: rgba(175, 175, 175, 0.72);
@@ -82,6 +84,9 @@ export const PostingWrapper = styled.div`
   margin-top: 3.125rem;
   padding-top:2.063rem;
   padding-bottom: 1.25rem;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `; 
 
 export const PostWrapper = styled.div`
@@ -89,7 +94,7 @@ export const PostWrapper = styled.div`
   height: 11.875rem;
   border-radius: 5px;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.16);
-  background-color: yellow;
+  background-color: #fff;
   margin-top:1.25rem;
   margin-left:.5rem;
   padding-bottom: .625rem;
