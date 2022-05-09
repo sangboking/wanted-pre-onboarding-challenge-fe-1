@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
-import Home from './Components/Home/Home';
+import Home from './Pages/Home/Home';
 import Join from './Pages/Accounts/Join/Join';
 import Login from './Pages/Accounts/Login/Login';
 import FindId from './Pages/Accounts/FindId/FindId';

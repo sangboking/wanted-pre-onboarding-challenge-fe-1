@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import FaceBookSoff from '../../../SvgIcons/FaceBookSoff';
 import CautionIcon from '../../../SvgIcons/CautionIcon';
-import * as styled from './TwitPostModal.style';
+import * as styled from './TwitPreview.style';
 import TwitS from '../../../SvgIcons/TwitS';
 import InstaSoff from '../../../SvgIcons/InstaSoff';
 import MessageTwitIcon from '../../../SvgIcons/MessageTwitIcon';

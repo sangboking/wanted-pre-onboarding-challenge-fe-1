@@ -7,7 +7,7 @@ import LikeIcon from '../../../SvgIcons/LikeIcon';
 import CommentIcon from '../../../SvgIcons/CommentIcon';
 import ShareIcon from '../../../SvgIcons/ShareIcon';
 import CautionIcon from '../../../SvgIcons/CautionIcon';
-import * as styled from './FbPostModal.style';
+import * as styled from './FbPreview.style';
 import { useRecoilValue } from 'recoil';
 import { postImgPreviewAtom, postTextAtom } from '../../../atom';
 import CautionModal from '../../CautionModal/CautionModal';
