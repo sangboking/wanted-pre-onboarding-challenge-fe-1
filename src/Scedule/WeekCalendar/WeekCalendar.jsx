@@ -141,7 +141,3 @@ export default function WeekCalendar({startDate,endDate}) {
   )
 }
 
-
-
-
-// moment().format() > data.result[index].postDate 
