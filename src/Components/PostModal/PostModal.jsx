@@ -3,10 +3,10 @@ import { useParams } from 'react-router-dom';
 import * as styled from './PostModal.style'
 import { useRecoilState, useRecoilValue, useSetRecoilState} from 'recoil';
 import {postModalAtom} from '../../../atom';
-import FbPostModal from '../../../Components/PostModal/FbPostModal/FbPostModal';
-import InstaPostModal from '../../../Components/PostModal/InstaPostModal/InstaPostModal';
-import TwitPostModal from '../../../Components/PostModal/TwitPostModal/TwitPostModal'
-import PostModalRight from '../../../Components/PostModal/PostModalRight/PostModalRight';
+import FbPostModal from '../../../Components/PostPreview/FbPreview/FbPreview';
+import InstaPostModal from '../../../Components/PostPreview/InstaPreview/InstaPreview';
+import TwitPostModal from '../../../Components/PostPreview/TwitPreview/TwitPreview';
+import PostModalRight from '../../../Components/PostModalRight/PostModalRight';
 import { loadingAtom, postImgAtom, postImgPreviewAtom } from '../../../atom';
 import { Grid } from 'react-loader-spinner';
 import { useQuery } from 'react-query';

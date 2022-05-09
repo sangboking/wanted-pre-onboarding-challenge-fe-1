@@ -3,7 +3,7 @@ import FaceBookSoff from '../../../SvgIcons/FaceBookSoff';
 import InstaS from '../../../SvgIcons/InstaS';
 import TwitSoff from '../../../SvgIcons/TwitSoff';
 import CautionIcon from '../../../SvgIcons/CautionIcon';
-import * as styled from './InstaPostModal.style';
+import * as styled from './InstaPreview.style';
 import InstaLogo from '../../../SvgIcons/InstaLogo';
 import HeartIcon from '../../../SvgIcons/HeartIcon';
 import MessageIcon from '../../../SvgIcons/MessageIcon';

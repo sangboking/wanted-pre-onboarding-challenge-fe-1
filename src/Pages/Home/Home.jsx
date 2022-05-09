@@ -9,7 +9,7 @@ import LinkrLogoNavy from '../../SvgIcons/LinkrLogoNavy';
 import { useQuery } from 'react-query';
 import { addBrand, fbLogin, getAccountInfo, loadFbSdk, setFBAsyncInit } from '../../apis/api';
 import { LoginSocialTwitter } from 'reactjs-social-login';
-import Example from '../Example';
+import Example from './Example';
 
 const Home = () => {
   const [brandModal, setBrandModal] = useState(false);
