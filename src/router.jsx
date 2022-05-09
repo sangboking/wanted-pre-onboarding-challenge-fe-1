@@ -1,27 +1,27 @@
 import React from 'react';
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
 import Home from './Components/Home/Home';
-import Join from './JoinLogin/Join/Join';
-import Login from './JoinLogin/Login/Login';
-import FindId from './JoinLogin/FindId/FindId';
-import FindPw from './JoinLogin/FindPw/FindPw';
-import ConfirmId from './JoinLogin/ConfirmId/ConfirmId';
-import ChangePw from './JoinLogin/ChangePw/ChangePw';
-import JoinOut from './JoinLogin/JoinOut/JoinOut';
+import Join from './Pages/Accounts/Join/Join';
+import Login from './Pages/Accounts/Login/Login';
+import FindId from './Pages/Accounts/FindId/FindId';
+import FindPw from './Pages/Accounts/FindPw/FindPw';
+import ConfirmId from './Pages/Accounts/ConfirmId/ConfirmId';
+import ChangePw from './Pages/Accounts/ChangePw/ChangePw';
+import JoinOut from './Pages/Accounts/JoinOut/JoinOut';
 
-import SceduleWeek from './Scedule/SceduleWeek/SceduleWeek';
-import SceduleMonth from './Scedule/SceduleMonth/SceduleMonth';
-import SceduleStream from './Scedule/SceduleStream/SceduleStream';
+import SceduleWeek from './Pages/Scedule/SceduleWeek/SceduleWeek';
+import SceduleMonth from './Pages/Scedule/SceduleMonth/SceduleMonth';
+import SceduleStream from './Pages/Scedule/SceduleStream/SceduleStream';
 
-import InsightFb from './Insight/InsightFb/InsightFb';
-import InsightInsta from './Insight/InsightInsta/InsightInsta';
-import InsightTwit from './Insight/InsightTwit/InsightTwit';
+import InsightFb from './Pages/Insight/InsightFb/InsightFb';
+import InsightInsta from './Pages/Insight/InsightInsta/InsightInsta';
+import InsightTwit from './Pages/Insight/InsightTwit/InsightTwit';
 
-import InboxMessage from './Inbox/InboxMessage/InboxMessage';
-import InboxComnet from './Inbox/InboxComment/InboxComnet';
+import InboxMessage from './Pages/Inbox/InboxMessage/InboxMessage';
+import InboxComnet from './Pages/Inbox/InboxComment/InboxComnet';
 
-import Connect from './Connect/Connect';
-import MyInfo from './Setting/MyInfo';
+import Connect from './Pages/Connect/Connect';
+import MyInfo from './Pages/Setting/MyInfo';
 
 
 const router = () => {
@@ -49,17 +49,17 @@ const router = () => {
             <Route path='/insightTwit/:brandId' element={<InsightTwit/>}></Route>
 
             {/* Inbox */}
-            <Route path='/inboxMessage' element={<InboxMessage/>}></Route>
-            <Route path='/inboxComment' element={<InboxComnet/>}></Route>
+            <Route path='/inboxMessage/:brandId' element={<InboxMessage/>}></Route>
+            <Route path='/inboxComment/:brandId' element={<InboxComnet/>}></Route>
 
             {/* Connect */}
-            <Route path='/connect' element={<Connect/>}></Route>
+            <Route path='/connect/:brandId' element={<Connect/>}></Route>
 
             {/* Home */}
             <Route path="/" element={<Home/>}/>
 
             {/* Setting */}
-            <Route path='/info' element={<MyInfo/>}></Route>
+            <Route path='/info/:brandId' element={<MyInfo/>}></Route>
            </>
           </Routes>
         </BrowserRouter>
