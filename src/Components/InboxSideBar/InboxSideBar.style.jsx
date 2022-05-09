@@ -158,6 +158,7 @@ export const DropDownComent = styled.h1`
 
 export const IconWrapper = styled.div`
   margin-left:2.2rem;
+  margin-top: .3rem;
   display:flex ;
   align-items:center ;
 `;

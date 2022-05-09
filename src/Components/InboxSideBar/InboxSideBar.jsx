@@ -19,38 +19,37 @@ export default function Sidebar({...props}) {
           </styled.LogoWrapper>
 
           <styled.UserWrapper>
-            <styled.Circle>R</styled.Circle>
             <styled.UserName>Round design</styled.UserName>
           </styled.UserWrapper>
 
           <styled.MenuWrapper>
-            <Link to='/scedule/week' style={{ textDecoration: 'none' }}>
+            <Link to='/sceduleWeek' style={{ textDecoration: 'none' }}>
               <styled.WeekMenu sceduleColor={props.sceduleColor}>
-                <styled.IconWrapper><SceduleIcon width={20} height={20}/></styled.IconWrapper>
+                <styled.IconWrapper><SceduleIcon width={18} height={18}/></styled.IconWrapper>
                 <styled.SceduleMenuName sceduleMenuColor={props.sceduleMenuColor}>스케줄</styled.SceduleMenuName>
               </styled.WeekMenu>
             </Link>
 
-            <Link to='/insight/fb' style={{ textDecoration: 'none' }}>
+            <Link to='/insightFb' style={{ textDecoration: 'none' }}>
               <styled.InsightMenu insightColor={props.insightColor}>
-                <styled.IconWrapper><InsightIcon width={20} height={20}/></styled.IconWrapper>
+                <styled.IconWrapper><InsightIcon width={18} height={18}/></styled.IconWrapper>
                 <styled.InsightMenuName insightMenuColor={props.insightMenuColor}>인사이트</styled.InsightMenuName>
               </styled.InsightMenu>
             </Link>
 
-            <Link to='/inbox/message' style={{ textDecoration: 'none' }}>
+            <Link to='/inboxMssage' style={{ textDecoration: 'none' }}>
               <styled.InboxMenu inboxColor={props.inboxColor}>
-                <styled.IconWrapper><InboxIcon width={20} height={20}/></styled.IconWrapper>
+                <styled.IconWrapper><InboxIcon width={18} height={18}/></styled.IconWrapper>
                 <styled.InboxMenuName inboxMenuColor={props.inboxMenuColor}>인박스</styled.InboxMenuName>              
               </styled.InboxMenu>
               
               <styled.DropwDownWrapper>
                 <styled.DropLine/>
-                <Link to='/inbox/message' style={{ textDecoration: 'none' }}><styled.DropDownMessage>메세지 관리</styled.DropDownMessage></Link>
+                <Link to='/inboxMessage' style={{ textDecoration: 'none' }}><styled.DropDownMessage>메세지 관리</styled.DropDownMessage></Link>
               </styled.DropwDownWrapper>
               
               <styled.DropwDownWrapper style={{marginLeft:'5.25rem'}}>
-                <Link to='/inbox/comment' style={{ textDecoration: 'none' }}><styled.DropDownComent>댓글 관리</styled.DropDownComent></Link>
+                <Link to='/inboxComment' style={{ textDecoration: 'none' }}><styled.DropDownComent>댓글 관리</styled.DropDownComent></Link>
               </styled.DropwDownWrapper> 
             </Link>
 

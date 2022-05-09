@@ -73,7 +73,7 @@ export default function Connect() {
           {/* Facebook 박스 영역 끝 */}
 
 
-          {/* Instargram 박스 영역 시작 */}
+          {/* Instagram 박스 영역 시작 */}
           <styled.SnsBoxNoConnect>
             <styled.SnsBoxTop>
               <styled.SnsIcon><FaceBookS/></styled.SnsIcon>
@@ -84,7 +84,7 @@ export default function Connect() {
               <styled.ConnectIconBox><DotIcon/></styled.ConnectIconBox>
             </styled.SnsAddBox>
           </styled.SnsBoxNoConnect> 
-          {/*Instargram 박스 영역 끝 */}
+          {/*Instagram 박스 영역 끝 */}
 
           
           {/* Twitter 박스 영역 시작 */}

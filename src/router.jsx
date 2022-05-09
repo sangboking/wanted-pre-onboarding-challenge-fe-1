@@ -1,21 +1,25 @@
 import React from 'react';
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
-import FindId from './JoinLogin/FindId';
 import Home from './Components/Home/Home';
-import Join from './JoinLogin/Join';
-import Login from './JoinLogin/Login';
-import FindPw from './JoinLogin/FindPw';
-import ConfirmId from './JoinLogin/ConfirmId';
-import SceduleWeek from './Scedule/SceduleWeek';
-import ChangePw from './JoinLogin/ChangePw';
-import JoinOut from './JoinLogin/JoinOut';
-import SceduleMonth from './Scedule/SceduleMonth';
-import SceduleStream from './Scedule/SceduleStream';
+import Join from './JoinLogin/Join/Join';
+import Login from './JoinLogin/Login/Login';
+import FindId from './JoinLogin/FindId/FindId';
+import FindPw from './JoinLogin/FindPw/FindPw';
+import ConfirmId from './JoinLogin/ConfirmId/ConfirmId';
+import ChangePw from './JoinLogin/ChangePw/ChangePw';
+import JoinOut from './JoinLogin/JoinOut/JoinOut';
+
+import SceduleWeek from './Scedule/SceduleWeek/SceduleWeek';
+import SceduleMonth from './Scedule/SceduleMonth/SceduleMonth';
+import SceduleStream from './Scedule/SceduleStream/SceduleStream';
+
 import InsightFb from './Insight/InsightFb/InsightFb';
+import InsightInsta from './Insight/InsightInsta/InsightInsta';
+import InsightTwit from './Insight/InsightTwit/InsightTwit';
+
 import InboxMessage from './Inbox/InboxMessage/InboxMessage';
 import InboxComnet from './Inbox/InboxComment/InboxComnet';
-import InsightInstar from './Insight/InsightInstar';
-import InsightTwit from './Insight/InsightTwit';
+
 import Connect from './Connect/Connect';
 import MyInfo from './Setting/MyInfo';
 
@@ -35,18 +39,18 @@ const router = () => {
             <Route path="/joinout" element={<JoinOut/>}/>
 
             {/* Scedule */}
-            <Route path="/scedule/week" element={<SceduleWeek/>}/>
-            <Route path="/scedule/month" element={<SceduleMonth/>}/>
-            <Route path="/scedule/stream" element={<SceduleStream/>}/>
+            <Route path="/sceduleWeek/:brandId" element={<SceduleWeek/>}/>
+            <Route path="/sceduleMonth/:brandId" element={<SceduleMonth/>}/>
+            <Route path="/sceduleStream/:brandId" element={<SceduleStream/>}/>
 
             {/* Insight */}
-            <Route path='/insight/fb' element={<InsightFb/>}></Route>
-            <Route path='/insight/instar' element={<InsightInstar/>}></Route>
-            <Route path='/insight/twit' element={<InsightTwit/>}></Route>
+            <Route path='/insightFb/:brandId' element={<InsightFb/>}></Route>
+            <Route path='/insightInsta/:brandId' element={<InsightInsta/>}></Route>
+            <Route path='/insightTwit/:brandId' element={<InsightTwit/>}></Route>
 
             {/* Inbox */}
-            <Route path='/inbox/message' element={<InboxMessage/>}></Route>
-            <Route path='/inbox/comment' element={<InboxComnet/>}></Route>
+            <Route path='/inboxMessage' element={<InboxMessage/>}></Route>
+            <Route path='/inboxComment' element={<InboxComnet/>}></Route>
 
             {/* Connect */}
             <Route path='/connect' element={<Connect/>}></Route>
@@ -56,7 +60,6 @@ const router = () => {
 
             {/* Setting */}
             <Route path='/info' element={<MyInfo/>}></Route>
-
            </>
           </Routes>
         </BrowserRouter>

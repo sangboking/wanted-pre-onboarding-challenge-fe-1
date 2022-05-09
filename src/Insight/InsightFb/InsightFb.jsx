@@ -1,11 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import * as styled from './InsightFb.style';
 import Sidebar from '../../Components/Sidebar/SideBar';
 import CautionIcon from '../../SvgIcons/CautionIcon';
 import DotIcon from '../../SvgIcons/DotIcon';
 import FaceBookS from '../../SvgIcons/FaceBookS';
-import InstarSoff from '../../SvgIcons/InstarSoff';
+import InstaSoff from '../../SvgIcons/InstaSoff';
 import LeftBtnIcon from '../../SvgIcons/LeftBtnIcon';
 import RightBtnIcon from '../../SvgIcons/RightBtnIcon';
 import SceduleIcon from '../../SvgIcons/SceduleIcon';
@@ -15,6 +15,7 @@ import TwitSoff from '../../SvgIcons/TwitSoff';
 export default function InsightFb() {
   const insightColor = '#3C4165';
   const insightMenuColor = '#fbfbfb';
+  const {brandId} = useParams();
   
 
   return (
@@ -25,9 +26,9 @@ export default function InsightFb() {
         <styled.InsightContentWrapper>
           <styled.InsightHeader>
             <styled.IconWrapper>
-              <Link to='/insight/fb'><styled.HeaderIcon style={{marginLeft:'.938rem'}}><FaceBookS/></styled.HeaderIcon></Link>
-              <Link to='/insight/instar'><styled.HeaderIcon><InstarSoff/></styled.HeaderIcon></Link>
-              <Link to='/insight/twit'><styled.HeaderIcon><TwitSoff/></styled.HeaderIcon></Link>
+              <Link to={{pathname:`/insightFb/${brandId}`}}><styled.HeaderIcon style={{marginLeft:'.938rem'}}><FaceBookS/></styled.HeaderIcon></Link>
+              <Link to={{pathname:`/insightInsta/${brandId}`}}><styled.HeaderIcon><InstaSoff/></styled.HeaderIcon></Link>
+              <Link to={{pathname:`/insightTwit/${brandId}`}}><styled.HeaderIcon><TwitSoff/></styled.HeaderIcon></Link>
             </styled.IconWrapper>
 
             <styled.HeaderDateWrapper>

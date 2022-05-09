@@ -2,16 +2,17 @@ import React from 'react'
 
 export default function SmileIcon(props) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" {...props}>
-  <g id="레이어_2" data-name="레이어 2" transform="translate(-2 -2)">
-    <g id="레이어_1" data-name="레이어 1" transform="translate(2.5 2.5)">
-      <circle id="타원_432" data-name="타원 432" cx="8" cy="8" r="8" fill="none" stroke="#191919" stroke-miterlimit="10" stroke-width="1"/>
-      <path id="패스_1206" data-name="패스 1206" d="M29.956,45.75a3.744,3.744,0,0,1-3.2,1.988,3.961,3.961,0,0,1-3.2-1.988" transform="translate(-18.759 -35.988)" fill="none" stroke="#191919" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1"/>
-      <circle id="타원_433" data-name="타원 433" cx="0.38" cy="0.38" r="0.38" transform="translate(3.97 5.398)" fill="none" stroke="#191919" stroke-miterlimit="10" stroke-width="1"/>
-      <circle id="타원_434" data-name="타원 434" cx="0.38" cy="0.38" r="0.38" transform="translate(11.042 5.398)" fill="none" stroke="#191919" stroke-miterlimit="10" stroke-width="1"/>
-    </g>
-  </g>
-</svg>
-
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" {...props}>
+      <g id="레이어_2" data-name="레이어 2" transform="translate(-0.5)">
+        <g id="레이어_1" data-name="레이어 1">
+          <circle id="타원_541" data-name="타원 541" cx="9" cy="9" r="9" transform="translate(1.5 1)" fill="#fff" stroke="#b8b8b8" strokeMiterlimit="10" strokeWidth="2"/>
+          <g id="그룹_4597" data-name="그룹 4597" transform="translate(0.07)">
+            <circle id="타원_542" data-name="타원 542" cx="1" cy="1" r="1" transform="translate(6.93 7.29)" fill="#b8b8b8"/>
+            <circle id="타원_543" data-name="타원 543" cx="1" cy="1" r="1" transform="translate(11.69 7.29)" fill="#b8b8b8"/>
+          </g>
+          <path id="패스_1860" data-name="패스 1860" d="M17.9,11.32a5.3,5.3,0,0,1-5.3,5.28h0a5.3,5.3,0,0,1-5.3-5.3Z" transform="translate(-2.3 -0.3)" fill="#b8b8b8"/>
+        </g>
+      </g>
+    </svg>
   )
 }

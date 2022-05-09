@@ -1,10 +1,23 @@
 import {atom} from 'recoil';
-import { recoilPersist } from 'recoil-persist';
 
-const { persistAtom } = recoilPersist();
-
-export const userInfoAtom = atom({
-  key:"userInfo",
-  default:'',
-  effects_UNSTABLE: [persistAtom]
+export const postTextAtom = atom({
+  key:"postText",
+  default:``
 })
+
+export const postImgAtom = atom({
+  key:"postImg",
+  default:null,
+  dangerouslyAllowMutability: true
+})
+
+export const postImgPreviewAtom = atom({
+  key:"postImgPreview",
+  default:[]
+})
+
+export const loadingAtom = atom({
+  key:"loading",
+  default:false
+})
+

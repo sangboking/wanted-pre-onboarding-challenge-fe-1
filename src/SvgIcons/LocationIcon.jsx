@@ -2,20 +2,31 @@ import React from 'react'
 
 export default function LocationIcon(props) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="9.954" height="16" viewBox="0 0 9.954 16" {...props}>
-      <g id="그룹_1964" data-name="그룹 1964" transform="translate(-673.443 -1095.599)">
-        <g id="그룹_1946" data-name="그룹 1946" transform="translate(673.443 1095.599)">
-          <g id="합치기_7" data-name="합치기 7" transform="translate(0 0)" fill="none">
-            <path d="M4.325,15.574.656,7.448A4.976,4.976,0,1,1,9.644,6.71a.666.666,0,0,1-.047.144l-3.968,8.72a.711.711,0,0,1-1.3,0Z" stroke="none"/>
-            <path d="M 4.978056907653809 14.58938026428223 L 8.670456886291504 6.474965572357178 L 8.676536560058594 6.442240238189697 L 8.706466674804688 6.361589908599854 C 8.870515823364258 5.919559955596924 8.953696250915527 5.453670024871826 8.953696250915527 4.976850032806396 C 8.953696250915527 2.78400993347168 7.16978645324707 1 4.97705602645874 1 C 2.784096240997314 1 0.9999962449073792 2.78400993347168 0.9999962449073792 4.976850032806396 C 0.9999962449073792 5.670279979705811 1.181066274642944 6.352739810943604 1.523636221885681 6.95044994354248 L 1.54758620262146 6.992249965667725 L 4.978056907653809 14.58938026428223 M 4.97705602645874 16 C 4.713296413421631 16 4.449526309967041 15.85816955566406 4.325476169586182 15.57408046722412 L 0.6560262441635132 7.447700023651123 C 0.2387862205505371 6.719699859619141 -3.781890882237349e-06 5.876110076904297 -3.781890882237349e-06 4.976850032806396 C -3.781890882237349e-06 2.228679895401001 2.228886127471924 0 4.97705602645874 0 C 7.725856304168701 0 9.953696250915527 2.228679895401001 9.953696250915527 4.976850032806396 C 9.953696250915527 5.586090087890625 9.844245910644531 6.169929981231689 9.643985748291016 6.709529876708984 C 9.63615608215332 6.751659870147705 9.620706558227539 6.799290180206299 9.596786499023438 6.853700160980225 L 5.628646373748779 15.57408046722412 C 5.504376411437988 15.85816955566406 5.240616321563721 16 4.97705602645874 16 Z" stroke="none" fill="#191919"/>
-          </g>
-          <g id="타원_461" data-name="타원 461" transform="translate(2.133 2.133)" fill="none" stroke="#191919" stroke-width="1">
-            <circle cx="2.844" cy="2.844" r="2.844" stroke="none"/>
-            <circle cx="2.844" cy="2.844" r="2.344" fill="none"/>
-          </g>
+    <svg xmlns="http://www.w3.org/2000/svg" width="12.151" height="19.477" viewBox="0 0 12.151 19.477" {...props}>
+      <g id="레이어_2" data-name="레이어 2" transform="translate(0.014 0.007)">
+        <g id="레이어_1" data-name="레이어 1">
+          <path id="패스_1861" data-name="패스 1861" d="M6.61,1A1.048,1.048,0,0,1,7,1.05.755.755,0,0,1,6.61,1Z" fill="none" stroke="#b8b8b8" strokeLinejoin="round" strokeWidth="2"/>
+          <path id="패스_1862" data-name="패스 1862" d="M7.63,1.26l.29.1Z" fill="none" stroke="#b8b8b8" strokeLinejoin="round" strokeWidth="2"/>
+          <path id="패스_1863" data-name="패스 1863" d="M5.51,1a5.28,5.28,0,0,1,.55,0,5.28,5.28,0,0,0-.55,0Z" fill="none" stroke="#b8b8b8" strokeLinejoin="round" strokeWidth="2"/>
+          <path id="패스_1864" data-name="패스 1864" d="M2.67,2.32a5,5,0,0,1,.68-.53,5.14,5.14,0,0,0-.68.53Z" fill="none" stroke="#b8b8b8" strokeLinejoin="round" strokeWidth="2"/>
+          <path id="패스_1865" data-name="패스 1865" d="M4.49,1.26c.21-.06.42-.13.63-.17C4.91,1.13,4.7,1.2,4.49,1.26Z" fill="none" stroke="#b8b8b8" strokeLinejoin="round" strokeWidth="2"/>
+          <path id="패스_1866" data-name="패스 1866" d="M8.59,1.69l.18.1Z" fill="none" stroke="#b8b8b8" strokeLinejoin="round" strokeWidth="2"/>
+          <path id="패스_1867" data-name="패스 1867" d="M4,1.43H4a5,5,0,0,0-.46.26,5.21,5.21,0,0,1,.67-.33Z" fill="none" stroke="#b8b8b8" strokeLinejoin="round" strokeWidth="2"/>
+          <path id="패스_1868" data-name="패스 1868" d="M9.45,2.32l.06.05Z" fill="none" stroke="#b8b8b8" strokeLinejoin="round" strokeWidth="2"/>
+          <path id="패스_1869" data-name="패스 1869" d="M2.61,2.37a4.88,4.88,0,0,0-1.31,2L1.46,4A5.2,5.2,0,0,1,2.61,2.37Z" fill="none" stroke="#b8b8b8" strokeLinejoin="round" strokeWidth="2"/>
+          <path id="패스_1870" data-name="패스 1870" d="M4.2,1.36l.29-.1Z" fill="none" stroke="#b8b8b8" strokeLinejoin="round" strokeWidth="2"/>
+          <path id="패스_1871" data-name="패스 1871" d="M8.13,1.43l-.21-.07a4.64,4.64,0,0,1,.67.33,5,5,0,0,0-.46-.26Z" fill="none" stroke="#b8b8b8" strokeLinejoin="round" strokeWidth="2"/>
+          <path id="패스_1872" data-name="패스 1872" d="M3.35,1.79l.18-.1Z" fill="none" stroke="#b8b8b8" strokeLinejoin="round" strokeWidth="2"/>
+          <path id="패스_1873" data-name="패스 1873" d="M2.61,2.37l.06-.05Z" fill="none" stroke="#b8b8b8" strokeLinejoin="round" strokeWidth="2"/>
+          <path id="패스_1874" data-name="패스 1874" d="M8.77,1.79a5,5,0,0,1,.68.53,5.14,5.14,0,0,0-.68-.53Z" fill="none" stroke="#b8b8b8" strokeLinejoin="round" strokeWidth="2"/>
+          <path id="패스_1875" data-name="패스 1875" d="M5.12,1.09a1.048,1.048,0,0,0,.39-.05C5.38,1.06,5.25,1.06,5.12,1.09Z" fill="none" stroke="#b8b8b8" strokeLinejoin="round" strokeWidth="2"/>
+          <path id="패스_1876" data-name="패스 1876" d="M7,1.09a5.79,5.79,0,0,1,.63.17C7.42,1.2,7.21,1.13,7,1.09Z" fill="none" stroke="#b8b8b8" strokeLinejoin="round" strokeWidth="2"/>
+          <path id="패스_1877" data-name="패스 1877" d="M6.06,1a5.09,5.09,0,0,1,.55,0,5.28,5.28,0,0,0-.55,0Z" fill="none" stroke="#b8b8b8" strokeLinejoin="round" strokeWidth="2"/>
+          <path id="패스_1878" data-name="패스 1878" d="M10.82,4.36a4.88,4.88,0,0,0-1.31-2A5.2,5.2,0,0,1,10.66,4Z" fill="none" stroke="#b8b8b8" strokeLinejoin="round" strokeWidth="2"/>
+          <path id="패스_1879" data-name="패스 1879" d="M10.82,4.36,10.66,4A5.2,5.2,0,0,0,9.51,2.37l-.06-.05a5,5,0,0,0-.68-.53l-.18-.1a4.64,4.64,0,0,0-.67-.33l-.29-.1A5.79,5.79,0,0,0,7,1.09a1.048,1.048,0,0,1-.39-.05,5.09,5.09,0,0,0-.55,0,5.28,5.28,0,0,0-.55,0,1.048,1.048,0,0,0-.39.05c-.13.05-.42.11-.63.17l-.29.1a5.21,5.21,0,0,0-.67.33l-.18.1a5,5,0,0,0-.68.53l-.06.05A5.2,5.2,0,0,0,1.46,4l-.16.38A5,5,0,0,0,1.43,8.1L6.06,18.47,10.69,8.1a5,5,0,0,0,.13-3.74Z" fill="none" stroke="#b8b8b8" strokeLinejoin="round" strokeWidth="2"/>
+          <circle id="타원_544" data-name="타원 544" cx="1.82" cy="1.82" r="1.82" transform="translate(4.24 4.16)" fill="none" stroke="#b8b8b8" strokeMiterlimit="10" strokeWidth="2"/>
         </g>
       </g>
     </svg>
-
-      )
+  )
 }
