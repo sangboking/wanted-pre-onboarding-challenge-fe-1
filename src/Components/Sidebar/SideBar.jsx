@@ -6,15 +6,16 @@ import InboxIcon from '../../SvgIcons/InboxIcon';
 import SettingIcon from '../../SvgIcons/SettingIcon';
 import Interlock from '../../SvgIcons/Interlock'
 import LinkrLogoSvg from '../../SvgIcons/LinkrLogoSvg';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useLocation } from 'react-router-dom';
 import { getDetailBrand } from '../../apis/api';
 import { useQuery } from 'react-query';
 import { useRecoilValue } from 'recoil';
-import { postModalAtom } from '../../Scedule/SceduleAtoms';
+import { postModalAtom } from '../../atom';
 
 export default function Sidebar({...props}) {
   const postModal = useRecoilValue(postModalAtom);
   const {brandId} = useParams();
+  const location = useLocation();
 
   const {data,isLoading} = useQuery('detailBrandInfo', () => getDetailBrand(brandId),
   {
@@ -29,7 +30,7 @@ export default function Sidebar({...props}) {
           </styled.LogoWrapper>
 
           <styled.BrandNameWrapper>
-            {isLoading ? null : <styled.UserName>{data.result.brandName}</styled.UserName>}
+            {isLoading ? null : <styled.UserName>{data?.result.brandName}</styled.UserName>}
           </styled.BrandNameWrapper>
 
           <styled.MenuWrapper>
@@ -47,22 +48,38 @@ export default function Sidebar({...props}) {
               </styled.InsightMenu>
             </Link>
 
-            <Link to='/inboxMessage' style={{ textDecoration: 'none' }}>
+            <Link to={{pathname:`/inboxmessage/${brandId}`}} style={{ textDecoration: 'none' }}>
               <styled.InboxMenu inboxColor={props.inboxColor}>
                 <styled.IconWrapper><InboxIcon width={16} height={16}/></styled.IconWrapper>
                 <styled.InboxMenuName inboxMenuColor={props.inboxMenuColor}>인박스</styled.InboxMenuName>              
               </styled.InboxMenu>
+
+              {
+                location.pathname === `/inboxmessage/${brandId}` || location.pathname === `/inboxcomment/${brandId}` ? 
+                <>
+                  <styled.DropwDownWrapper style={location.pathname === `/inboxmessage/${brandId}` ? {marginLeft:'0'} : {marginLeft:'5.25rem'}}>
+                    {location.pathname === `/inboxmessage/${brandId}` && <styled.DropLine/>}
+                    <Link to={{pathname:`/inboxmessage/${brandId}`}} style={{ textDecoration: 'none' }}><styled.DropDownMessage>메세지 관리</styled.DropDownMessage></Link>
+                  </styled.DropwDownWrapper>
+                  
+                  <styled.DropwDownWrapper style={location.pathname === `/inboxcomment/${brandId}` ? {marginLeft:'0'} : {marginLeft:'5.25rem'}}>
+                    {location.pathname === `/inboxcomment/${brandId}` && <styled.DropLine/>}
+                    <Link to={{pathname:`/inboxcomment/${brandId}`}} style={{ textDecoration: 'none' }}><styled.DropDownComent>댓글 관리</styled.DropDownComent></Link>
+                  </styled.DropwDownWrapper> 
+                </>
+                :null
+              }
             </Link>
 
             <styled.SettingWrapper>
-              <Link to='/info' style={{ textDecoration: 'none' }}>
+              <Link to={{pathname:`/info/${brandId}`}} style={{ textDecoration: 'none' }}>
                 <styled.SettingMenu InfoMenuColor={props.InfoMenuColor}>
                   <styled.IconWrapper><SettingIcon width={16} height={16}/></styled.IconWrapper>
                   <styled.SettingMenuName InfoNameColor={props.InfoNameColor}>설정</styled.SettingMenuName>
                 </styled.SettingMenu>
               </Link>
               
-              <Link to='/connect' style={{ textDecoration: 'none' }}>
+              <Link to={{pathname:`/connect/${brandId}`}} style={{ textDecoration: 'none' }}>
                 <styled.ConnectMenu MenuColor={props.MenuColor}>
                   <styled.IconWrapper><Interlock width={16} height={16}/></styled.IconWrapper>
                   <styled.ConnectMenuName NameColor={props.NameColor}>연동</styled.ConnectMenuName>

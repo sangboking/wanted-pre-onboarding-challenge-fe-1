@@ -21,3 +21,33 @@ export const loadingAtom = atom({
   default:false
 })
 
+export const postModalAtom = atom({
+  key:"postModal",
+  default:false
+})
+
+export const sceduleColorAtom = atom({
+  key:"sceduleColor",
+  default:'#3C4165'
+})
+
+export const sceduleMenuColorAtom = atom({
+  key:"sceduleMenuColor",
+  default:'#fbfbfb'
+})
+
+export const inboxMenuColorAtom = atom({
+  key:"inboxMenuColor",
+  default:'#fbfbfb'
+})
+
+export const inboxColorAtom = atom({
+  key:"inboxColor",
+  default:'#3C4165'
+})
+
+export const inboxDropAtom = atom({
+  key:"inboxDrop",
+  default:false
+})
+
