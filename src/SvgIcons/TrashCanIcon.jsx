@@ -1,8 +1,8 @@
 import React from 'react'
 
-export default function TrashCanIcon() {
+export default function TrashCanIcon(props) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="14.259" height="15.231" viewBox="0 0 14.259 15.231">
+    <svg xmlns="http://www.w3.org/2000/svg" width="14.259" height="15.231" viewBox="0 0 14.259 15.231" {...props}>
       <g id="레이어_2" data-name="레이어 2" transform="translate(0.15 0.15)">
         <g id="레이어_1" data-name="레이어 1" transform="translate(0.35 0.35)">
           <path id="패스_1542" data-name="패스 1542" d="M11.907,4.51v8.981a.731.731,0,0,1-.764.709H2.555a.742.742,0,0,1-.775-.709V5.579" transform="translate(-0.219 0.03)" fill="none" stroke="#191919" strokeLinecap="round" strokeMiterlimit="10" strokeWidth="1"/>

@@ -1,9 +1,16 @@
 import React from 'react'
 import * as styled from './MonthCalendar.style'
 import moment from 'moment';
+import { useParams } from 'react-router-dom';
+import { useQuery } from 'react-query';
+import { getPost } from '../../../apis/api';
 
 export default function MonthCalendar({firstWeek,lastWeek,today}) {
-  const calendarArr=()=>{
+  const { brandId } = useParams();
+
+  const {data} = useQuery('getPost', () => getPost(brandId));
+
+  const calendarArr = () => {
 
     let result = [];
     let week = firstWeek;
@@ -13,7 +20,7 @@ export default function MonthCalendar({firstWeek,lastWeek,today}) {
           {
             // eslint-disable-next-line no-loop-func
             Array(7).fill(0).map((data, index) => {
-              let days = today.clone().startOf('year').week(week).startOf('week').add(index, 'day'); //d로해도되지만 직관성
+              let days = today.clone().startOf('year').week(week).startOf('week').add(index, 'day');
 
               if(moment().format('YYYYMMDD') === days.format('YYYYMMDD')){
                 return(
@@ -44,7 +51,6 @@ export default function MonthCalendar({firstWeek,lastWeek,today}) {
 
   
   return (
-    
      <styled.CalendarWrapper>
       <styled.CalendarTable>
         <styled.CalendarThead>
@@ -66,22 +72,6 @@ export default function MonthCalendar({firstWeek,lastWeek,today}) {
         
       </styled.CalendarTable>
      </styled.CalendarWrapper>
-   
   )
 }
 
-
-
-// {month.map((a,i)=>{
-//   return(
-//     <CalendarTr key={i}>
-//       <CalendarTh2 scope='col' style={{color:"#e31100"}}></CalendarTh2>
-//       <CalendarTh2 scope='col'></CalendarTh2>
-//       <CalendarTh2 scope='col'></CalendarTh2>
-//       <CalendarTh2 scope='col'></CalendarTh2>
-//       <CalendarTh2 scope='col'></CalendarTh2>
-//       <CalendarTh2 scope='col'></CalendarTh2>
-//       <CalendarTh2 scope='col' style={{color:"#007aff"}}></CalendarTh2>
-//     </CalendarTr>
-//   )
-// })}

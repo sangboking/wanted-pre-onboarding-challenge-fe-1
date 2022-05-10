@@ -214,6 +214,7 @@ export const StreamBoxDate = styled.h1`
 export const StreamIcon = styled.div`
   margin-left:2.563rem;
   cursor: pointer;
+  position: relative;
 `;
 
 export const StreamNote = styled.div`
@@ -234,7 +235,7 @@ export const NoteWrapper = styled.div`
 export const NoteTopLeft = styled.div`
   width:50%;
   height: 3.25rem;
-  background-color: #eef3ff;
+  background-color: ${props => props.streamTab === 1 ? '#eef3ff' : '#fff'};
   border-top-left-radius: 10px;
   border-right: 1px solid #e4e4e4;
   border-bottom: 1px solid #e4e4e4;
@@ -254,7 +255,7 @@ export const NoteTopLeft = styled.div`
 export const NoteTopRight = styled.div`
   width:50%;
   height: 3.25rem;
-  background-color: #eef3ff;
+  background-color: ${props => props.streamTab === 2 ? '#eef3ff' : '#fff'};
   border-top-right-radius: 10px;
   border-bottom: 1px solid #e4e4e4;
   display:flex ;

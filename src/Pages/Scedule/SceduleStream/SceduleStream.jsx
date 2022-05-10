@@ -5,7 +5,7 @@ import Sidebar from '../../../Components/Sidebar/SideBar';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { postModalAtom, sceduleColorAtom, sceduleMenuColorAtom } from '../../../atom';
 import moment from 'moment';
-import PostModal from '../PostModal/PostModal';
+import PostModal from '../../../Components/PostModal/PostModal';
 import CloseIcon from '../../../SvgIcons/CloseIcon';
 import PostingIcon from '../../../SvgIcons/PostingIcon';
 import LeftBtnIcon from '../../../SvgIcons/LeftBtnIcon';
@@ -17,9 +17,12 @@ import DotdotdotIcon from '../../../SvgIcons/DotdotdotIcon';
 import { useQuery } from 'react-query';
 import { postImgAtom, postImgPreviewAtom, postTextAtom } from '../../../atom';
 import {  getPost } from '../../../apis/api';
+import StreamModal from '../../../Components/StreamModal/StreamModal';
 
 
 export default function SceduleStream() {
+  const [modalState, setModalState] = useState();
+  const [streamTab, setStreamTab] = useState(1);
   const [postModal,setPostModal] = useRecoilState(postModalAtom);
   const setPostImgPreview = useSetRecoilState(postImgPreviewAtom);
   const setPostImg = useSetRecoilState(postImgAtom);
@@ -53,10 +56,9 @@ export default function SceduleStream() {
       
     }
   );
-
   
   return (
-    <styled.Wrapper  postModal={postModal}>
+    <styled.Wrapper postModal={postModal}>
       <Sidebar sceduleColor={sceduleColor} sceduleMenuColor={sceduleMenuColor}/>
 
       <styled.ContentWrapper>
@@ -84,24 +86,31 @@ export default function SceduleStream() {
             {
               fbPostLoading ? <h1>페이스북 게시글을 불러오는 중입니다..</h1> :
                 fbPost?.result.map((post,i) => {
-                  
                   return (
                     <styled.StreamContentWrapper key={i}>
                       
                       <styled.StreamBox>
                         <styled.StreamBoxTitle>
                           <styled.StreamBoxTitleIcon>
-                            <styled.StreamSnsIcon><FaceBookS/></styled.StreamSnsIcon>
-                            <styled.StreamSnsIcon><InstaS/></styled.StreamSnsIcon>
-                            <styled.StreamSnsIcon><TwitS/></styled.StreamSnsIcon>
+                            <styled.StreamSnsIcon><FaceBookS width={17} height={17}/></styled.StreamSnsIcon>
+                            <styled.StreamSnsIcon><InstaS width={17} height={17}/></styled.StreamSnsIcon>
+                            <styled.StreamSnsIcon><TwitS width={17} height={17}/></styled.StreamSnsIcon>
                           </styled.StreamBoxTitleIcon>
                           <styled.StreamBoxDate>
                             {
                             `${new Date(post.postDate).getFullYear()}년 ${new Date(post.postDate).getMonth()+1}월 ${new Date(post.postDate).getDate()}일 ${new Date(post.postDate).getHours()+9}:${new Date(post.postDate).getMinutes()}`
                             }
-                            <styled.StreamIcon>
+                            <styled.StreamIcon onClick={() => 
+                            {
+                              setModalState(i);
+                            }}>
                               <DotdotdotIcon width={30} height={30}/>
+
+                              { modalState === i && <StreamModal /> }
                             </styled.StreamIcon>
+
+                            
+
                           </styled.StreamBoxDate>
                         </styled.StreamBoxTitle> 
 
@@ -113,8 +122,8 @@ export default function SceduleStream() {
                       
                       <styled.StreamNote>
                         <styled.NoteWrapper>
-                          <styled.NoteTopLeft>NOTE</styled.NoteTopLeft>
-                          <styled.NoteTopRight>HISTORY</styled.NoteTopRight>
+                          <styled.NoteTopLeft onClick={() => {setStreamTab(1)}} streamTab={streamTab}>NOTE</styled.NoteTopLeft>
+                          <styled.NoteTopRight onClick={() => {setStreamTab(2)}} streamTab={streamTab}>HISTORY</styled.NoteTopRight>
                         </styled.NoteWrapper>
                         
                         <styled.NoteBottomWrapper placeholder='노트를 입력하고 엔터를 누르세요.'>
@@ -123,7 +132,7 @@ export default function SceduleStream() {
                       </styled.StreamNote>
                     </styled.StreamContentWrapper>
                   )
-                })
+              })
             }
             
           </styled.StreamWrapper>

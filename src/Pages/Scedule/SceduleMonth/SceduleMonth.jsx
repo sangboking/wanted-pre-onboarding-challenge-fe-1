@@ -8,7 +8,7 @@ import MonthCalendar from '../MonthCalendar/MonthCalendar';
 import moment from 'moment';
 import LeftBtnIcon from '../../../SvgIcons/LeftBtnIcon';
 import RightBtnIcon from '../../../SvgIcons/RightBtnIcon';
-import PostModal from '../PostModal/PostModal';
+import PostModal from '../../../Components/PostModal/PostModal';
 import CloseIcon from '../../../SvgIcons/CloseIcon';
 import PostingIcon from '../../../SvgIcons/PostingIcon';
 import { postImgAtom, postImgPreviewAtom, postTextAtom } from '../../../atom';
