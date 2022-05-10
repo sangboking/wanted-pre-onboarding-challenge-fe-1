@@ -241,3 +241,38 @@ export const ConnectMenu = styled.div`
     background-color: ${props => props.theme.hoverNavyColor};
   }
 `;
+
+export const DropwDownWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top:1.438rem ;
+`;
+
+export const DropLine = styled.div`
+  width: 4.062rem;
+  height:1px;
+  background-color:#eaeaea ;
+  margin-right: 1.188rem;
+`;
+
+export const DropDownMessage = styled.h1`
+  cursor: pointer;
+  font-size: 0.938rem;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #fbfbfb;
+`;
+
+export const DropDownComent = styled.h1`
+  cursor: pointer;
+  font-size: 0.938rem;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #fbfbfb;
+`;
