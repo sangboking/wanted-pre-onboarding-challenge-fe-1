@@ -159,7 +159,5 @@ export default function WeekCalendar({startDate,endDate}) {
     </styled.WeekCalendarWrapper>
   )
 }
-<<<<<<< HEAD:src/Scedule/WeekCalendar/WeekCalendar.jsx
-=======
 
->>>>>>> 8bfe1c65e7f0aef352c97711aa2ef44acb5d132d:src/Pages/Scedule/WeekCalendar/WeekCalendar.jsx
+
