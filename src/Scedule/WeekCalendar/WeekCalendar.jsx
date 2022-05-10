@@ -136,12 +136,5 @@ export default function WeekCalendar({startDate,endDate}) {
       
       
     </styled.WeekCalendarWrapper>
-
-    
   )
 }
-
-
-
-
-// moment().format() > data.result[index].postDate 
