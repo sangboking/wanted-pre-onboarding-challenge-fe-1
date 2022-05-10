@@ -10,7 +10,7 @@ import PostingIcon from '../../../SvgIcons/PostingIcon';
 import LeftBtnIcon from '../../../SvgIcons/LeftBtnIcon';
 import RightBtnIcon from '../../../SvgIcons/RightBtnIcon';
 import CloseIcon from '../../../SvgIcons/CloseIcon';
-import PostModal from '../PostModal/PostModal';
+import PostModal from '../../../Components/PostModal/PostModal';
 import { postImgAtom, postImgPreviewAtom, postTextAtom } from '../../../atom';
 
 export default function SceduleWeek() {

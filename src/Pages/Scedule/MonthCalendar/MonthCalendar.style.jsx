@@ -32,13 +32,9 @@ export const CalendarTable = styled.table`
 `;
 
 
-export const CalendarThead = styled.thead`
-  
-`;
+export const CalendarThead = styled.thead``;
 
-export const CalendarTr = styled.tr`
-  
-`;
+export const CalendarTr = styled.tr``;
 
 export const CalendarTh = styled.th`
   background-color:  #eef3ff;

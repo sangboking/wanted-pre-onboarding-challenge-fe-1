@@ -21,7 +21,14 @@ export default function WeekCalendar({startDate,endDate}) {
     <styled.WeekCalendarWrapper>
       <styled.CalendarContent style={moment().format('YYYY-MM-DD') > startDate.clone().add(0,'days').format('YYYY-MM-DD') ? {backgroundColor:'#f8f8f8',borderBottomLeftRadius:'15px'} : {backgroundColor:'#fff',borderBottomLeftRadius:'15px'}}>
         <styled.CalendarHead style={{borderTopLeftRadius:'14px'}}>
-          <styled.SunHeadDate>일 {startDate.format('M/D')}</styled.SunHeadDate> 
+          <styled.HeadDateWrapper>
+            {
+              moment().format('YYYY-MM-DD') === startDate.format('YYYY-MM-DD') && <styled.FocusCircle />
+            }
+            <styled.SunHeadDate style={moment().format('YYYY-MM-DD') === startDate.format('YYYY-MM-DD') ? {fontWeight:'500'} : {fontWeight:'400'} }>
+              일 {startDate.format('M/D')}
+            </styled.SunHeadDate>
+          </styled.HeadDateWrapper> 
         </styled.CalendarHead>
         <styled.PostingWrapper >
         {
@@ -60,7 +67,14 @@ export default function WeekCalendar({startDate,endDate}) {
           return(
             <styled.CalendarContent key={i} style={moment().format('YYYY-MM-DD') > startDate.clone().add(i+1,'days').format('YYYY-MM-DD') ? {backgroundColor:'#f8f8f8'} : {backgroundColor:'#fff'}}>
               <styled.CalendarHead >
-                <styled.HeadDate>{day} {startDate.clone().add(i+1,'days').format('M/D')}</styled.HeadDate>
+               <styled.HeadDateWrapper>
+                {
+                 moment().format('YYYY-MM-DD') === startDate.clone().add(i+1,'days').format('YYYY-MM-DD') && <styled.FocusCircle />
+                }
+                <styled.HeadDate style={moment().format('YYYY-MM-DD') === startDate.clone().add(i+1,'days').format('YYYY-MM-DD') ? {fontWeight:'500'} : {fontWeight:'400'} }>
+                  {day} {startDate.clone().add(i+1,'days').format('M/D')}
+                </styled.HeadDate>
+               </styled.HeadDateWrapper>
               </styled.CalendarHead>
               <styled.PostingWrapper>
               {
@@ -99,7 +113,14 @@ export default function WeekCalendar({startDate,endDate}) {
 
       <styled.CalendarContent style={moment().format('YYYY-MM-DD') > endDate.clone().add(0,'days').format('YYYY-MM-DD') ? {backgroundColor:'#f8f8f8',borderBottomRightRadius:'15px'} : {backgroundColor:'#fff',borderBottomRightRadius:'15px'}}>
         <styled.CalendarHead style={{borderTopRightRadius:'10px'}}>
-          <styled.SatHeadDate>토 {endDate.format('M/D')}</styled.SatHeadDate>
+          <styled.HeadDateWrapper>
+            {
+              moment().format('YYYY-MM-DD') === endDate.format('YYYY-MM-DD') && <styled.FocusCircle />
+            }
+            <styled.SatHeadDate style={moment().format('YYYY-MM-DD') === endDate.format('YYYY-MM-DD') ? {fontWeight:'500'} : {fontWeight:'400'} }>
+              토 {endDate.format('M/D')}
+            </styled.SatHeadDate>
+          </styled.HeadDateWrapper> 
         </styled.CalendarHead>
         <styled.PostingWrapper>
         {

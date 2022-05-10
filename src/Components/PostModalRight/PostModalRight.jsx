@@ -45,7 +45,6 @@ export default function PostModalRight({...props}) {
   const uploadFile = (e) => {
     const imgArr = Array.from(e.target.files);
     setImgFile(imgArr);
-    console.log(imgArr);
     setPostImgPreview([]);
     for(let i=0; i<e.target.value.length; i++){
       if(e.target.files[i]){
@@ -79,8 +78,7 @@ export default function PostModalRight({...props}) {
         }
       })
       .then((response) => {
-        console.log(response);
-        imgInfo = response.data.result
+        imgInfo = response.data.result;
       })
     }
     const postData = {
@@ -94,7 +92,6 @@ export default function PostModalRight({...props}) {
     }
     await axios.post(`/api/brands/${brandId}/posts`, JSON.stringify(postData),{headers:{"Content-Type":`application/json`}})
     .then((response) => {
-      console.log(response);
       setLoading(false);
       toast.success("페이스북에 글을 게시하였습니다!",{
         position: toast.POSITION.TOP_CENTER,

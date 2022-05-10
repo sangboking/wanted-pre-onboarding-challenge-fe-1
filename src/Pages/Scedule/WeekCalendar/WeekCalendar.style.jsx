@@ -47,9 +47,21 @@ export const CalendarHead = styled.div`
   z-index: 5;
 `;
 
+export const FocusCircle = styled.div`
+  width: 0.25rem;
+  height: 0.25rem;
+  background-color: #007aff;
+  border-radius: 15px;
+  margin-right: .2rem;
+`;
+
+export const HeadDateWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 export const SunHeadDate = styled.h1`
   font-size: 0.875rem;
-  font-weight: normal;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
@@ -59,7 +71,6 @@ export const SunHeadDate = styled.h1`
 
 export const SatHeadDate = styled.h1`
   font-size: 0.875rem;
-  font-weight: normal;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
@@ -69,7 +80,6 @@ export const SatHeadDate = styled.h1`
 
 export const HeadDate = styled.h1`
   font-size: 0.875rem;
-  font-weight: normal;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
