@@ -1,0 +1,103 @@
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
+export default function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if(window.localStorage.getItem('loginToken')){
+      navigate('/');
+    };
+  },[]);
+
+  const onChangeEmail = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const onChangePassword = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const onClickLogin = () => {
+    axios.post(`http://localhost:8080/users/login`,{
+      email : email,
+      password : password
+    })
+    .then((response) => {
+      localStorage.setItem('loginToken',response.data.token);
+      alert('로그인에 성공하였습니다!');
+      navigate('/');
+    });
+  };
+
+  return (
+    <LoginWrapper>
+      <Title>원티드 프리온보딩 로그인</Title>
+ 
+      <InputBox>
+          <InputLabel>이메일</InputLabel>
+          <EmailPwInput value={email} onChange={onChangeEmail}/>
+        </InputBox>
+
+        <InputBox>
+          <InputLabel>비밀번호</InputLabel>
+          <EmailPwInput type='password' value={password} onChange={onChangePassword}/>
+        </InputBox>
+
+        <JoinButton onClick={onClickLogin}>로그인</JoinButton>
+    </LoginWrapper>
+  )
+};
+
+const LoginWrapper = styled.div`
+  width: 100%;
+  height: 100vh;
+  margin: 0 auto;
+  background-color: yellow;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Title = styled.h1`
+  font-size: 1.2rem;
+`;
+
+const InputBox = styled.section`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+`;
+
+const InputLabel = styled.label`
+  font-size: .8rem;
+  margin-right: 1rem;
+`;
+
+const EmailPwInput = styled.input`
+  width: 10rem;
+  height: 2rem;
+  border-radius: 15px;
+  border:1px solid  #eaeaea;
+`;
+
+const JoinButton = styled.button`
+  width: 7rem;
+  height: 2rem;
+  background-color: navy;
+  color:#fff;
+  border-radius: 15px;
+  border:1px solid  #eaeaea;
+  margin: 0 auto;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+`;
