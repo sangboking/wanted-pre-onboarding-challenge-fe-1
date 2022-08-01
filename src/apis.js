@@ -1,6 +1,6 @@
 import axios from "axios";
 
-// todo Id 가져오기
+// todo id로 단일조회
 export const getTodoId = (id, loginToken) => {
   return axios.get(`http://localhost:8080/todos/${id}`,
   {

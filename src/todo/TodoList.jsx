@@ -67,7 +67,7 @@ export default function TodoList() {
   const onClickDetailTodo = (id) => {
     getTodoId(id)
     .then(() => {
-
+      navigate(`/todo/${id}`)
     })
   };
 
@@ -93,8 +93,16 @@ export default function TodoList() {
 
       <AddTodoSection>
         <InputBox>
-          <AddTodoInput value={todoTitle} placeholder='제목을 입력해 주세요!' onChange={onChangeTodoTitle}/>
-          <AddTodoInput value={todoContent} placeholder='할일을 입력해 주세요!' onChange={onChangeTodoContent}/>
+          <AddTodoInput 
+            value={todoTitle} 
+            placeholder='제목을 입력해 주세요!' 
+            onChange={onChangeTodoTitle}
+          />
+          <AddTodoInput 
+            value={todoContent} 
+            placeholder='할일을 입력해 주세요!' 
+            onChange={onChangeTodoContent}
+          />
         </InputBox>
 
         <AddTodoButton
@@ -148,7 +156,7 @@ export default function TodoList() {
                   }
 
                   <Button
-                    onClick={() => {onClickDeleteTodo(todo.id)}}
+                    onClick={() => {onClickDetailTodo(todo.id)}}
                   >
                     상세
                   </Button>
