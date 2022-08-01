@@ -34,6 +34,10 @@ export default function Login() {
     });
   };
 
+  const onClickGoJoin = () => {
+    navigate('/join');
+  };
+
   return (
     <LoginWrapper>
       <Title>원티드 프리온보딩 로그인</Title>
@@ -48,7 +52,10 @@ export default function Login() {
           <EmailPwInput type='password' value={password} onChange={onChangePassword}/>
         </InputBox>
 
-        <JoinButton onClick={onClickLogin}>로그인</JoinButton>
+        <ButtonBox>
+          <JoinButton onClick={onClickLogin}>로그인</JoinButton>
+          <JoinButton style={{backgroundColor:'green', fontSize:'.5rem'}} onClick={onClickGoJoin}>회원가입 하러가기</JoinButton>
+        </ButtonBox>
     </LoginWrapper>
   )
 };
@@ -57,7 +64,7 @@ const LoginWrapper = styled.div`
   width: 100%;
   height: 100vh;
   margin: 0 auto;
-  background-color: yellow;
+  background-color: #f5f6f8;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -87,6 +94,13 @@ const EmailPwInput = styled.input`
   border:1px solid  #eaeaea;
 `;
 
+const ButtonBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+`;
+
 const JoinButton = styled.button`
   width: 7rem;
   height: 2rem;
@@ -100,4 +114,6 @@ const JoinButton = styled.button`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  margin-right: 1rem;
 `;
+
