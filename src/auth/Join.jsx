@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 export default function Join() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [buttonActivate, setButtonActivate] = useState(false);
 
   const navigate = useNavigate();
 
@@ -17,17 +18,24 @@ export default function Join() {
     setPassword(e.target.value);
   };
 
-  const onClickSingUp = () => {
-    const emailCheck =  /[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]$/i;
-    
-    if(!emailCheck.test(email) === true){
-     return alert('이메일 형식에는 @이나 . 이 필수 입니다!')
+  const joinValidation = () => {
+    const emailValidation = email.includes('@') && email.includes('.');
+    const passwordValidation = password.length > 7;
+
+    if(emailValidation && passwordValidation){
+      setButtonActivate(true);
     };
 
-    if(password.length < 8){
-      return alert('비밀번호는 8자 이상 입력해야 합니다!')
-    }
+    if(!emailValidation || !passwordValidation){
+      setButtonActivate(false);
+    };
+  };
 
+  useEffect(() => {
+    joinValidation();
+  },[email, password]);
+
+  const onClickSingUp = () => {
     axios.post(`http://localhost:8080/users/create`,{
       email : email,
       password : password
@@ -43,15 +51,36 @@ export default function Join() {
 
         <InputBox>
           <InputLabel>이메일</InputLabel>
-          <EmailPwInput value={email} onChange={onChangeEmail}/>
+          <EmailPwInput 
+            onChange={onChangeEmail}
+          />
         </InputBox>
 
         <InputBox>
           <InputLabel>비밀번호</InputLabel>
-          <EmailPwInput value={password} onChange={onChangePassword} type='password'/>
+          <EmailPwInput 
+            onChange={onChangePassword} 
+            type='password'
+          />
         </InputBox>
 
-        <JoinButton onClick={onClickSingUp}>회원가입</JoinButton>
+        {
+          buttonActivate ?
+          <JoinButton       
+            onClick={onClickSingUp}
+            buttonActivate={buttonActivate}
+          >
+            회원가입
+          </JoinButton> 
+        :
+          <JoinButton       
+            onClick={onClickSingUp}
+            buttonActivate={buttonActivate}
+            disabled
+          >
+            회원가입
+          </JoinButton>
+        }
   
     </JoinWrapper>
   )
@@ -61,7 +90,7 @@ const JoinWrapper = styled.div`
   width: 100%;
   height: 100vh;
   margin: 0 auto;
-  background-color: pink;
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -94,7 +123,7 @@ const EmailPwInput = styled.input`
 const JoinButton = styled.button`
   width: 7rem;
   height: 2rem;
-  background-color: navy;
+  background-color:${props => props.buttonActivate ? 'navy' : 'gray'};
   color:#fff;
   border-radius: 15px;
   border:1px solid  #eaeaea;
