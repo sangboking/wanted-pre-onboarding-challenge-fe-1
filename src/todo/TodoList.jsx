@@ -212,7 +212,7 @@ const InputBox = styled.div`
 `;
 
 const AddTodoInput = styled.input`
-  width:100%;
+  width:99%;
   height: 2rem;
   background: #495057;
   font-size: 1.2rem;
@@ -222,6 +222,9 @@ const AddTodoInput = styled.input`
   ::placeholder{
     font-size: 1.2rem;
     color:#fff;
+  }
+  :focus{
+    outline: none;
   }
 `;
 
