@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import TodoList from '../todo/TodoList';
 
 export default function Home() {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ export default function Home() {
   
   return (
     <TodoWrapper>
-      1
+      <TodoList />
     </TodoWrapper>
   )
 };
@@ -23,7 +24,7 @@ const TodoWrapper = styled.div`
   width: 100%;
   height: 100vh;
   margin: 0 auto;
-  background-color: #fff;
+  background-color: #f5f6f8;
   display: flex;
   flex-direction: column;
   align-items: center;
